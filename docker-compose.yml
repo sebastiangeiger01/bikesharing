@@ -1,0 +1,25 @@
+volumes:
+  postgres_data:
+
+services:
+  webapp:
+    image: lukeloewe/bike-sharing-webapp
+    build: ./webapp
+    restart: always
+    ports:
+      - "80:5000"
+
+  db:
+    image: postgres
+    restart: always
+    volumes: 
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: example
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    
