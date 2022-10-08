@@ -1,2 +1,4 @@
 flask
-psycopg2-binary
+psycopg2
+Flask-Security-Too
+flask-sqlalchemy

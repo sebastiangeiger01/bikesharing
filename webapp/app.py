@@ -1,32 +1,49 @@
-import psycopg2
-from flask import Flask
+import json
 
-app = Flask(__name__)
+from flask import request
 
-def get_users():
-    """ query data from the users table """
-    conn = None
-    try:
-        conn = psycopg2.connect("dbname='postgres' user='postgres' host='db' password='example'")
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM users")
-        result = "The number of users: " + str(cur.rowcount) + "<br> I have the following users in my database: <br>"
-        row = cur.fetchone()
+from . import create_app, database
+from .models import Cats
 
-        while row is not None:
-            result += str(row) + "<br>"
-            row = cur.fetchone()
+app = create_app()
 
-        cur.close()
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
-    finally:
-        if conn is not None:
-            conn.close()
 
-    return result
+@app.route('/', methods=['GET'])
+def fetch():
+    cats = database.get_all(Cats)
+    all_cats = []
+    for cat in cats:
+        new_cat = {
+            "id": cat.id,
+            "name": cat.name,
+            "price": cat.price,
+            "breed": cat.breed
+        }
 
-@app.route('/')
-def hello():
-    users = get_users()
-    return users
+        all_cats.append(new_cat)
+    return json.dumps(all_cats), 200
+
+
+@app.route('/add', methods=['POST'])
+def add():
+    data = request.get_json()
+    name = data['name']
+    price = data['price']
+    breed = data['breed']
+
+    database.add_instance(Cats, name=name, price=price, breed=breed)
+    return json.dumps("Added"), 200
+
+
+@app.route('/remove/<cat_id>', methods=['DELETE'])
+def remove(cat_id):
+    database.delete_instance(Cats, id=cat_id)
+    return json.dumps("Deleted"), 200
+
+
+@app.route('/edit/<cat_id>', methods=['PATCH'])
+def edit(cat_id):
+    data = request.get_json()
+    new_price = data['price']
+    database.edit_instance(Cats, id=cat_id, price=new_price)
+    return json.dumps("Edited"), 200

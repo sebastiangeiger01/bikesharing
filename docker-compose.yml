@@ -1,27 +1,31 @@
-volumes:
-  postgres_data:
-
 services:
   webapp:
     image: lukeloewe/bike-sharing-webapp
     build: ./webapp
     restart: always
+    env_file:
+      - database.conf
     ports:
       - 80:5000
     depends_on:
-      - db
+      - database
 
-  db:
+  database:
     image: postgres
     restart: always
     volumes: 
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: example
+      - postgres_volume:/var/lib/postgresql/data
+    env_file:
+      - database.conf
+    ports:
+      - 5432:5432
 
   adminer:
     image: adminer
     restart: always
     ports:
       - 8080:8080
+
+volumes:
+  postgres_volume:
     
