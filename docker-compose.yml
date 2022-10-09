@@ -5,6 +5,7 @@ services:
     restart: always
     env_file:
       - database.conf
+      - security.conf
     ports:
       - 80:5000
     depends_on:

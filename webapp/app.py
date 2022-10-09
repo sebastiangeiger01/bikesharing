@@ -1,49 +1,28 @@
 import json
 
-from flask import request
+from flask import request, render_template_string
 
 from . import create_app, database
-from .models import Cats
+from .models import *
+
+from flask_security import Security, current_user, auth_required, hash_password, SQLAlchemySessionUserDatastore
 
 app = create_app()
 
+# Setup Flask-Security
+user_datastore = SQLAlchemySessionUserDatastore(db.session, User, Role)
+app.security = Security(app, user_datastore)
 
-@app.route('/', methods=['GET'])
-def fetch():
-    cats = database.get_all(Cats)
-    all_cats = []
-    for cat in cats:
-        new_cat = {
-            "id": cat.id,
-            "name": cat.name,
-            "price": cat.price,
-            "breed": cat.breed
-        }
+# Views
+@app.route("/")
+@auth_required()
+def home():
+    return render_template_string('Hello {{email}} !', email=current_user.email)
 
-        all_cats.append(new_cat)
-    return json.dumps(all_cats), 200
-
-
-@app.route('/add', methods=['POST'])
+@app.route("/add")
 def add():
-    data = request.get_json()
-    name = data['name']
-    price = data['price']
-    breed = data['breed']
-
-    database.add_instance(Cats, name=name, price=price, breed=breed)
-    return json.dumps("Added"), 200
-
-
-@app.route('/remove/<cat_id>', methods=['DELETE'])
-def remove(cat_id):
-    database.delete_instance(Cats, id=cat_id)
-    return json.dumps("Deleted"), 200
-
-
-@app.route('/edit/<cat_id>', methods=['PATCH'])
-def edit(cat_id):
-    data = request.get_json()
-    new_price = data['price']
-    database.edit_instance(Cats, id=cat_id, price=new_price)
-    return json.dumps("Edited"), 200
+    if not app.security.datastore.find_user(email="test@me.com"):
+        app.security.datastore.create_user(email="test@me.com", password=hash_password("password"))
+        db.session.commit()
+        return "Added user"
+    return "User already exists"

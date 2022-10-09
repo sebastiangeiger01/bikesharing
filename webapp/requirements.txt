@@ -1,4 +1,4 @@
 flask
 psycopg2
-Flask-Security-Too
+flask-security-too[fsqla, common]
 flask-sqlalchemy
