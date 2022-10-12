@@ -1,4 +1,3 @@
-import email
 from flask_security import UserMixin, RoleMixin
 from flask_sqlalchemy import *
 from sqlalchemy import *
@@ -40,8 +39,9 @@ class Bikes(db.Model):
     __tablename__ = 'bikes'
     id = Column(Integer, primary_key=True)
     name = Column(String(255))
-    x_coordinate = Column(Integer)
-    y_coordinate = Column(Integer)
+    x_coordinate = Column(Float)
+    y_coordinate = Column(Float)
+    combination_lock_code = Column(String(255))
 
 class Rides(db.Model):
     __tablename__ = 'rides'
