@@ -1,6 +1,6 @@
 import json
 
-from flask import request, render_template_string
+from flask import request, render_template
 
 from . import create_app, database
 from .models import *
@@ -17,7 +17,7 @@ app.security = Security(app, user_datastore)
 @app.route("/")
 @auth_required()
 def home():
-    return render_template_string('Hello {{email}} !', email=current_user.email)
+    return render_template('hello.html', email=current_user.email)
 
 @app.route("/add")
 def add():
