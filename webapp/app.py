@@ -1,8 +1,6 @@
-import json
+from flask import render_template
 
-from flask import request, render_template
-
-from . import create_app, database
+from . import create_app
 from .models import *
 
 from flask_security import Security, current_user, auth_required, hash_password, SQLAlchemySessionUserDatastore
