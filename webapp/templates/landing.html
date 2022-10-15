@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Bike Rental</title>
+    <link rel="stylesheet" href="static/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="static/assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="static/assets/css/Brands.css">
+    <link rel="stylesheet" href="static/assets/css/Features-Boxed.css">
+    <link rel="stylesheet" href="static/assets/css/Footer-Clean.css">
+    <link rel="stylesheet" href="static/assets/css/Highlight-Phone.css">
+    <link rel="stylesheet" href="static/assets/css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="static/assets/css/Map-Clean.css">
+    <link rel="stylesheet" href="static/assets/css/Navigation-with-Button.css">
+    <link rel="stylesheet" href="static/assets/css/styles.css">
+    <link rel="stylesheet" href="static/assets/css/Team-Boxed.css">
+	
+	 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+     integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+     crossorigin=""/>
+	 
+	 <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+     integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+     crossorigin=""></script>
+	 
+	 <link rel="stylesheet" href="static/assets/bootstrap/css/style1.css">
+	
+</head>
+
+<body>
+
+
+
+
+
+    <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
+        <div class="container"><a class="navbar-brand" href="#">BikeRental</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">First Item</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Second Item</a></li>
+                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Dropdown </a>
+                        <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+                    </li>
+                </ul><span class="navbar-text actions"> <a class="login" href="/login">Log In</a><a class="btn btn-light action-button" role="button" href="#">Registrieren</a></span>
+            </div>
+        </div>
+    </nav>
+    <section class="map-clean">
+        
+            <div class="intro"></div>
+       
+	   <div id="map" style="width: 100%; height: 400px;"></div>
+<script>
+
+	var map = L.map('map').setView([50.0012314, 8.2762513], 13);
+
+	var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
+
+</script>
+	   
+	   
+        <div class="brands">
+            <section class="highlight-phone" style="background: rgb(255,255,255);">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="intro">
+                                <h2>Sei' nicht feig, miet das Bike!</h2>
+                                <p>Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae. Aliqua sed justo ligula.</p><a class="btn btn-primary" role="button" href="#">Action Button</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-4"><img src="static/assets/img/bicycle-rent-isometric-design-concept_1284-21936.jpg" style="width: 338px;margin: -10px;padding: 4px;"></div>
+                    </div>
+                </div>
+            </section><a href="#"> <img src="static/assets/img/instacart.png"><img src="static/assets/img/kickstarter.png"><img src="static/assets/img/lyft.png"><img src="static/assets/img/shopify.png"><img src="static/assets/img/pinterest.png"><img src="static/assets/img/twitter.png"></a>
+        </div>
+        <section class="features-boxed">
+            <div class="container">
+                <div class="intro">
+                    <h2 class="text-center">Warum solltest du Fahrräder mieten?</h2>
+                </div>
+                <div class="row justify-content-center features">
+                    <div class="col-sm-6 col-md-5 col-lg-4 item">
+                        <div class="box"><i class="fa fa-map-marker icon"></i>
+                            <h3 class="name">Funktioniert überall</h3>
+                            <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-5 col-lg-4 item">
+                        <div class="box"><i class="fa fa-clock-o icon"></i>
+                            <h3 class="name">24 / 7 Mieten</h3>
+                            <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-5 col-lg-4 item">
+                        <div class="box"><i class="fa fa-list-alt icon"></i>
+                            <h3 class="name">Customizable </h3>
+                            <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-5 col-lg-4 item">
+                        <div class="box"><i class="fa fa-leaf icon"></i>
+                            <h3 class="name">Umweltschonend</h3>
+                            <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-5 col-lg-4 item">
+                        <div class="box"><i class="fa fa-plane icon"></i>
+                            <h3 class="name">Schnell</h3>
+                            <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-5 col-lg-4 item">
+                        <div class="box"><i class="fa fa-phone icon"></i>
+                            <h3 class="name">Mobile-first</h3>
+                            <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+     <section class="team-boxed">
+            <div class="container">
+                <div class="intro">
+                    <h2 class="text-center">Team </h2>
+                    <p class="text-center">Dieses Nerds stecken hinter BikeRental</p>
+                </div>
+                <div class="row people">
+                    <div class="col-md-6 col-lg-4 item">
+                        <div class="box"><img class="rounded-circle" src="static/assets/img/PB.jpeg">
+                            <h3 class="name">Jonas Frey</h3>
+                            <p class="title">Frontend Designer</p>
+                            <p class="description">Hat das Auge für das gewisse Etwas und hat die Webseite nutzerfreundlich gestaltet.&nbsp;</p>
+                            <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                        </div>
+                        <div class="box"><img class="rounded-circle" src="static/assets/img/1.jpg">
+                            <h3 class="name">Kai Seegers</h3>
+                            <p class="title">Musician</p>
+                            <p class="description">Zahlen und Logik sind sein Ding. Die Datenbankarchitektur was sein Anliegen.<br></p>
+                            <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 item">
+                        <div class="box"><img class="rounded-circle" src="static/assets/img/2.jpg">
+                            <h3 class="name">Luke Löwe</h3>
+                            <p class="title">Datenbankexperte</p>
+                            <p class="description">Zahlen und Logik sind sein Ding. Die Datenbankarchitektur was sein Anliegen.</p>
+                            <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                        </div>
+                        <div class="box"><img class="rounded-circle" src="static/assets/img/1.jpg">
+                            <h3 class="name">Tim&nbsp;</h3>
+                            <p class="title">Musician</p>
+                            <p class="description">Zahlen und Logik sind sein Ding. Die Datenbankarchitektur was sein Anliegen.<br></p>
+                            <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 item">
+                        <div class="box"><img class="rounded-circle" src="static/assets/img/3.jpg">
+                            <h3 class="name">Sebastian Geiger</h3>
+                            <p class="title">Backend Entwickler</p>
+                            <p class="description">Zahlen und Logik sind sein Ding. Die Datenbankarchitektur was sein Anliegen.<br></p>
+                            <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                        </div>
+                        <div class="box"><img class="rounded-circle" src="static/assets/img/1.jpg">
+                            <h3 class="name">Roman</h3>
+                            <p class="title">Projektmanager</p>
+                            <p class="description">Zahlen und Logik sind sein Ding. Die Datenbankarchitektur was sein Anliegen.<br></p>
+                            <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <footer class="footer-clean">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-4 col-md-3 item">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Für Kommunen</a></li>
+                        <li><a href="#">Für Kunden</a></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-md-3 item">
+                    <h3>Infos</h3>
+                    <ul>
+                        <li><a href="#">Das Unternehmen</a></li>
+                        <li><a href="#">Das Team</a></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-md-3 item">
+                    <h3>Rechtliches</h3>
+                    <ul>
+                        <li><a href="#">Impressum</a></li>
+                        <li><a href="#">Datenschutz</a></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a>
+                    <p class="copyright">Bike Rental© 2022</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="static/assets/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

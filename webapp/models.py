@@ -41,7 +41,6 @@ class Bikes(db.Model):
     name = Column(String(255))
     x_coordinate = Column(Float)
     y_coordinate = Column(Float)
-    combination_lock_code = Column(String(255))
 
 class Rides(db.Model):
     __tablename__ = 'rides'

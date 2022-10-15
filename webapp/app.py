@@ -24,3 +24,7 @@ def add():
         db.session.commit()
         return "Added user"
     return "User already exists"
+
+@app.route("/landing")
+def landing():
+    return render_template('landing.html')
