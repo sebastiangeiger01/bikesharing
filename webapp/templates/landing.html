@@ -64,6 +64,13 @@
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	}).addTo(map);
 
+    var Fahrradstellplatz = {{geo | safe}};
+
+	L.geoJSON(Fahrradstellplatz).bindPopup(function (layer){
+    //return layer.feature.properties.name;
+    return layer.feature.properties.imagelink;
+  }).addTo(map);
+
 </script>
 	   
 	   

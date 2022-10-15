@@ -27,4 +27,5 @@ def add():
 
 @app.route("/landing")
 def landing():
-    return render_template('landing.html')
+    geo = '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[49,50]},"properties":{"id":"1","name":"schnelles Bike1"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[11,50]},"properties":{"id":"2","name":"schnelles Bike2"}}]}'
+    return render_template('landing.html', geo=geo)
