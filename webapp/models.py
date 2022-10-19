@@ -41,6 +41,7 @@ class Bikes(db.Model):
     name = Column(String(255))
     x_coordinate = Column(Float)
     y_coordinate = Column(Float)
+    image = Column(LargeBinary)
 
 class Rides(db.Model):
     __tablename__ = 'rides'
