@@ -27,5 +27,13 @@ def add():
 
 @app.route("/landing")
 def landing():
+    #Datenbankverbindung
+    #GeoJson bauen als String übergeben
+    #Bilder als Zeichenkette (base64) in GeoJson (b&#39 am anfang entfernen) 
     geo = '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[49,50]},"properties":{"id":"1","name":"schnelles Bike1"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[11,50]},"properties":{"id":"2","name":"schnelles Bike2"}}]}'
     return render_template('landing.html', geo=geo)
+
+@app.route("/bike/<id>")
+def bike(id):
+    bike = Bikes.query.filter_by(id=id).first() #Datenbankverbindung
+    return render_template('bike.html', bike=bike)
