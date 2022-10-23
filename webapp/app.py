@@ -27,10 +27,13 @@ def add():
 
 @app.route("/landing")
 def landing():
+    #note: docker-compose up --build
     #Datenbankverbindung
     #GeoJson bauen als String übergeben (mehrere Bikes in einem GJson)
     #Bilder als Zeichenkette (base64) in GeoJson (b&#39 am anfang entfernen) 
-    geo = '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[49,50]},"properties":{"id":"1","name":"schnelles Bike1"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[11,50]},"properties":{"id":"2","name":"schnelles Bike2"}}]}'
+    bikes = Bikes.query.filter_by(id=1)
+    geo = '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[' + bike.x_coordinate + ',' + bike.y_coordinate + ']},"properties":{"id":"' + bike.id + '","name":"' + bike.name + '"}}]}'
+    #geo = '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[49,50]},"properties":{"id":"1","name":"schnelles Bike1"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[11,50]},"properties":{"id":"2","name":"schnelles Bike2"}}]}'
     return render_template('landing.html', geo=geo)
 
 @app.route("/bike/<id>")
