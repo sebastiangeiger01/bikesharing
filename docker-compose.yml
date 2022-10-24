@@ -1,6 +1,6 @@
 services:
   webapp:
-    image: lukeloewe/bike-sharing-webapp
+    image: bike-sharing-webapp
     build: ./webapp
     restart: always
     env_file:
