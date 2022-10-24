@@ -31,9 +31,11 @@ def landing():
     #Datenbankverbindung
     #GeoJson bauen als String übergeben (mehrere Bikes in einem GJson)
     #Bilder als Zeichenkette (base64) in GeoJson (b&#39 am anfang entfernen) 
-    bikes = Bikes.query.filter_by(id=1)
-    geo = '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[' + bike.x_coordinate + ',' + bike.y_coordinate + ']},"properties":{"id":"' + bike.id + '","name":"' + bike.name + '"}}]}'
-    #geo = '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[49,50]},"properties":{"id":"1","name":"schnelles Bike1"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[11,50]},"properties":{"id":"2","name":"schnelles Bike2"}}]}'
+    stmt = select(id, name, x_coordinate, y_coordinate)
+    for row in session.execute(stmt):
+        print(f"{row.id} {row.name}")
+    #geo = '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[' + bike.x_coordinate + ',' + bike.y_coordinate + ']},"properties":{"id":"' + bike.id + '","name":"' + bike.name + '"}}]}'
+    geo = '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[49,50]},"properties":{"id":"1","name":"schnelles Bike1"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[11,50]},"properties":{"id":"2","name":"schnelles Bike2"}}]}'
     return render_template('landing.html', geo=geo)
 
 @app.route("/bike/<id>")
