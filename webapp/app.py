@@ -31,6 +31,7 @@ def hello():
     return render_template('hello.html', email=current_user.email)
 
 @app.route("/bike/<id>")
+@auth_required()
 def bike(id):
     bike = Bikes.query.filter_by(id=id).first()
     return render_template('bike.html', bike=bike)
