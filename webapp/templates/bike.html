@@ -6,15 +6,5 @@
 <body>
     <h1>Bike {{ bike.id }}</h1>
     <p>My bike is called {{ bike.name }}.</p>
-    <img src="/bike-image/{{ bike.id }}">
-    <img src="" id="img">
-
-<script>
-    data = "{{bike.image}}"
-    data = data.replace("b&#39;", "") //to get rid of start curly brace code 
-    data = data.replace("&#39;", "")  //to get rid of end curly bracecode 
-
-    document.getElementById("img").src = data; // set src
-</script>
 </body>
 </html>
