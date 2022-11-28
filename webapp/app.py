@@ -40,6 +40,7 @@ def bike(id):
     bike = get_instance(Bike, id)
     return render_template('bike.html', bike=bike)
 
+# TODO: form
 @app.route("/bike-management", methods=['GET', 'POST'])
 @app.route("/bike-management/<operation>", methods=['GET', 'POST'])
 @auth_required()
@@ -57,7 +58,7 @@ def bike_management(operation = None):
             return "Bike edited"
     return render_template('bike_management.html')
 
-# TODO: check copilot code
+# TODO: check copilot code delete user? & assign roles
 @app.route("/user-management", methods=['GET', 'POST'])
 @app.route("/user-management/<operation>", methods=['GET', 'POST'])
 @auth_required()
