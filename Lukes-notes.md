@@ -1,8 +1,11 @@
 # Reference
-https://haseebmajid.dev/blog/simple-app-flask-sqlalchemy-and-docker
+https://haseebmajid.dev/blog/simple-app-flask-sqlalchemy-and-docker no longer available
 https://flask-security-too.readthedocs.io/en/stable/
 https://www.onlinetutorialspoint.com/flask/flask-simple-html-templates-example.html
 
 # Error
 https://github.com/psycopg/psycopg2/issues/1360
 - don't use binary!
+
+# Knowledge
+https://stackoverflow.com/questions/5207160/what-is-a-csrf-token-what-is-its-importance-and-how-does-it-work

@@ -1,36 +1,69 @@
-{% extends "security/base.html" %}
-{% from "security/_macros.html" import render_field_with_errors, render_field, render_field_errors, render_form_errors %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-{% include "security/_messages.html" %}
-<h1>{{ _fsdomain('Login') }}</h1>
-  <form style="background-color: aqua;" action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
-    {{ login_user_form.hidden_tag() }}
-    {{ render_form_errors(login_user_form) }}
-    {% if "email" in identity_attributes %}
-      {{ render_field_with_errors(login_user_form.email) }}
-    {% endif %}
-    {% if login_user_form.username and "username" in identity_attributes %}
-      {% if "email" in identity_attributes %}
-        <h3>{{ _fsdomain("or") }}</h3>
-      {% endif %}
-      {{ render_field_with_errors(login_user_form.username) }}
-    {% endif %}
-    <div class="fs-gap">
-      {{ render_field_with_errors(login_user_form.password) }}</div>
-    {{ render_field_with_errors(login_user_form.remember) }}
-    {{ render_field_errors(login_user_form.csrf_token) }}
-    {{ render_field(login_user_form.submit) }}
-  </form>
-  {% if security.webauthn %}
-    <hr class="fs-gap">
-    <h2>{{ _fsdomain("Use WebAuthn to Sign In") }}</h2>
-    <div>
-      <form method="GET" id="wan-signin-form" name="wan_signin_form">
-        <input id="wan_signin" name="wan_signin" type="submit" value="{{ _fsdomain('Sign in with WebAuthn') }}"
-          formaction="{{ url_for_security("wan_signin") }}">
-      </form>
-    </div>
-  {% endif %}
-{% include "security/_menu.html" %}
-{% endblock %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Bike Rental</title>
+    <link rel="stylesheet" href="static/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="static/assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="static/assets/css/Brands.css">
+    <link rel="stylesheet" href="static/assets/css/Features-Boxed.css">
+    <link rel="stylesheet" href="static/assets/css/Footer-Clean.css">
+    <link rel="stylesheet" href="static/assets/css/Highlight-Phone.css">
+    <link rel="stylesheet" href="static/assets/css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="static/assets/css/Map-Clean.css">
+    <link rel="stylesheet" href="static/assets/css/Navigation-with-Button.css">
+    <link rel="stylesheet" href="static/assets/css/styles.css">
+    <link rel="stylesheet" href="static/assets/css/Team-Boxed.css">
+</head>
+
+<body>
+    <section class="login-clean">
+        <form action="/login" method="POST" name="login_user_form">
+            {{ login_user_form.hidden_tag() }}
+            <h2 class="visually-hidden">Login Form</h2>
+            <div class="illustration"><i class="icon ion-ios-navigate"></i></div>
+            <div class="mb-3" id="email"><input class="form-control" autocomplete="email" id="email" type="email" name="email" placeholder="Email" value=""></div>
+            <div class="mb-3" id="password"><input class="form-control" autocomplete="current-password" id="password" required value="" type="password" name="password" placeholder="Password"></div>
+            <div class="fs-div" id="csrf_token">
+            <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Log In</button></div><a class="forgot" href="#">Forgot your email or password?</a>
+        </form>
+    </section>
+    <footer class="footer-clean">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-4 col-md-3 item">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Web design</a></li>
+                        <li><a href="#">Development</a></li>
+                        <li><a href="#">Hosting</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-md-3 item">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">Company</a></li>
+                        <li><a href="#">Team</a></li>
+                        <li><a href="#">Legacy</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-md-3 item">
+                    <h3>Careers</h3>
+                    <ul>
+                        <li><a href="#">Job openings</a></li>
+                        <li><a href="#">Employee success</a></li>
+                        <li><a href="#">Benefits</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a>
+                    <p class="copyright">Company Name © 2022</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="static/assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
