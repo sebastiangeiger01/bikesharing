@@ -44,7 +44,7 @@ def bike(id, operation=None):
         elif request.content_type == 'application/x-www-form-urlencoded':
             ride_req = request.form
         else:
-            return "Unsupported content type"
+            return "Unknown content type"
         # time format: 2004-10-19 10:23:54
         if operation == 'rent':
             add_instance(Ride, user_id=current_user.id, bike_id=id, start_time=ride_req['start_time'])
@@ -54,13 +54,13 @@ def bike(id, operation=None):
             return redirect('/bike' + id)
 
     if ride_db is None:
-        operation = "rent"
+        status = "rent"
     elif ride_db.user_id == current_user.id:
-        operation = "return"
+        status = "return"
     else:
-        operation = "unavailable"
+        status = "unavailable"
     bike = get_instance(Bike, id)
-    return render_template('bike.html', bike=bike, operation=operation, button_text=operation.capitalize())
+    return render_template('bike.html', bike=bike, status=status)
 
 @app.route("/bike-management", methods=['GET', 'POST'])
 @app.route("/bike-management/<operation>", methods=['GET', 'POST'])
