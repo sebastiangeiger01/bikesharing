@@ -34,49 +34,61 @@ def hello():
     return render_template('hello.html', email=current_user.email)
 
 # TODO: rent, return functionality
-@app.route("/bike-<id>")
+@app.route("/bike-<id>", methods=['GET', 'POST'])
+@app.route("/bike-<id>/<operation>", methods=['GET', 'POST'])
 @auth_required()
 def bike(id):
     bike = get_instance(Bike, id)
     return render_template('bike.html', bike=bike)
 
-# TODO: form
 @app.route("/bike-management", methods=['GET', 'POST'])
 @app.route("/bike-management/<operation>", methods=['GET', 'POST'])
 @auth_required()
 def bike_management(operation = None):
     if request.method == 'POST':
         if request.content_type == 'application/json':
-            json = request.get_json()
+            bike = request.get_json()
         elif request.content_type == 'application/x-www-form-urlencoded':
-            json = request.form
+            bike = request.form
         else:
             return "Unknown request content type"
         if operation == 'add':
-            add_instance(Bike, **json)
+            add_instance(Bike, **bike)
             return "Bike added"
         elif operation == 'delete':
-            delete_instance(Bike, json['id'])
+            delete_instance(Bike, bike['id'])
             return "Bike deleted"
         elif operation == 'edit':
-            edit_instance(Bike, **json)
+            edit_instance(Bike, **bike)
             return "Bike edited"
+        else:
+            return "Unknown operation"
     return render_template('bike_management.html')
 
-# TODO: check copilot code delete user? & assign roles
+# TODO: test this & create user_management.html
 @app.route("/user-management", methods=['GET', 'POST'])
 @app.route("/user-management/<operation>", methods=['GET', 'POST'])
 @auth_required()
-def user_management(operation = add):
+def user_management(operation = None):
     if request.method == 'POST':
-        json = request.get_json()
-        if operation == 'add':
-            add_instance(User, **json)
-            return "User added"
-        elif operation == 'delete':
-            delete_instance(User, json['id'])
+        if request.content_type == 'application/json':
+            roles_users = request.get_json()
+        elif request.content_type == 'application/x-www-form-urlencoded':
+            roles_users = request.form
+        else:
+            return "Unknown request content type"
+        if operation == 'delete':
+            delete_instance(User, roles_users['user_id'])
+            # delete related roles
+            RolesUsers.query.filter_by(user_id=roles_users['user_id']).delete().all()
+            db.session.commit()
             return "User deleted"
-        elif operation == 'edit':
-            edit_instance(User, **json)
-            return "User edited"
+        elif operation == 'add-role':
+            add_instance(RolesUsers, roles_users['user_id'], roles_users['role_id'])
+            return "Role added"
+        elif operation == 'remove-role':
+            delete_instance(RolesUsers, roles_users['id'])
+            return "Role removed"
+        else:
+            return "Unknown operation"
     return render_template('user_management.html')
