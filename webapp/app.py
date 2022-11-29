@@ -45,7 +45,12 @@ def bike(id):
 @auth_required()
 def bike_management(operation = None):
     if request.method == 'POST':
-        json = request.get_json()
+        if request.content_type == 'application/json':
+            json = request.get_json()
+        elif request.content_type == 'application/x-www-form-urlencoded':
+            json = request.form
+        else:
+            return "Unknown request content type"
         if operation == 'add':
             add_instance(Bike, **json)
             return "Bike added"
@@ -61,7 +66,7 @@ def bike_management(operation = None):
 @app.route("/user-management", methods=['GET', 'POST'])
 @app.route("/user-management/<operation>", methods=['GET', 'POST'])
 @auth_required()
-def user_management(operation = None):
+def user_management(operation = add):
     if request.method == 'POST':
         json = request.get_json()
         if operation == 'add':
