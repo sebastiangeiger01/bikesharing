@@ -4,7 +4,7 @@ from . import create_app
 from .models import *
 from .database import *
 
-from flask_security import Security, current_user, auth_required, hash_password, SQLAlchemySessionUserDatastore
+from flask_security import Security, current_user, auth_required, roles_required, hash_password, SQLAlchemySessionUserDatastore
 
 app = create_app()
 
@@ -65,6 +65,7 @@ def bike(id, operation=None):
 @app.route("/bike-management", methods=['GET', 'POST'])
 @app.route("/bike-management/<operation>", methods=['GET', 'POST'])
 @auth_required()
+@roles_required('bike-manager')
 def bike_management(operation = None):
     if request.method == 'POST':
         if request.content_type == 'application/json':
@@ -90,6 +91,7 @@ def bike_management(operation = None):
 @app.route("/user-management", methods=['GET', 'POST'])
 @app.route("/user-management/<operation>", methods=['GET', 'POST'])
 @auth_required()
+@roles_required('user-manager')
 def user_management(operation = None):
     if request.method == 'POST':
         if request.content_type == 'application/json':
