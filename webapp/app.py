@@ -12,6 +12,18 @@ app = create_app()
 user_datastore = SQLAlchemySessionUserDatastore(db.session, User, Role)
 app.security = Security(app, user_datastore)
 
+# Create roles and default admin
+@app.before_first_request
+def setup_roles():
+    if get_all(Role) == []:
+        user_datastore.find_or_create_role('user-manager')
+        user_datastore.find_or_create_role('bike-manager')
+        app.security.datastore.create_user(email='admin@bikesharing.com', password=hash_password('admin'))
+        db.session.commit()
+        add_instance(RolesUsers, user_id=1, role_id=1)
+        add_instance(RolesUsers, user_id=1, role_id=2)
+        db.session.commit()
+
 # Views
 @app.route("/")
 def home():
@@ -60,6 +72,8 @@ def bike(id, operation=None):
     else:
         status = "unavailable"
     bike = get_instance(Bike, id)
+    if bike is None:
+        return redirect('/')
     return render_template('bike.html', bike=bike, status=status)
 
 @app.route("/bike-management", methods=['GET', 'POST'])
