@@ -24,7 +24,7 @@ def setup_roles():
         add_instance(RolesUsers, user_id=1, role_id=2)
         db.session.commit()
 
-# Views
+# Home
 @app.route("/")
 def home():
     geo = '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[49,50]},"properties":{"id":"1","name":"schnelles Bike1"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[11,50]},"properties":{"id":"2","name":"schnelles Bike2"}}]}'
@@ -45,6 +45,7 @@ def add():
 def hello():
     return render_template('hello.html', email=current_user.email)
 
+# rent and return bikes
 @app.route("/bike<id>", methods=['GET', 'POST'])
 @app.route("/bike<id>/<operation>", methods=['GET', 'POST'])
 @auth_required()
@@ -76,6 +77,7 @@ def bike(id, operation=None):
         return redirect('/')
     return render_template('bike.html', bike=bike, status=status)
 
+# bike-managers can add, delet and edit bikes
 @app.route("/bike-management", methods=['GET', 'POST'])
 @app.route("/bike-management/<operation>", methods=['GET', 'POST'])
 @auth_required()
@@ -102,6 +104,7 @@ def bike_management(operation = None):
     return render_template('bike_management.html')
 
 # TODO: test this & create user_management.html
+# user-managers can delete users and assign roles
 @app.route("/user-management", methods=['GET', 'POST'])
 @app.route("/user-management/<operation>", methods=['GET', 'POST'])
 @auth_required()

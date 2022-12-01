@@ -13,6 +13,7 @@ def create_app():
     flask_app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
     flask_app.config['SECURITY_PASSWORD_SALT'] = os.environ['SECURITY_PASSWORD_SALT']
     flask_app.config['SECURITY_REGISTERABLE'] = True
+    flask_app.config['SECURITY_CHANGEABLE'] = True
     flask_app.app_context().push()
     db.init_app(flask_app)
     db.create_all()

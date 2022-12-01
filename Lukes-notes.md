@@ -3,6 +3,7 @@ https://haseebmajid.dev/blog/simple-app-flask-sqlalchemy-and-docker no longer av
 https://flask-security-too.readthedocs.io/en/stable/
 https://www.onlinetutorialspoint.com/flask/flask-simple-html-templates-example.html
 https://flask-user.readthedocs.io/en/latest/authorization.html roles
+https://flask-security-too.readthedocs.io/en/stable/configuration.html#login-logout env vars flask security
 
 # Error
 https://github.com/psycopg/psycopg2/issues/1360
