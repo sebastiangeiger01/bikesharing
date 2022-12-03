@@ -3,6 +3,7 @@ from flask import render_template, request, redirect
 from . import create_app
 from .models import *
 from .database import *
+from sqlalchemy import *
 
 from flask_security import Security, current_user, auth_required, roles_required, hash_password, SQLAlchemySessionUserDatastore
 
@@ -51,8 +52,9 @@ def hello():
 @app.route("/biketest")
 @auth_required()
 def biketest():
-    first_bike_db = Bike.query.first()
-    return render_template('bike_test.html', id=first_bike_db.id, name=first_bike_db.name, x=first_bike_db.x_coordinate, y=first_bike_db.y_coordinate)
+    highest_id = db.session.query(func.max(Bike.id)).scalar()
+    bike_db = Bike.query.filter_by(id=highest_id).first()
+    return render_template('bike_test.html', id=bike_db.id, name=bike_db.name, x=bike_db.x_coordinate, y=bike_db.y_coordinate)
 
 # rent and return bikes
 @app.route("/bike<id>", methods=['GET', 'POST'])
