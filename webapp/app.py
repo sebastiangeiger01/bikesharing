@@ -25,9 +25,11 @@ def setup_roles():
         db.session.commit()
 
 # Home
+# docker-compose up --build
 @app.route("/")
 def home():
-    geo = '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[49,50]},"properties":{"id":"1","name":"schnelles Bike1"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[11,50]},"properties":{"id":"2","name":"schnelles Bike2"}}]}'
+    #geo = '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[' + bike.x_coordinate + ',' + bike.y_coordinate +']},"properties":{"id":'+ bike.id +',"name":'+ bike.name +'}},]}'
+    geo = '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[49,55]},"properties":{"id":"1","name":"schnelles Bike1"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[11,55]},"properties":{"id":"2","name":"schnelles Bike2"}}]}'
     return render_template('home.html', geo=geo)
 
 # remove this later
@@ -44,6 +46,13 @@ def add():
 @auth_required()
 def hello():
     return render_template('hello.html', email=current_user.email)
+
+# remove this later
+@app.route("/biketest")
+@auth_required()
+def biketest():
+    first_bike_db = Bike.query.first()
+    return render_template('bike_test.html', id=first_bike_db.id, name=first_bike_db.name, x=first_bike_db.x_coordinate, y=first_bike_db.y_coordinate)
 
 # rent and return bikes
 @app.route("/bike<id>", methods=['GET', 'POST'])
