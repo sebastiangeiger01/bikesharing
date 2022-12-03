@@ -26,11 +26,15 @@ def setup_roles():
         db.session.commit()
 
 # Home
-# docker-compose up --build
+# GeoJSON Template: '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[20.0,30.0]},"properties":{"id":"1","name":"Pegasus 500"} },{"type":"Feature","geometry":{"type":"Point","coordinates":[15.0,50.0]},"properties":{"id":"2","name":"Tesla E3000"} },]}'
 @app.route("/")
 def home():
-    #geo = '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[' + bike.x_coordinate + ',' + bike.y_coordinate +']},"properties":{"id":'+ bike.id +',"name":'+ bike.name +'}},]}'
-    geo = '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[49,55]},"properties":{"id":"1","name":"schnelles Bike1"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[11,55]},"properties":{"id":"2","name":"schnelles Bike2"}}]}'
+    geo = '{"type": "FeatureCollection", "features":['
+    highest_id = db.session.query(func.max(Bike.id)).scalar()
+    for i in range(highest_id):
+        current_bike = Bike.query.filter_by(id=i+1).first()
+        geo = geo + '{"type":"Feature","geometry":{"type":"Point","coordinates":[' + str(current_bike.x_coordinate) + ',' + str(current_bike.y_coordinate) + ']},"properties":{"id":"' + str(current_bike.id) + '","name":"' + current_bike.name + '"} },'
+    geo = geo + ']}'
     return render_template('home.html', geo=geo)
 
 # remove this later
