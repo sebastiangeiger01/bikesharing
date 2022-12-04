@@ -35,15 +35,14 @@ class User(db.Model, UserMixin):
     roles = relationship('Role', secondary='roles_users', backref=backref('users', lazy='dynamic'))
 
 # Other tables
-class Bikes(db.Model):
+class Bike(db.Model):
     __tablename__ = 'bikes'
     id = Column(Integer, primary_key=True)
     name = Column(String(255))
     x_coordinate = Column(Float)
     y_coordinate = Column(Float)
-    image = Column(LargeBinary)
 
-class Rides(db.Model):
+class Ride(db.Model):
     __tablename__ = 'rides'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))

@@ -1,9 +1,11 @@
-from flask import render_template
+from flask import render_template, request, redirect
 
 from . import create_app
 from .models import *
+from .database import *
+from sqlalchemy import *
 
-from flask_security import Security, current_user, auth_required, hash_password, SQLAlchemySessionUserDatastore
+from flask_security import Security, current_user, auth_required, roles_required, hash_password, SQLAlchemySessionUserDatastore
 
 app = create_app()
 
@@ -11,12 +13,31 @@ app = create_app()
 user_datastore = SQLAlchemySessionUserDatastore(db.session, User, Role)
 app.security = Security(app, user_datastore)
 
-# Views
-@app.route("/")
-@auth_required()
-def home():
-    return render_template('hello.html', email=current_user.email)
+# Create roles and default admin
+@app.before_first_request
+def setup_roles():
+    if get_all(Role) == []:
+        user_datastore.find_or_create_role('user-manager')
+        user_datastore.find_or_create_role('bike-manager')
+        app.security.datastore.create_user(email='admin@bikesharing.com', password=hash_password('admin'))
+        db.session.commit()
+        add_instance(RolesUsers, user_id=1, role_id=1)
+        add_instance(RolesUsers, user_id=1, role_id=2)
+        db.session.commit()
 
+# Home
+# GeoJSON Template: '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[20.0,30.0]},"properties":{"id":"1","name":"Pegasus 500"} },{"type":"Feature","geometry":{"type":"Point","coordinates":[15.0,50.0]},"properties":{"id":"2","name":"Tesla E3000"} },]}'
+@app.route("/")
+def home():
+    geo = '{"type": "FeatureCollection", "features":['
+    highest_id = db.session.query(func.max(Bike.id)).scalar()
+    for i in range(highest_id):
+        current_bike = Bike.query.filter_by(id=i+1).first()
+        geo = geo + '{"type":"Feature","geometry":{"type":"Point","coordinates":[' + str(current_bike.x_coordinate) + ',' + str(current_bike.y_coordinate) + ']},"properties":{"id":"' + str(current_bike.id) + '","name":"' + current_bike.name + '"} },'
+    geo = geo + ']}'
+    return render_template('home.html', geo=geo)
+
+# remove this later
 @app.route("/add")
 def add():
     if not app.security.datastore.find_user(email="test@me.com"):
@@ -25,20 +46,104 @@ def add():
         return "Added user"
     return "User already exists"
 
-@app.route("/landing")
-def landing():
-    #note: docker-compose up --build
-    #Datenbankverbindung
-    #GeoJson bauen als String übergeben (mehrere Bikes in einem GJson)
-    #Bilder als Zeichenkette (base64) in GeoJson (b&#39 am anfang entfernen) 
-    stmt = select(id, name, x_coordinate, y_coordinate)
-    for row in session.execute(stmt):
-        print(f"{row.id} {row.name}")
-    #geo = '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[' + bike.x_coordinate + ',' + bike.y_coordinate + ']},"properties":{"id":"' + bike.id + '","name":"' + bike.name + '"}}]}'
-    geo = '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[49,50]},"properties":{"id":"1","name":"schnelles Bike1"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[11,50]},"properties":{"id":"2","name":"schnelles Bike2"}}]}'
-    return render_template('landing.html', geo=geo)
+# remove this later
+@app.route("/hello")
+@auth_required()
+def hello():
+    return render_template('hello.html', email=current_user.email)
 
-@app.route("/bike/<id>")
-def bike(id):
-    bike = Bikes.query.filter_by(id=id).first() #Datenbankverbindung
-    return render_template('bike.html', bike=bike)
+# remove this later
+@app.route("/biketest")
+@auth_required()
+def biketest():
+    highest_id = db.session.query(func.max(Bike.id)).scalar()
+    bike_db = Bike.query.filter_by(id=highest_id).first()
+    return render_template('bike_test.html', id=bike_db.id, name=bike_db.name, x=bike_db.x_coordinate, y=bike_db.y_coordinate)
+
+# rent and return bikes
+@app.route("/bike<id>", methods=['GET', 'POST'])
+@app.route("/bike<id>/<operation>", methods=['GET', 'POST'])
+@auth_required()
+def bike(id, operation=None):
+    ride_db = Ride.query.filter_by(bike_id=id, end_time=None).first()
+    if request.method == 'POST':
+        if request.content_type == 'application/json':
+            ride_req = request.get_json()
+        elif request.content_type == 'application/x-www-form-urlencoded':
+            ride_req = request.form
+        else:
+            return "Unknown content type"
+        # time format: 2004-10-19 10:23:54
+        if operation == 'rent':
+            add_instance(Ride, user_id=current_user.id, bike_id=id, start_time=ride_req['start_time'])
+            return redirect('/bike' + id)
+        elif operation == 'return':                
+            edit_instance(Ride, ride_db.id, end_time=ride_req['end_time'])
+            return redirect('/bike' + id)
+
+    if ride_db is None:
+        status = "rent"
+    elif ride_db.user_id == current_user.id:
+        status = "return"
+    else:
+        status = "unavailable"
+    bike = get_instance(Bike, id)
+    if bike is None:
+        return redirect('/')
+    return render_template('bike.html', bike=bike, status=status)
+
+# bike-managers can add, delet and edit bikes
+@app.route("/bike-management", methods=['GET', 'POST'])
+@app.route("/bike-management/<operation>", methods=['GET', 'POST'])
+@auth_required()
+@roles_required('bike-manager')
+def bike_management(operation = None):
+    if request.method == 'POST':
+        if request.content_type == 'application/json':
+            bike = request.get_json()
+        elif request.content_type == 'application/x-www-form-urlencoded':
+            bike = request.form
+        else:
+            return "Unknown request content type"
+        if operation == 'add':
+            add_instance(Bike, **bike)
+            return "Bike added"
+        elif operation == 'delete':
+            delete_instance(Bike, bike['id'])
+            return "Bike deleted"
+        elif operation == 'edit':
+            edit_instance(Bike, **bike)
+            return "Bike edited"
+        else:
+            return "Unknown operation"
+    return render_template('bike_management.html')
+
+# TODO: test this & create user_management.html
+# user-managers can delete users and assign roles
+@app.route("/user-management", methods=['GET', 'POST'])
+@app.route("/user-management/<operation>", methods=['GET', 'POST'])
+@auth_required()
+@roles_required('user-manager')
+def user_management(operation = None):
+    if request.method == 'POST':
+        if request.content_type == 'application/json':
+            roles_users = request.get_json()
+        elif request.content_type == 'application/x-www-form-urlencoded':
+            roles_users = request.form
+        else:
+            return "Unknown request content type"
+        if operation == 'delete':
+            delete_instance(User, roles_users['user_id'])
+            # delete related roles
+            RolesUsers.query.filter_by(user_id=roles_users['user_id']).delete().all()
+            db.session.commit()
+            return "User deleted"
+        elif operation == 'add-role':
+            add_instance(RolesUsers, roles_users['user_id'], roles_users['role_id'])
+            return "Role added"
+        elif operation == 'remove-role':
+            delete_instance(RolesUsers, roles_users['id'])
+            return "Role removed"
+        else:
+            return "Unknown operation"
+    return render_template('user_management.html')

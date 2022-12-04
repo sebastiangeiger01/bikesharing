@@ -5,27 +5,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Bike Rental</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/Brands.css">
-    <link rel="stylesheet" href="assets/css/Features-Boxed.css">
-    <link rel="stylesheet" href="assets/css/Footer-Clean.css">
-    <link rel="stylesheet" href="assets/css/Highlight-Phone.css">
-    <link rel="stylesheet" href="assets/css/Login-Form-Clean.css">
-    <link rel="stylesheet" href="assets/css/Map-Clean.css">
-    <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/Team-Boxed.css">
+    <link rel="stylesheet" href="static/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="static/assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="static/assets/css/Brands.css">
+    <link rel="stylesheet" href="static/assets/css/Features-Boxed.css">
+    <link rel="stylesheet" href="static/assets/css/Footer-Clean.css">
+    <link rel="stylesheet" href="static/assets/css/Highlight-Phone.css">
+    <link rel="stylesheet" href="static/assets/css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="static/assets/css/Map-Clean.css">
+    <link rel="stylesheet" href="static/assets/css/Navigation-with-Button.css">
+    <link rel="stylesheet" href="static/assets/css/styles.css">
+    <link rel="stylesheet" href="static/assets/css/Team-Boxed.css">
 </head>
 
 <body>
     <section class="login-clean">
-        <form method="post">
+        <form action="/login" method="POST" name="login_user_form">
+            {{ login_user_form.hidden_tag() }}
             <h2 class="visually-hidden">Login Form</h2>
             <div class="illustration"><i class="icon ion-ios-navigate"></i></div>
-            <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Email"></div>
-            <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password"></div>
+            <div class="mb-3" id="email"><input class="form-control" autocomplete="email" id="email" type="email" name="email" placeholder="Email" value=""></div>
+            <div class="mb-3" id="password"><input class="form-control" autocomplete="current-password" id="password" required value="" type="password" name="password" placeholder="Password"></div>
+            <div class="fs-div" id="csrf_token">
             <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Log In</button></div><a class="forgot" href="#">Forgot your email or password?</a>
         </form>
     </section>
@@ -62,7 +64,6 @@
             </div>
         </div>
     </footer>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
-
 </html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Bike</title>
+</head>
+<body>
+    <h1>Some day this may look more beautiful...</h1>
+    <form action="/bike-management/add" method="POST">
+        <input type="text" name="name" placeholder="Name">
+        <input type="number" name="x_coordinate" placeholder="X Coordinate">
+        <input type="number" name="y_coordinate" placeholder="Y Coordinate">
+        <button type="submit">Add Bike</button>
+    </form>
+    <linebreak>
+    <form action="/bike-management/edit" method="POST">
+        <input type="number" name="id" placeholder="ID">
+        <input type="text" name="name" placeholder="Name">
+        <input type="number" name="x_coordinate" placeholder="X Coordinate">
+        <input type="number" name="y_coordinate" placeholder="Y Coordinate">
+        <button type="submit">Edit Bike</button>
+    </form>
+    <linebreak>
+    <form action="/bike-management/delete" method="POST">
+        <input type="number" name="id" placeholder="ID">
+        <button type="submit">Delete Bike</button>
+    </form>
+</body>
+</html>
