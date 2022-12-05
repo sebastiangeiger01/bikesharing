@@ -30,9 +30,8 @@ def setup_roles():
 @app.route("/")
 def home():
     geo = '{"type": "FeatureCollection", "features":['
-    highest_id = db.session.query(func.max(Bike.id)).scalar()
-    for i in range(highest_id):
-        current_bike = Bike.query.filter_by(id=i+1).first()
+    bikes = get_all(Bike)
+    for current_bike in bikes:
         geo = geo + '{"type":"Feature","geometry":{"type":"Point","coordinates":[' + str(current_bike.x_coordinate) + ',' + str(current_bike.y_coordinate) + ']},"properties":{"id":"' + str(current_bike.id) + '","name":"' + current_bike.name + '"} },'
     geo = geo + ']}'
     return render_template('home.html', geo=geo)
