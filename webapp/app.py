@@ -3,6 +3,7 @@ from flask import render_template, request, redirect
 from . import create_app
 from .models import *
 from .database import *
+from sqlalchemy import *
 
 from flask_security import Security, current_user, auth_required, roles_required, hash_password, SQLAlchemySessionUserDatastore
 
@@ -25,12 +26,13 @@ def setup_roles():
         db.session.commit()
 
 # Home
+# GeoJSON Template: '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[20.0,30.0]},"properties":{"id":"1","name":"Pegasus 500"} },{"type":"Feature","geometry":{"type":"Point","coordinates":[15.0,50.0]},"properties":{"id":"2","name":"Tesla E3000"} },]}'
 @app.route("/")
 def home():
-    bikes = get_all(Bike)
     geo = '{"type": "FeatureCollection", "features":['
-    for bike in bikes:
-        geo = geo + '{"type":"Feature","geometry":{"type":"Point","coordinates":[' + str(bike.x_coordinate) + ',' + str(bike.y_coordinate) + ']},"properties":{"id":"' + str(bike.id) + '","name":"' + bike.name + '"} },'
+    bikes = get_all(Bike)
+    for current_bike in bikes:
+        geo = geo + '{"type":"Feature","geometry":{"type":"Point","coordinates":[' + str(current_bike.x_coordinate) + ',' + str(current_bike.y_coordinate) + ']},"properties":{"id":"' + str(current_bike.id) + '","name":"' + current_bike.name + '"} },'
     geo = geo + ']}'
     return render_template('home.html', geo=geo)
 
@@ -39,6 +41,14 @@ def home():
 @auth_required()
 def hello():
     return render_template('hello.html', email=current_user.email)
+
+# remove this later
+@app.route("/biketest")
+@auth_required()
+def biketest():
+    highest_id = db.session.query(func.max(Bike.id)).scalar()
+    bike_db = Bike.query.filter_by(id=highest_id).first()
+    return render_template('bike_test.html', id=bike_db.id, name=bike_db.name, x=bike_db.x_coordinate, y=bike_db.y_coordinate)
 
 # rent and return bikes
 @app.route("/bike<id>", methods=['GET', 'POST', 'PUT'])

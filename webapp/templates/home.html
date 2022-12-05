@@ -58,6 +58,7 @@
 <script>
 
 	var map = L.map('map').setView([50.0012314, 8.2762513], 13);
+    //var map = L.map('map').setView([{{x_startview}}, {{y_startview}}], {{zoom}}); 
 
 	var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		maxZoom: 19,
@@ -67,8 +68,8 @@
     var Fahrradstellplatz = {{geo | safe}};
 
 	L.geoJSON(Fahrradstellplatz).bindPopup(function (layer){
-    //return layer.feature.properties.name;
-    return layer.feature.properties.imagelink;
+    return '<a href="/bike' + layer.feature.properties.id + '">' + layer.feature.properties.name + "</a>";
+    
   }).addTo(map);
 
 </script>
