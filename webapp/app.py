@@ -4,7 +4,6 @@ from . import create_app
 from .models import *
 from .database import *
 from sqlalchemy import *
-
 from flask_security import Security, current_user, auth_required, roles_required, hash_password, SQLAlchemySessionUserDatastore
 
 app = create_app()
