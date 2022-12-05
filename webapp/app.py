@@ -27,17 +27,12 @@ def setup_roles():
 # Home
 @app.route("/")
 def home():
-    geo = '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[49,50]},"properties":{"id":"1","name":"schnelles Bike1"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[11,50]},"properties":{"id":"2","name":"schnelles Bike2"}}]}'
+    bikes = get_all(Bike)
+    geo = '{"type": "FeatureCollection", "features":['
+    for bike in bikes:
+        geo = geo + '{"type":"Feature","geometry":{"type":"Point","coordinates":[' + str(bike.x_coordinate) + ',' + str(bike.y_coordinate) + ']},"properties":{"id":"' + str(bike.id) + '","name":"' + bike.name + '"} },'
+    geo = geo + ']}'
     return render_template('home.html', geo=geo)
-
-# remove this later
-@app.route("/add")
-def add():
-    if not app.security.datastore.find_user(email="test@me.com"):
-        app.security.datastore.create_user(email="test@me.com", password=hash_password("password"))
-        db.session.commit()
-        return "Added user"
-    return "User already exists"
 
 # remove this later
 @app.route("/hello")
@@ -46,89 +41,90 @@ def hello():
     return render_template('hello.html', email=current_user.email)
 
 # rent and return bikes
-@app.route("/bike<id>", methods=['GET', 'POST'])
-@app.route("/bike<id>/<operation>", methods=['GET', 'POST'])
+@app.route("/bike<id>", methods=['GET', 'POST', 'PUT'])
 @auth_required()
-def bike(id, operation=None):
+def bike(id):
     ride_db = Ride.query.filter_by(bike_id=id, end_time=None).first()
-    if request.method == 'POST':
-        if request.content_type == 'application/json':
-            ride_req = request.get_json()
-        elif request.content_type == 'application/x-www-form-urlencoded':
-            ride_req = request.form
+    if request.method == 'GET':
+        if ride_db is None:
+            status = "rent"
+        elif ride_db.user_id == current_user.id:
+            status = "return"
         else:
-            return "Unknown content type"
-        # time format: 2004-10-19 10:23:54
-        if operation == 'rent':
-            add_instance(Ride, user_id=current_user.id, bike_id=id, start_time=ride_req['start_time'])
-            return redirect('/bike' + id)
-        elif operation == 'return':                
-            edit_instance(Ride, ride_db.id, end_time=ride_req['end_time'])
-            return redirect('/bike' + id)
+            status = "unavailable"
+        bike = get_instance(Bike, id)
+        if bike is None:
+            return redirect('/')
+        return render_template('bike.html', bike=bike, status=status)
 
-    if ride_db is None:
-        status = "rent"
-    elif ride_db.user_id == current_user.id:
-        status = "return"
+    if request.content_type == 'application/json':
+        ride_req = request.get_json()
     else:
-        status = "unavailable"
-    bike = get_instance(Bike, id)
-    if bike is None:
-        return redirect('/')
-    return render_template('bike.html', bike=bike, status=status)
+        return "Unknown content type"
+
+    # time format: 2004-10-19 10:23:54
+    if request.method == 'POST':
+        add_instance(Ride, user_id=current_user.id, bike_id=id, start_time=ride_req['start_time'])
+        return redirect('/bike' + id)
+    elif request.method == 'PUT':                
+        edit_instance(Ride, ride_db.id, end_time=ride_req['end_time'])
+        return redirect('/bike' + id)
+    else:
+        return "Unknown method"
 
 # bike-managers can add, delet and edit bikes
-@app.route("/bike-management", methods=['GET', 'POST'])
-@app.route("/bike-management/<operation>", methods=['GET', 'POST'])
+@app.route("/bike-management", methods=['GET', 'POST', 'PUT', 'DELETE'])
 @auth_required()
 @roles_required('bike-manager')
 def bike_management(operation = None):
+    if request.method == 'GET':
+        bikes = get_all(Bike)
+        return render_template('bike_management.html', bikes=bikes)
+
+    if request.content_type == 'application/json':
+        bike = request.get_json()
+    else:
+        return "Unknown request content type"
+
     if request.method == 'POST':
-        if request.content_type == 'application/json':
-            bike = request.get_json()
-        elif request.content_type == 'application/x-www-form-urlencoded':
-            bike = request.form
-        else:
-            return "Unknown request content type"
-        if operation == 'add':
-            add_instance(Bike, **bike)
-            return "Bike added"
-        elif operation == 'delete':
-            delete_instance(Bike, bike['id'])
-            return "Bike deleted"
-        elif operation == 'edit':
-            edit_instance(Bike, **bike)
-            return "Bike edited"
-        else:
-            return "Unknown operation"
-    return render_template('bike_management.html')
+        add_instance(Bike, **bike)
+        return "Bike added"
+    elif request.method == 'DELETE':
+        delete_instance(Bike, bike['id'])
+        return "Bike deleted"
+    elif request.method == 'PUT':
+        edit_instance(Bike, **bike)
+        return "Bike edited"
+    else:
+        return "Unknown method"
 
 # TODO: test this & create user_management.html
 # user-managers can delete users and assign roles
-@app.route("/user-management", methods=['GET', 'POST'])
-@app.route("/user-management/<operation>", methods=['GET', 'POST'])
+@app.route("/user-management", methods=['GET', 'PUT', 'DELETE'])
 @auth_required()
 @roles_required('user-manager')
 def user_management(operation = None):
-    if request.method == 'POST':
-        if request.content_type == 'application/json':
-            roles_users = request.get_json()
-        elif request.content_type == 'application/x-www-form-urlencoded':
-            roles_users = request.form
-        else:
-            return "Unknown request content type"
-        if operation == 'delete':
-            delete_instance(User, roles_users['user_id'])
-            # delete related roles
-            RolesUsers.query.filter_by(user_id=roles_users['user_id']).delete().all()
-            db.session.commit()
-            return "User deleted"
-        elif operation == 'add-role':
+    if request.method == 'GET':
+        users = get_all(User)
+        return render_template('user_management.html', users=users)
+
+    if request.content_type == 'application/json':
+        roles_users = request.get_json()
+    else:
+        return "Unknown request content type"
+
+    if request.method == 'DELETE':
+        delete_instance(User, roles_users['user_id'])
+        # delete related roles
+        RolesUsers.query.filter_by(user_id=roles_users['user_id']).delete().all()
+        db.session.commit()
+        return "User deleted"
+    elif request.method == 'PUT':
+        if roles_users['operation'] == 'add_role':
             add_instance(RolesUsers, roles_users['user_id'], roles_users['role_id'])
             return "Role added"
-        elif operation == 'remove-role':
+        elif roles_users['operation'] == 'remove_role':
             delete_instance(RolesUsers, roles_users['id'])
             return "Role removed"
         else:
             return "Unknown operation"
-    return render_template('user_management.html')

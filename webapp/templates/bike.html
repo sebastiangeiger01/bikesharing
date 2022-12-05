@@ -40,12 +40,11 @@
                     <div class="row">
                         <div class="col">
                             <h1>Bike #{{ bike.id }} {{ bike.name }}</h1>
-                            <form action="/bike{{ bike.id }}/{{ status }}" method="POST">
+                            <form action="/bike{{ bike.id }}" method="POST">
                                 <input type="datetime" name="start_time" placeholder="Start Time" value="2004-10-19 10:23:54">
                                 <button type="submit" class="btn btn-primary">{{ status }} rent</button>
                             </form>
-                            <linebreak>
-                            <form action="/bike{{ bike.id }}/{{ status }}" method="POST">
+                            <form action="/bike{{ bike.id }}" method="PUT">
                                 <input type="datetime" name="end_time" placeholder="End Time" value="2004-10-19 10:23:54">
                                 <button type="submit" class="btn btn-primary">{{ status }} return</button>
                             </form>
