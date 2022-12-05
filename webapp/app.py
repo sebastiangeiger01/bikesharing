@@ -74,10 +74,10 @@ def bike(id):
     # time format: 2004-10-19 10:23:54
     if request.method == 'POST':
         add_instance(Ride, user_id=current_user.id, bike_id=id, start_time=ride_req['start_time'])
-        return redirect('/bike' + id)
+        return "bike rented"
     elif request.method == 'PUT':                
         edit_instance(Ride, ride_db.id, end_time=ride_req['end_time'])
-        return redirect('/bike' + id)
+        return "bike returned"
     else:
         return "Unknown method"
 
@@ -107,7 +107,6 @@ def bike_management(operation = None):
     else:
         return "Unknown method"
 
-# TODO: test this & create user_management.html
 # user-managers can delete users and assign roles
 @app.route("/user-management", methods=['GET', 'PUT', 'DELETE'])
 @auth_required()
@@ -125,15 +124,15 @@ def user_management(operation = None):
     if request.method == 'DELETE':
         delete_instance(User, roles_users['user_id'])
         # delete related roles
-        RolesUsers.query.filter_by(user_id=roles_users['user_id']).delete().all()
+        RolesUsers.query.filter_by(user_id=roles_users['user_id']).delete()
         db.session.commit()
         return "User deleted"
     elif request.method == 'PUT':
         if roles_users['operation'] == 'add_role':
-            add_instance(RolesUsers, roles_users['user_id'], roles_users['role_id'])
+            add_instance(RolesUsers, user_id=roles_users['user_id'], role_id=roles_users['role_id'])
             return "Role added"
         elif roles_users['operation'] == 'remove_role':
-            delete_instance(RolesUsers, roles_users['id'])
+            delete_instance(RolesUsers, id=roles_users['id'])
             return "Role removed"
         else:
             return "Unknown operation"

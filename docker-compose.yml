@@ -6,6 +6,7 @@ services:
     env_file:
       - database.conf
       - security.conf
+      - mail.conf
     ports:
       - 80:5000
     depends_on:
