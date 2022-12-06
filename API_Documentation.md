@@ -70,7 +70,7 @@ Connection: close
 User-Agent: RapidAPI/4.0.0 (Macintosh; OS X/13.0.1) GCDHTTPRequest
 Content-Length: 55
 
-{"password":"admin123","email":"admin@bikesharing.com"}
+{"password":"admin","email":"admin@bikesharing.com"}
 ```
 **Get Token cURL**
 ```sh
@@ -79,7 +79,7 @@ curl -X "POST" "http://localhost/login?include_auth_token=true" \
      -H 'Content-Type: application/json; charset=utf-8' \
      -d $'{
   "email": "admin@bikesharing.com",
-  "password": "admin123"
+  "password": "admin"
 }'
 ```
 
@@ -98,7 +98,7 @@ jQuery.ajax({
     contentType: "application/json",
     data: JSON.stringify({
         "email": "admin@bikesharing.com",
-        "password": "admin123"
+        "password": "admin"
     })
 })
 .done(function(data, textStatus, jqXHR) {
