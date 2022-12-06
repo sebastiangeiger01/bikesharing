@@ -296,6 +296,7 @@ jQuery.ajax({
 
 <details>
 <summary><h3>Change Password</summary>
+
 **HTTP**
 ```http
 POST /change?auth_token=WyIzNjk2YjczZTg2YWE0ZmIzODI0YzBhNmVkYzQ2Zjc3YiJd.Y44_wA.3WWVoGbyRA6IB1VH7Oj3-mHTHC4 HTTP/1.1
@@ -352,6 +353,7 @@ jQuery.ajax({
 
 <details>
 <summary><h3>Delete</summary>
+
 **HTTP**
 ```http
 DELETE /user-management HTTP/1.1
@@ -405,6 +407,7 @@ jQuery.ajax({
 
 <details>
 <summary><h3>Add Role</summary>
+
 **HTTP**
 ```http
 PUT /user-management HTTP/1.1
@@ -462,6 +465,7 @@ jQuery.ajax({
 
 <details>
 <summary><h3>Remove Role</summary>
+
 **HTTP**
 ```http
 PUT /user-management HTTP/1.1
@@ -513,53 +517,285 @@ jQuery.ajax({
     /* ... */
 });
 ```
+</details>
 
 ## Bike
 <details>
 <summary><h3>Add Bike</summary>
 
 **HTTP**
+```http
+POST /bike-management?auth_token=WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU HTTP/1.1
+Content-Type: application/json
+Host: localhost
+Connection: close
+User-Agent: RapidAPI/4.0.0 (Macintosh; OS X/13.0.1) GCDHTTPRequest
+Content-Length: 52
+
+{"name":"gbike","x_coordinate":21,"y_coordinate":20}
+```
 **cURL**
+```sh
+## json add
+curl -X "POST" "http://localhost/bike-management?auth_token=WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU" \
+     -H 'Content-Type: application/json' \
+     -d $'{
+  "name": "gbike",
+  "x_coordinate": 21,
+  "y_coordinate": 20
+}'
+```
 **JavaScript (jQuery)**
+```javascript
+// json add (POST http://localhost/bike-management)
+
+jQuery.ajax({
+    url: "http://localhost/bike-management?" + jQuery.param({
+        "auth_token": "WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU",
+    }),
+    type: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    contentType: "application/json",
+    data: JSON.stringify({
+        "name": "gbike",
+        "x_coordinate": 21,
+        "y_coordinate": 20
+    })
+})
+.done(function(data, textStatus, jqXHR) {
+    console.log("HTTP Request Succeeded: " + jqXHR.status);
+    console.log(data);
+})
+.fail(function(jqXHR, textStatus, errorThrown) {
+    console.log("HTTP Request Failed");
+})
+.always(function() {
+    /* ... */
+});
+```
 </details>
 
 <details>
 <summary><h3>Delete Bike</summary>
 
 **HTTP**
+```http
+DELETE /bike-management HTTP/1.1
+Authentication-Token: WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU
+Content-Type: application/json
+Host: localhost
+Connection: close
+User-Agent: RapidAPI/4.0.0 (Macintosh; OS X/13.0.1) GCDHTTPRequest
+Content-Length: 8
+
+{"id":3}
+```
 **cURL**
+```sh
+## json delete
+curl -X "DELETE" "http://localhost/bike-management" \
+     -H 'Authentication-Token: WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU' \
+     -H 'Content-Type: application/json' \
+     -d $'{
+  "id": 3
+}'
+```
 **JavaScript (jQuery)**
+```javascript
+// json delete (DELETE http://localhost/bike-management)
+
+jQuery.ajax({
+    url: "http://localhost/bike-management",
+    type: "DELETE",
+    headers: {
+        "Authentication-Token": "WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU",
+        "Content-Type": "application/json",
+    },
+    contentType: "application/json",
+    data: JSON.stringify({
+        "id": 3
+    })
+})
+.done(function(data, textStatus, jqXHR) {
+    console.log("HTTP Request Succeeded: " + jqXHR.status);
+    console.log(data);
+})
+.fail(function(jqXHR, textStatus, errorThrown) {
+    console.log("HTTP Request Failed");
+})
+.always(function() {
+    /* ... */
+});
+```
 </details>
 
 <details>
 <summary><h3>Edit Bike</summary>
 
 **HTTP**
-**cURL**
-**JavaScript (jQuery)**
-</details>
+```http
+PUT /bike-management HTTP/1.1
+Content-Type: application/json
+Authentication-Token: WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU
+Host: localhost
+Connection: close
+User-Agent: RapidAPI/4.0.0 (Macintosh; OS X/13.0.1) GCDHTTPRequest
+Content-Length: 59
 
-<details>
-<summary><h3>Delete Bike</summary>
-
-**HTTP**
+{"name":"Cabik","x_coordinate":20,"y_coordinate":20,"id":1}
+```
 **cURL**
+```sh
+## json edit
+curl -X "PUT" "http://localhost/bike-management" \
+     -H 'Content-Type: application/json' \
+     -H 'Authentication-Token: WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU' \
+     -d $'{
+  "id": 1,
+  "name": "Cabik",
+  "x_coordinate": 20,
+  "y_coordinate": 20
+}'
+```
 **JavaScript (jQuery)**
+```javascript
+// json edit (PUT http://localhost/bike-management)
+
+jQuery.ajax({
+    url: "http://localhost/bike-management",
+    type: "PUT",
+    headers: {
+        "Content-Type": "application/json",
+        "Authentication-Token": "WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU",
+    },
+    contentType: "application/json",
+    data: JSON.stringify({
+        "id": 1,
+        "name": "Cabik",
+        "x_coordinate": 20,
+        "y_coordinate": 20
+    })
+})
+.done(function(data, textStatus, jqXHR) {
+    console.log("HTTP Request Succeeded: " + jqXHR.status);
+    console.log(data);
+})
+.fail(function(jqXHR, textStatus, errorThrown) {
+    console.log("HTTP Request Failed");
+})
+.always(function() {
+    /* ... */
+});
+```
 </details>
 
 ## Ride
 <details>
-<summary><h3>Start Bike</summary>
+<summary><h3>Start Ride</summary>
 
 **HTTP**
+```http
+POST /bike1 HTTP/1.1
+Authentication-Token: WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU
+Content-Type: application/json; charset=utf-8
+Host: localhost
+Connection: close
+User-Agent: RapidAPI/4.0.0 (Macintosh; OS X/13.0.1) GCDHTTPRequest
+Content-Length: 36
+
+{"start_time":"2004-10-19 10:23:54"}
+```
 **cURL**
+```sh
+## start
+curl -X "POST" "http://localhost/bike1" \
+     -H 'Authentication-Token: WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d $'{
+  "start_time": "2004-10-19 10:23:54"
+}'
+```
 **JavaScript (jQuery)**
+```javascript
+// start (POST http://localhost/bike1)
+
+jQuery.ajax({
+    url: "http://localhost/bike1",
+    type: "POST",
+    headers: {
+        "Authentication-Token": "WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU",
+        "Content-Type": "application/json; charset=utf-8",
+    },
+    contentType: "application/json",
+    data: JSON.stringify({
+        "start_time": "2004-10-19 10:23:54"
+    })
+})
+.done(function(data, textStatus, jqXHR) {
+    console.log("HTTP Request Succeeded: " + jqXHR.status);
+    console.log(data);
+})
+.fail(function(jqXHR, textStatus, errorThrown) {
+    console.log("HTTP Request Failed");
+})
+.always(function() {
+    /* ... */
+});
+```
 </details>
 
 <details>
-<summary><h3>End Bike</summary>
+<summary><h3>End Ride</summary>
 
 **HTTP**
+```http
+PUT /bike1 HTTP/1.1
+Authentication-Token: WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU
+Content-Type: application/json; charset=utf-8
+Host: localhost
+Connection: close
+User-Agent: RapidAPI/4.0.0 (Macintosh; OS X/13.0.1) GCDHTTPRequest
+Content-Length: 34
+
+{"end_time":"2004-10-19 10:23:59"}
+```
 **cURL**
+```sh
+## end
+curl -X "PUT" "http://localhost/bike1" \
+     -H 'Authentication-Token: WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d $'{
+  "end_time": "2004-10-19 10:23:59"
+}'
+```
 **JavaScript (jQuery)**
+```javascript
+// end (PUT http://localhost/bike1)
+
+jQuery.ajax({
+    url: "http://localhost/bike1",
+    type: "PUT",
+    headers: {
+        "Authentication-Token": "WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU",
+        "Content-Type": "application/json; charset=utf-8",
+    },
+    contentType: "application/json",
+    data: JSON.stringify({
+        "end_time": "2004-10-19 10:23:59"
+    })
+})
+.done(function(data, textStatus, jqXHR) {
+    console.log("HTTP Request Succeeded: " + jqXHR.status);
+    console.log(data);
+})
+.fail(function(jqXHR, textStatus, errorThrown) {
+    console.log("HTTP Request Failed");
+})
+.always(function() {
+    /* ... */
+});
+```
 </details>
