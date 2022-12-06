@@ -1,7 +1,7 @@
 # API Documentation
 ## Authentication
 ### Session
-Use `/login` to login. When using session authentication a CSRF token is required in every request. The token is generated with `{{ csrf_token() }}`. Include the CSRF token in the HTTP header `X-CSRF-Token`.
+Use `/login` to login. When using session authentication a CSRF token is required in every request. The token is generated with `{{ csrf_token() }}`. Include the CSRF token in the HTTP header `X-CSRF-Token`. Close the session with `GET /logout`. 
 
 **Add Bike HTTP**
 ```http
@@ -125,6 +125,18 @@ Set-Cookie: session=.eJwljktOBDEMRO-SNUJ24jjxXKbl-CMQEqDuYYW4OxnNwgtLVfXebznyjOu
 Connection: close
 
 {"meta":{"code":200},"response":{"csrf_token":"IjBkNDRiNWRhNjFlNDI5ZDljYjdhMGZhMWRhMmExMzA5M2ZiNmE1ZDIi.Y45AgQ.G-Z0I-L1YwtOw0cuvVr2n7uxjJk","user":{"authentication_token":"WyJhMzg5MTRmMDRiYzk0NzE5YmU4Y2E4YTY3OTk5ODFjMCJd.Y45AgQ.Fi6Fk8iep5moYN3P9E2G8YLd83Q"}}}
+```
+
+**Add Bike URL parameter HTTP**
+```http
+POST /bike-management?auth_token=WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU HTTP/1.1
+Content-Type: application/json
+Host: localhost
+Connection: close
+User-Agent: RapidAPI/4.0.0 (Macintosh; OS X/13.0.1) GCDHTTPRequest
+Content-Length: 52
+
+{"name":"gbike","x_coordinate":21,"y_coordinate":20}
 ```
 
 **Add Bike header HTTP**
