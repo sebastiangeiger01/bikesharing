@@ -513,3 +513,53 @@ jQuery.ajax({
     /* ... */
 });
 ```
+
+## Bike
+<details>
+<summary><h3>Add Bike</summary>
+
+**HTTP**
+**cURL**
+**JavaScript (jQuery)**
+</details>
+
+<details>
+<summary><h3>Delete Bike</summary>
+
+**HTTP**
+**cURL**
+**JavaScript (jQuery)**
+</details>
+
+<details>
+<summary><h3>Edit Bike</summary>
+
+**HTTP**
+**cURL**
+**JavaScript (jQuery)**
+</details>
+
+<details>
+<summary><h3>Delete Bike</summary>
+
+**HTTP**
+**cURL**
+**JavaScript (jQuery)**
+</details>
+
+## Ride
+<details>
+<summary><h3>Start Bike</summary>
+
+**HTTP**
+**cURL**
+**JavaScript (jQuery)**
+</details>
+
+<details>
+<summary><h3>End Bike</summary>
+
+**HTTP**
+**cURL**
+**JavaScript (jQuery)**
+</details>
