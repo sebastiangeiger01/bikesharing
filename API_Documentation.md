@@ -1,6 +1,8 @@
 # API Documentation
 ## Authentication
-### Session
+<details>
+<summary><h3>Session</summary>
+
 Use `/login` to login. When using session authentication a CSRF token is required in every request. The token is generated with `{{ csrf_token() }}`. Include the CSRF token in the HTTP header `X-CSRF-Token`. Close the session with `GET /logout`. 
 
 **Add Bike HTTP**
@@ -57,8 +59,10 @@ jQuery.ajax({
     /* ... */
 });
 ```
+</details>
 
-### Token
+<details>
+<summary><h3>Token</summary>
 The token can either be included in the header `Authentication-Token` or passed as URL parameter `auth_token`. To get your token use `/login` with the URL parameter `include_auth_token=true`. 
 
 **Get Token HTTP**
@@ -234,9 +238,12 @@ jQuery.ajax({
     /* ... */
 });
 ```
+</details>
 
 ## User
-### Register
+<details>
+<summary><h3>Register</summary>
+
 **HTTP**
 ```http
 POST /register HTTP/1.1
@@ -285,8 +292,10 @@ jQuery.ajax({
     /* ... */
 });
 ```
+</details>
 
-### Change Password
+<details>
+<summary><h3>Change Password</summary>
 **HTTP**
 ```http
 POST /change?auth_token=WyIzNjk2YjczZTg2YWE0ZmIzODI0YzBhNmVkYzQ2Zjc3YiJd.Y44_wA.3WWVoGbyRA6IB1VH7Oj3-mHTHC4 HTTP/1.1
@@ -339,8 +348,10 @@ jQuery.ajax({
     /* ... */
 });
 ```
+</details>
 
-### Delete
+<details>
+<summary><h3>Delete</summary>
 **HTTP**
 ```http
 DELETE /user-management HTTP/1.1
@@ -390,8 +401,10 @@ jQuery.ajax({
     /* ... */
 });
 ```
+</details>
 
-### Add Role
+<details>
+<summary><h3>Add Role</summary>
 **HTTP**
 ```http
 PUT /user-management HTTP/1.1
@@ -445,8 +458,10 @@ jQuery.ajax({
     /* ... */
 });
 ```
+</details>
 
-### Remove Role
+<details>
+<summary><h3>Remove Role</summary>
 **HTTP**
 ```http
 PUT /user-management HTTP/1.1
