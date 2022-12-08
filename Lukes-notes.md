@@ -8,6 +8,8 @@ https://flask-security-too.readthedocs.io/en/stable/configuration.html#login-log
 # Error
 https://github.com/psycopg/psycopg2/issues/1360
 - don't use binary!
+register throws 500 error
+- no mail server configured
 
 # Knowledge
 https://stackoverflow.com/questions/5207160/what-is-a-csrf-token-what-is-its-importance-and-how-does-it-work
