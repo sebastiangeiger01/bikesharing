@@ -1,9 +1,14 @@
 # API Documentation
+
+This REST API accepts the `Content-Type: application/json`. 
+
 ## Authentication
 <details>
 <summary><h3>Session</summary>
 
-Use `/login` to login. When using session authentication a CSRF token is required in every request. The token is generated with `{{ csrf_token() }}`. Include the CSRF token in the HTTP header `X-CSRF-Token`. Close the session with `GET /logout`. 
+Use `/login` to login. When using session authentication a CSRF token is required in every request. The token is generated with `{{ csrf_token() }}`. Include the CSRF token in the HTTP header `X-CSRF-Token`. Close the session with `GET /logout`.
+
+Here are some examples on how to add a bike using session authentication:
 
 **Add Bike HTTP**
 ```http
@@ -66,7 +71,9 @@ jQuery.ajax({
 
 <details>
 <summary><h3>Token</summary>
-The token can either be included in the header `Authentication-Token` or passed as URL parameter `auth_token`. To get your token use `/login` with the URL parameter `include_auth_token=true`. 
+The token can either be included in the header `Authentication-Token` or passed as URL parameter `auth_token`. 
+
+To get your token use `/login` with the URL parameter `include_auth_token=true`. 
 
 **Get Token HTTP**
 ```http
@@ -120,6 +127,8 @@ jQuery.ajax({
 });
 ```
 
+The response has an attribute `authentication_token` in its body:
+
 **Response**
 ```http
 HTTP/1.1 200 OK
@@ -133,6 +142,8 @@ Connection: close
 
 {"meta":{"code":200},"response":{"csrf_token":"IjBkNDRiNWRhNjFlNDI5ZDljYjdhMGZhMWRhMmExMzA5M2ZiNmE1ZDIi.Y45AgQ.G-Z0I-L1YwtOw0cuvVr2n7uxjJk","user":{"authentication_token":"WyJhMzg5MTRmMDRiYzk0NzE5YmU4Y2E4YTY3OTk5ODFjMCJd.Y45AgQ.Fi6Fk8iep5moYN3P9E2G8YLd83Q"}}}
 ```
+
+The following examples demonstrate the difference between transmitting the authentication token as URL parameter or in the header:
 
 **Add Bike URL parameter HTTP**
 ```http
@@ -247,6 +258,18 @@ jQuery.ajax({
 <details>
 <summary><h3>Register</summary>
 
+| Method | URL | Requirements |
+|---|---|---|
+| POST | `/register` | None |
+
+**Body**
+```json
+{
+  "email": "t@l.co",
+  "password": "password"
+}
+```
+
 **HTTP**
 ```http
 POST /register HTTP/1.1
@@ -299,6 +322,19 @@ jQuery.ajax({
 
 <details>
 <summary><h3>Change Password</summary>
+
+| Method | URL | Requirements |
+|---|---|---|
+| POST | `/change` | authentication |
+
+**Body**
+```json
+{
+  "password": "password",
+  "new_password": "admin123",
+  "new_password_confirm": "admin123"
+}
+```
 
 **HTTP**
 ```http
@@ -356,6 +392,17 @@ jQuery.ajax({
 <details>
 <summary><h3>Delete</summary>
 
+| Method | URL | Requirements |
+|---|---|---|
+| DELETE | `/user-management` | Role: user-manager |
+
+**Body**
+```json
+{
+  "user_id": "3"
+}
+```
+
 **HTTP**
 ```http
 DELETE /user-management HTTP/1.1
@@ -406,6 +453,19 @@ jQuery.ajax({
 
 <details>
 <summary><h3>Add Role</summary>
+
+| Method | URL | Requirements |
+|---|---|---|
+| PUT | `/user-management` | Role: user-manager |
+
+**Body**
+```json
+{
+  "user_id": 4,
+  "role_id": 1,
+  "operation": "add_role"
+}
+```
 
 **HTTP**
 ```http
@@ -462,6 +522,18 @@ jQuery.ajax({
 <details>
 <summary><h3>Remove Role</summary>
 
+| Method | URL | Requirements |
+|---|---|---|
+| PUT | `/user-management` | Role: user-manager |
+
+**Body**
+```json
+{
+  "id": 3,
+  "operation": "remove_role"
+}
+```
+
 **HTTP**
 ```http
 PUT /user-management HTTP/1.1
@@ -515,6 +587,19 @@ jQuery.ajax({
 ## Bike
 <details>
 <summary><h3>Add Bike</summary>
+
+| Method | URL | Requirements |
+|---|---|---|
+| POST | `/bike-management` | Role: bike-manager |
+
+**Body**
+```json
+{
+  "name": "gbike",
+  "x_coordinate": 21,
+  "y_coordinate": 20
+}
+```
 
 **HTTP**
 ```http
@@ -572,6 +657,17 @@ jQuery.ajax({
 <details>
 <summary><h3>Delete Bike</summary>
 
+| Method | URL | Requirements |
+|---|---|---|
+| DELETE | `/bike-management` | Role: bike-manager |
+
+**Body**
+```json
+{
+  "id": 3
+}
+```
+
 **HTTP**
 ```http
 DELETE /bike-management HTTP/1.1
@@ -622,6 +718,20 @@ jQuery.ajax({
 
 <details>
 <summary><h3>Edit Bike</summary>
+
+| Method | URL | Requirements |
+|---|---|---|
+| PUT | `/bike-management` | Role: bike-manager |
+
+**Body**
+```json
+{
+  "name": "Cabik",
+  "x_coordinate": 20,
+  "y_coordinate": 20,
+  "id": 1
+}
+```
 
 **HTTP**
 ```http
@@ -681,6 +791,17 @@ jQuery.ajax({
 <details>
 <summary><h3>Start Ride</summary>
 
+| Method | URL | Requirements |
+|---|---|---|
+| POST | `/bike<id>` | authenticated |
+
+**Body**
+```json
+{
+  "start_time": "2004-10-19 10:23:54"
+}
+```
+
 **HTTP**
 ```http
 POST /bike1 HTTP/1.1
@@ -731,6 +852,17 @@ jQuery.ajax({
 
 <details>
 <summary><h3>End Ride</summary>
+
+| Method | URL | Requirements |
+|---|---|---|
+| PUT | `/bike<id>` | authenticated |
+
+**Body**
+```json
+{
+  "end_time": "2004-10-19 10:23:59"
+}
+```
 
 **HTTP**
 ```http
