@@ -12,3 +12,4 @@ https://github.com/psycopg/psycopg2/issues/1360
 # Knowledge
 https://stackoverflow.com/questions/5207160/what-is-a-csrf-token-what-is-its-importance-and-how-does-it-work
 https://docs.sqlalchemy.org/en/14/orm/query.html#sqlalchemy.orm.Query.scalar sqlalchemy query api
+https://leafletjs.com/reference.html#latlngbounds documentation map
