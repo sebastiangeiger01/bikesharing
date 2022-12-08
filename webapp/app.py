@@ -28,12 +28,30 @@ def setup_roles():
 # GeoJSON Template: '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[20.0,30.0]},"properties":{"id":"1","name":"Pegasus 500"} },{"type":"Feature","geometry":{"type":"Point","coordinates":[15.0,50.0]},"properties":{"id":"2","name":"Tesla E3000"} },]}'
 @app.route("/")
 def home():
+    #Initialize variables
     geo = '{"type": "FeatureCollection", "features":['
+    min_x = -90
+    max_x = 90
+    min_y = -180
+    max_y = 180
+    list_x = list()
+    list_y = list()
     bikes = get_all(Bike)
+
+    #Loop through bike array
     for current_bike in bikes:
         geo = geo + '{"type":"Feature","geometry":{"type":"Point","coordinates":[' + str(current_bike.x_coordinate) + ',' + str(current_bike.y_coordinate) + ']},"properties":{"id":"' + str(current_bike.id) + '","name":"' + current_bike.name + '"} },'
+        list_x.append(current_bike.x_coordinate)
+        list_y.append(current_bike.y_coordinate) 
     geo = geo + ']}'
-    return render_template('home.html', geo=geo)
+
+    #Variables to calculate zoom for map startview
+    min_x=min(list_x)
+    min_y=min(list_y)
+    max_x=max(list_x)
+    max_y=max(list_y)
+
+    return render_template('home.html', geo=geo, min_y=min_y, min_x=min_x, max_y=max_y, max_x=max_x)
 
 # remove this later
 @app.route("/hello")
