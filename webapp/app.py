@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, jsonify
 
 from . import create_app
 from .models import *
@@ -49,6 +49,19 @@ def biketest():
     bike_db = Bike.query.filter_by(id=highest_id).first()
     return render_template('bike_test.html', id=bike_db.id, name=bike_db.name, x=bike_db.x_coordinate, y=bike_db.y_coordinate)
 
+@app.route("/bikes")
+@auth_required()
+def bikes():
+    bikes = get_all(Bike)
+    return jsonify(bikes)
+
+@app.route("/users")
+@auth_required()
+@roles_required('user-manager')
+def users():
+    users = get_all(User)
+    return jsonify(users)
+
 # rent and return bikes
 @app.route("/bike<id>", methods=['GET', 'POST', 'PUT'])
 @auth_required()
@@ -66,7 +79,7 @@ def bike(id):
             return redirect('/')
         return render_template('bike.html', bike=bike, status=status)
 
-    if request.content_type == 'application/json':
+    if 'application/json' in request.content_type:
         ride_req = request.get_json()
     else:
         return "Unknown content type"
@@ -90,7 +103,7 @@ def bike_management(operation = None):
         bikes = get_all(Bike)
         return render_template('bike_management.html', bikes=bikes)
 
-    if request.content_type == 'application/json':
+    if 'application/json' in request.content_type:
         bike = request.get_json()
     else:
         return "Unknown request content type"
@@ -116,7 +129,7 @@ def user_management(operation = None):
         users = get_all(User)
         return render_template('user_management.html', users=users)
 
-    if request.content_type == 'application/json':
+    if 'application/json' in request.content_type:
         roles_users = request.get_json()
     else:
         return "Unknown request content type"
