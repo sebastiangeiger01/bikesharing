@@ -46,10 +46,11 @@ def home():
     geo = geo + ']}'
 
     #Variables to calculate zoom for map startview
-    min_x=min(list_x)
-    min_y=min(list_y)
-    max_x=max(list_x)
-    max_y=max(list_y)
+    if len(list_x) & len(list_y) != 0:
+        min_x=min(list_x)
+        min_y=min(list_y)
+        max_x=max(list_x)
+        max_y=max(list_y)
 
     return render_template('home.html', geo=geo, min_y=min_y, min_x=min_x, max_y=max_y, max_x=max_x)
 
