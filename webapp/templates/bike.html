@@ -1,93 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Bike Rental</title>
-    <link rel="stylesheet" href="static/assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/assets/fonts/ionicons.min.css">
-    <link rel="stylesheet" href="static/assets/css/Brands.css">
-    <link rel="stylesheet" href="static/assets/css/Features-Boxed.css">
-    <link rel="stylesheet" href="static/assets/css/Footer-Clean.css">
-    <link rel="stylesheet" href="static/assets/css/Highlight-Phone.css">
-    <link rel="stylesheet" href="static/assets/css/Login-Form-Clean.css">
-    <link rel="stylesheet" href="static/assets/css/Map-Clean.css">
-    <link rel="stylesheet" href="static/assets/css/Navigation-with-Button.css">
-    <link rel="stylesheet" href="static/assets/css/styles.css">
-    <link rel="stylesheet" href="static/assets/css/Team-Boxed.css">
-</head>
-
-<body>
-    <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
-        <div class="container"><a class="navbar-brand" href="#">BikeRetal</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+      <title>Bike Rental</title>
+      <link rel="stylesheet" href="static/assets/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" href="static/assets/fonts/ionicons.min.css">
+      <link rel="stylesheet" href="static/assets/css/Brands.css">
+      <link rel="stylesheet" href="static/assets/css/Features-Boxed.css">
+      <link rel="stylesheet" href="static/assets/css/Footer-Clean.css">
+      <link rel="stylesheet" href="static/assets/css/Highlight-Phone.css">
+      <link rel="stylesheet" href="static/assets/css/Login-Form-Clean.css">
+      <link rel="stylesheet" href="static/assets/css/Map-Clean.css">
+      <link rel="stylesheet" href="static/assets/css/Navigation-with-Button.css">
+      <link rel="stylesheet" href="static/assets/css/styles.css">
+      <link rel="stylesheet" href="static/assets/css/Team-Boxed.css">
+   </head>
+   <body>
+      <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
+         <div class="container">
+            <a class="navbar-brand" href="#">BikeRetal</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#">First Item</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Second Item</a></li>
-                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Dropdown </a>
-                        <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                    </li>
-                </ul><span class="navbar-text actions"> <a class="login" href="#">Log In</a><a class="btn btn-light action-button" role="button" href="#">Registrieren</a></span>
+               <ul class="navbar-nav me-auto">
+                  <li class="nav-item"><a class="nav-link active" href="#">First Item</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#">Second Item</a></li>
+                  <li class="nav-item dropdown">
+                     <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Dropdown </a>
+                     <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+                  </li>
+               </ul>
+               <span class="navbar-text actions"> <a class="login" href="#">Log In</a><a class="btn btn-light action-button" role="button" href="#">Registrieren</a></span>
             </div>
-        </div>
-    </nav>
-    <section class="map-clean">
-        <div class="map"></div>
-        <div class="brands">
-            <section class="highlight-phone" style="background: rgb(255,255,255);">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <h1>Bike #{{ bike.id }} {{ bike.name }}</h1>
-                            <form action="/bike{{ bike.id }}" method="POST">
-                                <input type="datetime" name="start_time" placeholder="Start Time" value="2004-10-19 10:23:54">
-                                <button type="submit" class="btn btn-primary">{{ status }} rent</button>
-                            </form>
-                            <form action="/bike{{ bike.id }}" method="PUT">
-                                <input type="datetime" name="end_time" placeholder="End Time" value="2004-10-19 10:23:54">
-                                <button type="submit" class="btn btn-primary">{{ status }} return</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </section>
-    <footer class="footer-clean">
-        <div class="container">
+         </div>
+      </nav>
+      <!-- Product section-->
+      <section class="py-5">
+         <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+               <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" style="box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1); border-radius: 5% 5% 5% 5% / 5% 5% 5% 5%;" src="static/assets/img/Produktbild.png" alt="{{ bike.name }}" /></div>
+               <div class="col-md-6">
+                  <div class="small mb-1">Bike-ID:{{ bike.id }}</div>
+                  <h1 class="display-5 fw-bolder">{{ bike.name }}</h1>
+                  <div class="fs-5 mb-5">
+                     <span class="text-decoration-line-through">5,00 €</span>
+                     <span>3,50 €</span>
+                  </div>
+                  <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
+                  <div class="d-flex">
+                     <form action="/bike{{ bike.id }}" method="PUT">
+                        <input type="datetime" name="start_time" placeholder="Start Time" id="start-time" value="2004-10-19 10:23:54">
+                        <button type="submit" class="btn btn-primary" id="rent-button">{{ status }} rent</button>
+                     </form>
+                     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                     <script>
+                        $('#rent-button').click(function() {
+                          jQuery.ajax({
+                            url: "http://localhost/{{ bike.id }}",
+                            type: "POST",
+                            headers: {
+                              "X-CSRF-Token": "{{csrf_token()}}",
+                              "Content-Type": "application/json; charset=utf-8",
+                            },
+                            contentType: "application/json",
+                            data: JSON.stringify({
+                              "start_time": $('#start-time-input').val()
+                            })
+                          })
+                          .done(function(data, textStatus, jqXHR) {
+                            console.log("HTTP Request Succeeded: " + jqXHR.status);
+                            console.log(data);
+                          })
+                          .fail(function(jqXHR, textStatus, errorThrown) {
+                            console.log("HTTP Request Failed");
+                          })
+                          .always(function() {
+                            /* ... */
+                          });
+                        });
+                     </script>
+                     <form action="/bike{{ bike.id }}" method="PUT">
+                        <input type="datetime" name="end_time" placeholder="End Time" id="end-time" value="2004-10-19 10:23:54">
+                        <button type="submit" class="btn btn-primary" id="return-button">{{ status }} return</button>
+                     </form>
+                     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                     <script>
+                        $('#return-button').click(function() {
+                          jQuery.ajax({
+                            url: "http://localhost/{{ bike.id }}",
+                            type: "PUT",
+                            headers: {
+                              "X-CSRF-Token": "{{csrf_token()}}",
+                              "Content-Type": "application/json; charset=utf-8",
+                            },
+                            contentType: "application/json",
+                            data: JSON.stringify({
+                              "end_time": $('#end-time').val()
+                            })
+                          })
+                          .done(function(data, textStatus, jqXHR) {
+                            console.log("HTTP Request Succeeded: " + jqXHR.status);
+                            console.log(data);
+                          })
+                          .fail(function(jqXHR, textStatus, errorThrown) {
+                            console.log("HTTP Request Failed");
+                          })
+                          .always(function() {
+                            /* ... */
+                          });
+                        });
+                     </script>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      </div>
+      </section>
+      <footer class="footer-clean">
+         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-sm-4 col-md-3 item">
-                    <h3>Services</h3>
-                    <ul>
-                        <li><a href="#">Für Kommunen</a></li>
-                        <li><a href="#">Für Kunden</a></li>
-                        <li></li>
-                    </ul>
-                </div>
-                <div class="col-sm-4 col-md-3 item">
-                    <h3>Infos</h3>
-                    <ul>
-                        <li><a href="#">Das Unternehmen</a></li>
-                        <li><a href="#">Das Team</a></li>
-                        <li></li>
-                    </ul>
-                </div>
-                <div class="col-sm-4 col-md-3 item">
-                    <h3>Rechtliches</h3>
-                    <ul>
-                        <li><a href="#">Impressum</a></li>
-                        <li><a href="#">Datenschutz</a></li>
-                        <li></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a>
-                    <p class="copyright">Bike Rental© 2022</p>
-                </div>
+               <div class="col-sm-4 col-md-3 item">
+                  <h3>Services</h3>
+                  <ul>
+                     <li><a href="#">Für Kommunen</a></li>
+                     <li><a href="#">Für Kunden</a></li>
+                     <li></li>
+                  </ul>
+               </div>
+               <div class="col-sm-4 col-md-3 item">
+                  <h3>Infos</h3>
+                  <ul>
+                     <li><a href="#">Das Unternehmen</a></li>
+                     <li><a href="#">Das Team</a></li>
+                     <li></li>
+                  </ul>
+               </div>
+               <div class="col-sm-4 col-md-3 item">
+                  <h3>Rechtliches</h3>
+                  <ul>
+                     <li><a href="#">Impressum</a></li>
+                     <li><a href="#">Datenschutz</a></li>
+                     <li></li>
+                  </ul>
+               </div>
+               <div class="col-lg-3 item social">
+                  <a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a>
+                  <p class="copyright">Bike Rental© 2022</p>
+               </div>
             </div>
-        </div>
-    </footer>
-    <script src="static/assets/bootstrap/js/bootstrap.min.js"></script>
-</body>
-
+         </div>
+      </footer>
+      <script src="static/assets/bootstrap/js/bootstrap.min.js"></script>
+   </body>
 </html>
