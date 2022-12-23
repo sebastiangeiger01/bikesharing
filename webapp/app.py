@@ -30,10 +30,10 @@ def setup_roles():
 def home():
     #Initialize variables
     geo = '{"type": "FeatureCollection", "features":['
-    min_x = -90
-    max_x = 90
-    min_y = -180
-    max_y = 180
+    min_x = 8.212967
+    max_x = 8.343430
+    min_y = 49.977280
+    max_y = 50.021858
     list_x = list()
     list_y = list()
     bikes = get_all(Bike)
@@ -68,18 +68,42 @@ def biketest():
     bike_db = Bike.query.filter_by(id=highest_id).first()
     return render_template('bike_test.html', id=bike_db.id, name=bike_db.name, x=bike_db.x_coordinate, y=bike_db.y_coordinate)
 
-@app.route("/bikes")
+# JSON with all bikes (id, name, x, y)
+@app.route("/allbikes")
 @auth_required()
 def bikes():
     bikes = get_all(Bike)
-    return jsonify(bikes)
+    bike_json = '['
+    for current_bike in bikes:
+        bike_json = bike_json + '{ "id": ' + str(current_bike.id) + ', "name": "' + str(current_bike.name) + '", "x": ' + str(current_bike.x_coordinate) + ', "y": ' + str(current_bike.y_coordinate) + '},'
+    if len(bikes) != 0:
+        bike_json = bike_json[:-1] + ']'
+    else:
+        bike_json = bike_json + ']'
+    return render_template('bike_test.html', id=bike_json)
+    #return bike_json
 
-@app.route("/users")
+# JSON with all users (id, email, roles)
+@app.route("/allusers")
 @auth_required()
 @roles_required('user-manager')
 def users():
     users = get_all(User)
-    return jsonify(users)
+    user_json = '['
+    for current_user in users:
+        user_json = user_json + '{ "id": ' + str(current_user.id) + ', "email": "' + str(current_user.email) + '", "roles": ['
+        roles_users = RolesUsers.query.filter_by(user_id=current_user.id).all()
+        if len(roles_users) != 0:
+            for current_roles_users in roles_users:
+                user_json = user_json + '"' + Role.query.filter_by(id=current_roles_users.role_id).first().name + '",'
+            user_json = user_json[:-1] + ']},'
+        else:
+            user_json = user_json + ']},'
+    if len(users) != 0:
+        user_json = user_json[:-1] + ']'
+    else:
+        user_json = user_json + ']'
+    return user_json
 
 # rent and return bikes
 @app.route("/bike<id>", methods=['GET', 'POST', 'PUT'])
