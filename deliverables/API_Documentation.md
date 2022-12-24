@@ -364,7 +364,6 @@ curl -X "POST" "http://localhost/change" \
 
 jQuery.ajax({
     url: "http://localhost/change",
-    }),
     type: "POST",
     headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -629,7 +628,6 @@ curl -X "POST" "http://localhost/bike-management" \
 
 jQuery.ajax({
     url: "http://localhost/bike-management",
-    }),
     type: "POST",
     headers: {
         "Content-Type": "application/json",
