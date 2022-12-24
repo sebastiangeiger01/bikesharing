@@ -1,101 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-      <title>Bike Rental</title>
-      <link rel="stylesheet" href="static/assets/bootstrap/css/bootstrap.min.css">
-      <link rel="stylesheet" href="static/assets/fonts/font-awesome.min.css">
-      <link rel="stylesheet" href="static/assets/fonts/ionicons.min.css">
-      <link rel="stylesheet" href="static/assets/css/Brands.css">
-      <link rel="stylesheet" href="static/assets/css/Features-Boxed.css">
-      <link rel="stylesheet" href="static/assets/css/Footer-Clean.css">
-      <link rel="stylesheet" href="static/assets/css/Highlight-Phone.css">
-      <link rel="stylesheet" href="static/assets/css/Login-Form-Clean.css">
-      <link rel="stylesheet" href="static/assets/css/Map-Clean.css">
-      <link rel="stylesheet" href="static/assets/css/Navigation-with-Button.css">
-      <link rel="stylesheet" href="static/assets/css/styles.css">
-      <link rel="stylesheet" href="static/assets/css/Team-Boxed.css">
-   </head>
-   <body>
-      <section class="vh-100 bg-image"
-         style="background-image: url('static/assets/img/HG_Regsiter.jpg');">
-         <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-            <div class="container h-100">
-               <div class="row d-flex justify-content-center align-items-center h-100">
-                  <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-                     <div class="card" style="border-radius: 15px;">
-                        <div class="card-body p-5">
-                           <!-- include messages template -->
-                           {% include "security/_messages.html" %}
-                           <h2 class="text-uppercase text-center mb-5">Login</h2>
-                           <form action="/login" method="POST" name="login_user_form">
-                              {{ login_user_form.hidden_tag() }}
-                              <div class="form-outline mb-4">
-                                 <input class="form-control" autocomplete="email" id="email" type="email" name="email" placeholder="Email" value="">
-                                 <label class="form-label" for="form3Example3cg">Deine E-Mail</label>
-                              </div>
-                              <div class="form-outline mb-4">
-                                 <input class="form-control" autocomplete="current-password" id="password" required value="" type="password" name="password" placeholder="Password">
-                                 <label class="form-label" for="form3Example4cg">Passwort</label>
-                                 <p class="text-center text-muted mt-5 mb-0">Du hast dein Passwort vergessen? <a href="http://localhost/login/#"
-                                    class="fw-bold text-body"><u>Erstelle ein neues</u></a></p>
-                              </div>
-                              <div class="d-flex justify-content-center">
-                                 <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Log In</button></div>
-                              </div>
-                              {% if login_user_form.email.errors or login_user_form.password.errors %}
-                              <div class="alert alert-danger">
-                                 {% for error in login_user_form.email.errors %}
-                                 <p>{{ error }}</p>
-                                 {% endfor %}
-                                 {% for error in login_user_form.password.errors %}
-                                 <p>{{ error }}</p>
-                                 {% endfor %}
-                              </div>
-                              {% endif %}
-                           </form>
-                        </div>
+<!-- Navigationsleiste und Footer importieren -->
+{% extends 'base.html' %}
+{%block content%}
+<!-- Bike Management Section-->
+
+<body>
+   <section class="vh-100 bg-image" style="background-image: url('static/assets/img/HG_Register.jpg');">
+      <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+         <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+               <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                  <div class="card" style="border-radius: 15px;">
+                     <div class="card-body p-5">
+                        <!-- include messages template -->
+                        {% include "security/_messages.html" %}
+                        <h2 class="text-uppercase text-center mb-5">Login</h2>
+                        <form action="/login" method="POST" name="login_user_form">
+                           {{ login_user_form.hidden_tag() }}
+                           <div class="form-outline mb-4">
+                              <input class="form-control" autocomplete="email" id="email" type="email" name="email"
+                                 placeholder="Email" value="">
+                              <label class="form-label" for="form3Example3cg">Deine E-Mail</label>
+                           </div>
+                           <div class="form-outline mb-4">
+                              <input class="form-control" autocomplete="current-password" id="password" required
+                                 value="" type="password" name="password" placeholder="Password">
+                              <label class="form-label" for="form3Example4cg">Passwort</label>
+                              <p class="text-center text-muted mt-5 mb-0">Du hast dein Passwort vergessen? <a
+                                    href="http://localhost/login/#" class="fw-bold text-body"><u>Erstelle ein
+                                       neues</u></a></p>
+                           </div>
+                           <div class="d-flex justify-content-center">
+                              <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Log
+                                    In</button></div>
+                           </div>
+                           {% if login_user_form.email.errors or login_user_form.password.errors %}
+                           <div class="alert alert-danger">
+                              {% for error in login_user_form.email.errors %}
+                              <p>{{ error }}</p>
+                              {% endfor %}
+                              {% for error in login_user_form.password.errors %}
+                              <p>{{ error }}</p>
+                              {% endfor %}
+                           </div>
+                           {% endif %}
+                        </form>
                      </div>
                   </div>
                </div>
             </div>
          </div>
-      </section>
-      <footer class="footer-clean">
-         <div class="container">
-            <div class="row justify-content-center">
-               <div class="col-sm-4 col-md-3 item">
-                  <h3>Services</h3>
-                  <ul>
-                     <li><a href="#">Web design</a></li>
-                     <li><a href="#">Development</a></li>
-                     <li><a href="#">Hosting</a></li>
-                  </ul>
-               </div>
-               <div class="col-sm-4 col-md-3 item">
-                  <h3>About</h3>
-                  <ul>
-                     <li><a href="#">Company</a></li>
-                     <li><a href="#">Team</a></li>
-                     <li><a href="#">Legacy</a></li>
-                  </ul>
-               </div>
-               <div class="col-sm-4 col-md-3 item">
-                  <h3>Careers</h3>
-                  <ul>
-                     <li><a href="#">Job openings</a></li>
-                     <li><a href="#">Employee success</a></li>
-                     <li><a href="#">Benefits</a></li>
-                  </ul>
-               </div>
-               <div class="col-lg-3 item social">
-                  <a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a>
-                  <p class="copyright">Company Name © 2022</p>
-               </div>
-            </div>
-         </div>
-      </footer>
-      <script src="static/assets/bootstrap/js/bootstrap.min.js"></script>
-   </body>
+      </div>
+   </section>
+   <script src="static/assets/bootstrap/js/bootstrap.min.js"></script>
+   {% endblock %}
+</body>
+
 </html>
