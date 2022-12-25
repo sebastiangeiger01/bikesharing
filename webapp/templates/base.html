@@ -1,58 +1,102 @@
-<nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
-    <div class="container"><a class="navbar-brand" href="#">BikeRental</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navcol-1">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item"><a class="nav-link" href="http://www.localhost/bike-management.html">Bike-Management</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Second Item</a></li>
-                <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Dropdown </a>
-                    <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                </li>
+<!DOCTYPE html>
+<html lang="en">
 
-            {% if current_user.is_authenticated %}
-            </ul><span class="navbar-text actions"><a class="btn btn-light action-button" role="button" href="/logout">Logout</a></span>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Bike Rental</title>
+    <link rel="stylesheet" href="static/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="static/assets/css/Brands.css">
+    <link rel="stylesheet" href="static/assets/css/Features-Boxed.css">
+    <link rel="stylesheet" href="static/assets/css/Footer-Clean.css">
+    <link rel="stylesheet" href="static/assets/css/Highlight-Phone.css">
+    <link rel="stylesheet" href="static/assets/css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="static/assets/css/Map-Clean.css">
+    <link rel="stylesheet" href="static/assets/css/Navigation-with-Button.css">
+    <link rel="stylesheet" href="static/assets/css/styles.css">
+    <link rel="stylesheet" href="static/assets/css/Team-Boxed.css">
+    <script src="static/assets/bootstrap/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Navigationsleiste -->
+    <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
+        <div class="container"><a class="navbar-brand" href="http://localhost">BikeRental</a><button
+                data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span
+                    class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav me-auto">
+
+
+
+
+                    {% if current_user.has_role('bike-manager') %}
+                    <li class="nav-item"><a class="nav-link" href="/bike-management">Bike-Management</a></li>
+                    {% endif %}
+                    
+                    
+                    
+                    {% if current_user.has_role('user-manager') %}
+                    <li class="nav-item"><a class="nav-link" href="/user-management">User-Management</a></li>
+                    {% endif %}
+                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false"
+                            data-bs-toggle="dropdown" href="#">Dropdown </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">First Item</a>
+                            <a class="dropdown-item" href="#">Second Item</a>
+                            <a class="dropdown-item" href="#">Third Item</a></div>
+                    </li>
+                    {% if current_user.is_authenticated %}
+                </ul><span class="navbar-text actions"><a
+                    class="btn btn-link" role="button" href="/change">Passwort ändern</a><a class="btn btn-light action-button" role="button"
+                        href="/logout">Logout</a></span>
                 {% else %}
-            </ul><span class="navbar-text actions"> <a class="login" href="/login">Log In</a><a class="btn btn-light action-button" role="button" href="/register">Registrieren</a></span>
-            {% endif %}
+                </ul><span class="navbar-text actions"> <a class="login" href="/login">Log In</a><a
+                        class="btn btn-light action-button" role="button" href="/register">Registrieren</a></span>
+                {% endif %}
 
-        </div>
-    </div>
-</nav>
-
-{% block content %}
-
-{% endblock %}
-
-
-<footer class="footer-clean">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-sm-4 col-md-3 item">
-                <h3>Services</h3>
-                <ul>
-                    <li><a href="#">Für Kommunen</a></li>
-                    <li><a href="#">Für Kunden</a></li>
-                    <li></li>
-                </ul>
-            </div>
-            <div class="col-sm-4 col-md-3 item">
-                <h3>Infos</h3>
-                <ul>
-                    <li><a href="#">Das Unternehmen</a></li>
-                    <li><a href="#">Das Team</a></li>
-                    <li></li>
-                </ul>
-            </div>
-            <div class="col-sm-4 col-md-3 item">
-                <h3>Rechtliches</h3>
-                <ul>
-                    <li><a href="#">Impressum</a></li>
-                    <li><a href="#">Datenschutz</a></li>
-                    <li></li>
-                </ul>
-            </div>
-            <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a>
-                <p class="copyright">Bike Rental© 2022</p>
             </div>
         </div>
-    </div>
-</footer>
+    </nav>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer class="footer-clean">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-4 col-md-3 item">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Für Kommunen</a></li>
+                        <li><a href="#">Für Kunden</a></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-md-3 item">
+                    <h3>Infos</h3>
+                    <ul>
+                        <li><a href="#">Das Unternehmen</a></li>
+                        <li><a href="#">Das Team</a></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-md-3 item">
+                    <h3>Rechtliches</h3>
+                    <ul>
+                        <li><a href="#">Impressum</a></li>
+                        <li><a href="#">Datenschutz</a></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i
+                            class="icon ion-social-instagram"></i></a>
+                    <p class="copyright">Bike Rental© 2022</p>
+                </div>
+            </div>
+        </div>
+    </footer>
