@@ -28,9 +28,17 @@
                     class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav me-auto">
-                    {% if current_user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href="/bike-management">Bike-Management</a></li>
 
+
+
+
+                    {% if current_user.has_role('bike-manager') %}
+                    <li class="nav-item"><a class="nav-link" href="/bike-management">Bike-Management</a></li>
+                    {% endif %}
+                    
+                    
+                    
+                    {% if current_user.has_role('user-manager') %}
                     <li class="nav-item"><a class="nav-link" href="/user-management">User-Management</a></li>
                     {% endif %}
                     <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false"
