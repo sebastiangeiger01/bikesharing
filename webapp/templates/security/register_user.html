@@ -1,107 +1,65 @@
+<!-- Navigationsleiste und Footer importieren -->
+{% extends 'base.html' %}
+{%block content%}
+<!-- Bike Management Section-->
 
-<!DOCTYPE html>
-<html>
-   <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-      <title>Bike Rental</title>
-      <link rel="stylesheet" href="static/assets/bootstrap/css/bootstrap.min.css">
-      <link rel="stylesheet" href="static/assets/fonts/font-awesome.min.css">
-      <link rel="stylesheet" href="static/assets/fonts/ionicons.min.css">
-      <link rel="stylesheet" href="static/assets/css/Brands.css">
-      <link rel="stylesheet" href="static/assets/css/Features-Boxed.css">
-      <link rel="stylesheet" href="static/assets/css/Footer-Clean.css">
-      <link rel="stylesheet" href="static/assets/css/Highlight-Phone.css">
-      <link rel="stylesheet" href="static/assets/css/Login-Form-Clean.css">
-      <link rel="stylesheet" href="static/assets/css/Map-Clean.css">
-      <link rel="stylesheet" href="static/assets/css/Navigation-with-Button.css">
-      <link rel="stylesheet" href="static/assets/css/styles.css">
-      <link rel="stylesheet" href="static/assets/css/Team-Boxed.css">
-   </head>
-   <body>
-      <section class="vh-100 bg-image"
-         style="background-image: url('static/assets/img/HG_Register.jpg');">
-         <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-            <div class="container h-100">
-               <div class="row d-flex justify-content-center align-items-center h-100">
-                  <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-                     <div class="card" style="border-radius: 15px;">
-                        <div class="card-body p-5">
-                           <!-- include messages template -->
-                           {% include "security/_messages.html" %}
-                           <h2 class="text-uppercase text-center mb-5">Erstelle einen Account</h2>
-                           <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
-                              <div class="form-outline mb-4">
-                                 {{ register_user_form.email(class="form-control") }}
-                                 <label class="form-label" for="form3Example3cg">Deine E-Mail</label>
-                              </div>
-                              <div class="form-outline mb-4">
-                                 {{ register_user_form.password(class="form-control") }}
-                                 <label class="form-label" for="form3Example4cg">Passwort</label>
-                              </div>
-                              <div class="form-outline mb-4">
-                                 {{ register_user_form.password_confirm(class="form-control") }}
-                                 <label class="form-label" for="form3Example4cdg">Passwort erneut eingeben</label>
-                              </div>
-                              <div class="form-check d-flex justify-content-center mb-5">
-                                 <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
-                                 <label class="form-check-label" for="form2Example3g">
-                                 Ich habe die <a href="#!" class="text-body"><u>Nutzungsbedingungen</u></a> gelesen und stimme ihnen zu.
-                                 </label>
-                              </div>
-                              <div class="d-flex justify-content-center">
-                                 {{ register_user_form.submit(class="btn btn-primary") }}
-                              </div>
-                              <p class="text-center text-muted mt-5 mb-0">Du hast schon einen Account? <a href="http://localhost/login"
-                                 class="fw-bold text-body"><u>Login</u></a></p>
-                              {{ register_user_form.hidden_tag() }}
-                              {% if register_user_form.errors %}
-                              <div class="alert alert-danger">
-                                 {% for error in register_user_form.errors %}
-                                 <p>{{ error }}</p>
-                                 {% endfor %}
-                              </div>
-                              {% endif %}
-                           </form>
-                        </div>
+</html>
+<!-- Starte Inhalt-->
+
+<body>
+   <section class="vh-100 bg-image" style="background-image: url('static/assets/img/HG_Register.jpg');">
+      <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+         <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+               <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                  <div class="card" style="border-radius: 15px;">
+                     <div class="card-body p-5">
+                        <!-- include messages template -->
+                        {% include "security/_messages.html" %}
+                        <h2 class="text-uppercase text-center mb-5">Erstelle einen Account</h2>
+                        <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
+                           <div class="form-outline mb-4">
+                              {{ register_user_form.email(class="form-control") }}
+                              <label class="form-label" for="form3Example3cg">Deine E-Mail</label>
+                           </div>
+                           <div class="form-outline mb-4">
+                              {{ register_user_form.password(class="form-control") }}
+                              <label class="form-label" for="form3Example4cg">Passwort</label>
+                           </div>
+                           <div class="form-outline mb-4">
+                              {{ register_user_form.password_confirm(class="form-control") }}
+                              <label class="form-label" for="form3Example4cdg">Passwort erneut eingeben</label>
+                           </div>
+                           <div class="form-check d-flex justify-content-center mb-5">
+                              <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
+                              <label class="form-check-label" for="form2Example3g">
+                                 Ich habe die <a href="#!" class="text-body"><u>Nutzungsbedingungen</u></a> gelesen und
+                                 stimme ihnen zu.
+                              </label>
+                           </div>
+                           <div class="d-flex justify-content-center">
+                              {{ register_user_form.submit(class="btn btn-primary") }}
+                           </div>
+                           <p class="text-center text-muted mt-5 mb-0">Du hast schon einen Account? <a
+                                 href="http://localhost/login" class="fw-bold text-body"><u>Login</u></a></p>
+                           {{ register_user_form.hidden_tag() }}
+                           {% if register_user_form.errors %}
+                           <div class="alert alert-danger">
+                              {% for error in register_user_form.errors %}
+                              <p>{{ error }}</p>
+                              {% endfor %}
+                           </div>
+                           {% endif %}
+                        </form>
                      </div>
                   </div>
                </div>
             </div>
          </div>
-      </section>
+      </div>
+   </section>
 
+   {% endblock %}
+</body>
 
-      <footer class="footer-clean">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-sm-4 col-md-3 item">
-                    <h3>Services</h3>
-                    <ul>
-                        <li><a href="#">Für Kommunen</a></li>
-                        <li><a href="#">Für Kunden</a></li>
-                        <li></li>
-                    </ul>
-                </div>
-                <div class="col-sm-4 col-md-3 item">
-                    <h3>Infos</h3>
-                    <ul>
-                        <li><a href="#">Das Unternehmen</a></li>
-                        <li><a href="#">Das Team</a></li>
-                        <li></li>
-                    </ul>
-                </div>
-                <div class="col-sm-4 col-md-3 item">
-                    <h3>Rechtliches</h3>
-                    <ul>
-                        <li><a href="#">Impressum</a></li>
-                        <li><a href="#">Datenschutz</a></li>
-                        <li></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a>
-                    <p class="copyright">Bike Rental© 2022</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+</html>

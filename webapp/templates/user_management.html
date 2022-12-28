@@ -10,31 +10,27 @@
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
 
-
         <center>
           <font color="white">
-            <h1>Bike Management</h1>
+            <h1>User Management</h1>
           </font>
         </center>
-
-
-
 
         <div class="col-md-4">
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5">
               <!-- Erstes Formular-->
 
-              <h2>Fahrrad anlegen</h2>
+              <h2>Rolle zuweisen</h2>
               <form id="form-hinzufuegen">
 
-                <label class="form-label" for="name_hinzu">Name:</label><br>
-                <input class="form-control" type="text" id="name_hinzu" name="name_hinzu"><br>
-                <label for="x_coordinate">X-Koordinate:</label><br>
-                <input class="form-control" type="text" id="x_coordinate_hinzu" name="x_coordinate_hinzu"><br>
-                <label for="y_coordinate">Y-Koordinate:</label><br>
-                <input class="form-control" type="text" id="y_coordinate_hinzu" name="y_coordinate_hinzu"><br><br>
-                <button class="btn btn-primary d-block w-100" type="submit">Fahrrad anlegen</button>
+                <label class="form-label" for="id_zuweisen">User-ID:</label><br>
+                <input class="form-control" type="number" id="id_zuweisen" name="id_zuweisen"><br>
+
+                <label for="role_zuweisen">Role-ID:</label><br>
+                <input class="form-control" type="number" id="role_zuweisen" name="role_zuweisen"><br>
+
+                <button class="btn btn-primary d-block w-100" type="submit">Rolle zuweisen</button>
               </form>
               <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
               <script>
@@ -45,18 +41,18 @@
 
                   // Führe den Ajax-Code aus
                   jQuery.ajax({
+                    url: "http://localhost/user-management",
+                    type: "PUT",
 
-                    url: "http://localhost/bike-management",
-                    type: "POST",
                     headers: {
                       "X-CSRF-Token": "{{csrf_token()}}",
                       "Content-Type": "application/json; charset=utf-8",
                     },
                     contentType: "application/json",
                     data: JSON.stringify({
-                      'name': $('#name_hinzu').val(),
-                      'x_coordinate': $('#x_coordinate_hinzu').val(),
-                      'y_coordinate': $('#y_coordinate_hinzu').val()
+                      "user_id": $('#id_zuweisen').val(),
+                      "role_id": $('#role_zuweisen').val(),
+                      "operation": "add_role"
                     })
                   })
                     .done(function (data, textStatus, jqXHR) {
@@ -74,63 +70,41 @@
             </div>
           </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         <div class="col-md-4">
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5">
               <!-- Zweites Formular-->
 
-              <h2>Fahrrad bearbeiten</h2>
-              <form id="form-bearbeiten">
+              <h2>Rolle entfernen</h2>
+              <form id="role_entfernen">
 
-                <label class="form-label" for="id_bearbeiten">Fahrrad-ID:</label><br>
-                <input class="form-control" type="number" id="id_bearbeiten" name="id_bearbeiten"><br>
-                <label class="form-label" for="name_bearbeiten">Name:</label><br>
-                <input class="form-control" type="text" id="name_bearbeiten" name="name_bearbeiten"><br>
-                <label for="x_coordinate">X-Koordinate:</label><br>
-                <input class="form-control" type="text" id="x_coordinate_bearbeiten" name="x_coordinate_bearbeiten"><br>
-                <label for="y_coordinate">Y-Koordinate:</label><br>
-                <input class="form-control" type="text" id="y_coordinate_bearbeiten"
-                  name="y_coordinate_bearbeiten"><br><br>
-                <button class="btn btn-primary d-block w-100" type="submit">Fahrrad bearbeiten</button>
+                <label for="role_zentfernen">Role-ID:</label><br>
+                <input class="form-control" type="number" id="role_zentfernen" name="role_zentfernen"><br>
+
+
+                <button class="btn btn-primary d-block w-100" type="submit">Rolle löschen</button>
               </form>
               <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
               <script>
                 // Die submit-Funktion wird auf das Form-Element angewendet
-                $('#form-bearbeiten').submit(function (event) {
+                $('#role_entfernen').submit(function (event) {
                   // Verhindere das Standardverhalten (das Formular wird gesendet)
                   event.preventDefault();
 
                   // Führe den Ajax-Code aus
                   jQuery.ajax({
-
-                    url: "http://localhost/bike-management",
-                    type: "POST",
+                    url: "http://localhost/user-management",
+                    type: "PUT",
                     headers: {
                       "X-CSRF-Token": "{{csrf_token()}}",
                       "Content-Type": "application/json; charset=utf-8",
                     },
                     contentType: "application/json",
                     data: JSON.stringify({
-                      'id': $('#id_bearbeiten').val(),
-                      'name': $('#name_bearbeiten').val(),
-                      'x_coordinate': $('#x_coordinate_bearbeiten').val(),
-                      'y_coordinate': $('#y_coordinate_bearbeiten').val()
+                        "id": $('#role_zentfernen').val(),
+                        "operation": "remove_role"
+
                     })
                   })
                     .done(function (data, textStatus, jqXHR) {
@@ -149,27 +123,18 @@
           </div>
         </div>
 
-
-
-
-
-
-
-
-
-
         <div class="col-md-4">
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5">
               <!-- Drittes Formular-->
 
-              <h2>Fahrrad löschen</h2>
+              <h2>User löschen</h2>
               <form id="form-loeschen">
 
-                <label class="form-label" for="id_loeschen">Fahrrad-ID:</label><br>
+                <label class="form-label" for="id_loeschen">User-ID:</label><br>
                 <input class="form-control" type="number" id="id_loeschen" name="id_loeschen"><br>
 
-                <button class="btn btn-primary d-block w-100" type="submit">Fahrrad löschen</button>
+                <button class="btn btn-primary d-block w-100" type="submit">User löschen</button>
               </form>
               <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
               <script>
@@ -181,7 +146,7 @@
                   // Führe den Ajax-Code aus
                   jQuery.ajax({
 
-                    url: "http://localhost/bike-management",
+                    url: "http://localhost/user-management",
                     type: "DELETE",
                     headers: {
                       "X-CSRF-Token": "{{csrf_token()}}",
@@ -189,7 +154,7 @@
                     },
                     contentType: "application/json",
                     data: JSON.stringify({
-                      'id': $('#id_loeschen').val(),
+                      "user_id": $('#id_loeschen').val(),
                     })
                   })
                     .done(function (data, textStatus, jqXHR) {
@@ -207,21 +172,6 @@
             </div>
           </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       </div>
     </div>
