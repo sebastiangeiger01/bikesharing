@@ -1,0 +1,183 @@
+<!-- Navigationsleiste und Footer importieren -->
+{% extends 'base.html' %}
+{%block content%}
+<!-- Bike Management Section-->
+
+</html>
+<!-- Starte Inhalt-->
+<section class="vh-100 bg-image" style="background-image: url('static/assets/img/HG_Register.jpg');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+
+        <center>
+          <font color="white">
+            <h1>User Management</h1>
+          </font>
+        </center>
+
+        <div class="col-md-4">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <!-- Erstes Formular-->
+
+              <h2>Rolle zuweisen</h2>
+              <form id="form-hinzufuegen">
+
+                <label class="form-label" for="id_zuweisen">User-ID:</label><br>
+                <input class="form-control" type="number" id="id_zuweisen" name="id_zuweisen"><br>
+
+                <label for="role_zuweisen">Role-ID:</label><br>
+                <input class="form-control" type="number" id="role_zuweisen" name="role_zuweisen"><br>
+
+                <button class="btn btn-primary d-block w-100" type="submit">Rolle zuweisen</button>
+              </form>
+              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+              <script>
+                // Die submit-Funktion wird auf das Form-Element angewendet
+                $('#form-hinzufuegen').submit(function (event) {
+                  // Verhindere das Standardverhalten (das Formular wird gesendet)
+                  event.preventDefault();
+
+                  // Führe den Ajax-Code aus
+                  jQuery.ajax({
+                    url: "http://localhost/user-management",
+                    type: "PUT",
+
+                    headers: {
+                      "X-CSRF-Token": "{{csrf_token()}}",
+                      "Content-Type": "application/json; charset=utf-8",
+                    },
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                      "user_id": $('#id_zuweisen').val(),
+                      "role_id": $('#role_zuweisen').val(),
+                      "operation": "add_role"
+                    })
+                  })
+                    .done(function (data, textStatus, jqXHR) {
+                      console.log("HTTP Request Succeeded: " + jqXHR.status);
+                      console.log(data);
+                    })
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                      console.log("HTTP Request Failed");
+                    })
+                    .always(function () {
+                      /* ... */
+                    });
+                });
+              </script>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <!-- Zweites Formular-->
+
+              <h2>Rolle entfernen</h2>
+              <form id="role_entfernen">
+
+                <label for="role_zentfernen">Role-ID:</label><br>
+                <input class="form-control" type="number" id="role_zentfernen" name="role_zentfernen"><br>
+
+
+                <button class="btn btn-primary d-block w-100" type="submit">Rolle löschen</button>
+              </form>
+              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+              <script>
+                // Die submit-Funktion wird auf das Form-Element angewendet
+                $('#role_entfernen').submit(function (event) {
+                  // Verhindere das Standardverhalten (das Formular wird gesendet)
+                  event.preventDefault();
+
+                  // Führe den Ajax-Code aus
+                  jQuery.ajax({
+                    url: "http://localhost/user-management",
+                    type: "PUT",
+                    headers: {
+                      "X-CSRF-Token": "{{csrf_token()}}",
+                      "Content-Type": "application/json; charset=utf-8",
+                    },
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        "id": $('#role_zentfernen').val(),
+                        "operation": "remove_role"
+
+                    })
+                  })
+                    .done(function (data, textStatus, jqXHR) {
+                      console.log("HTTP Request Succeeded: " + jqXHR.status);
+                      console.log(data);
+                    })
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                      console.log("HTTP Request Failed");
+                    })
+                    .always(function () {
+                      /* ... */
+                    });
+                });
+              </script>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <!-- Drittes Formular-->
+
+              <h2>User löschen</h2>
+              <form id="form-loeschen">
+
+                <label class="form-label" for="id_loeschen">User-ID:</label><br>
+                <input class="form-control" type="number" id="id_loeschen" name="id_loeschen"><br>
+
+                <button class="btn btn-primary d-block w-100" type="submit">User löschen</button>
+              </form>
+              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+              <script>
+                // Die submit-Funktion wird auf das Form-Element angewendet
+                $('#form-loeschen').submit(function (event) {
+                  // Verhindere das Standardverhalten (das Formular wird gesendet)
+                  event.preventDefault();
+
+                  // Führe den Ajax-Code aus
+                  jQuery.ajax({
+
+                    url: "http://localhost/user-management",
+                    type: "DELETE",
+                    headers: {
+                      "X-CSRF-Token": "{{csrf_token()}}",
+                      "Content-Type": "application/json; charset=utf-8",
+                    },
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                      "user_id": $('#id_loeschen').val(),
+                    })
+                  })
+                    .done(function (data, textStatus, jqXHR) {
+                      console.log("HTTP Request Succeeded: " + jqXHR.status);
+                      console.log(data);
+                    })
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                      console.log("HTTP Request Failed");
+                    })
+                    .always(function () {
+                      /* ... */
+                    });
+                });
+              </script>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+</body>
+
+</html>
