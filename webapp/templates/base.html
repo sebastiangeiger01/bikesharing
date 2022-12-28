@@ -29,6 +29,22 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav me-auto">
 
+                    <li class="nav-item"><a class="nav-link" href="/user-management">User-Management</a></li>
+                    {% endif %}
+                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false"
+                            data-bs-toggle="dropdown" href="#">Dropdown </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">First Item</a>
+                            <a class="dropdown-item" href="#">Second Item</a>
+                            <a class="dropdown-item" href="#">Third Item</a></div>
+                    </li>
+                    {% if current_user.is_authenticated %}
+                </ul><span class="navbar-text actions"><a class="btn btn-light action-button" role="button"
+                        href="/logout">Logout</a></span>
+                {% else %}
+                </ul><span class="navbar-text actions"> <a class="login" href="/login">Log In</a><a
+                        class="btn btn-light action-button" role="button" href="/register">Registrieren</a></span>
+                {% endif %}
 
 
 
