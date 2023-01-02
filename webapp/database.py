@@ -2,7 +2,7 @@ from .models import db
 
 
 def get_all(model):
-    data = model.query.all()
+    data = model.query.order_by(model.id).all()
     return data
 
 def get_instance(model, id):

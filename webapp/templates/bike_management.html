@@ -102,11 +102,10 @@
                 <input class="form-control" type="number" id="id_bearbeiten" name="id_bearbeiten"><br>
                 <label class="form-label" for="name_bearbeiten">Name:</label><br>
                 <input class="form-control" type="text" id="name_bearbeiten" name="name_bearbeiten"><br>
-                <label for="x_coordinate">X-Koordinate:</label><br>
+                <label for="x_coordinate_bearbeiten">X-Koordinate:</label><br>
                 <input class="form-control" type="text" id="x_coordinate_bearbeiten" name="x_coordinate_bearbeiten"><br>
-                <label for="y_coordinate">Y-Koordinate:</label><br>
-                <input class="form-control" type="text" id="y_coordinate_bearbeiten"
-                  name="y_coordinate_bearbeiten"><br><br>
+                <label for="y_coordinate_bearbeiten">Y-Koordinate:</label><br>
+                <input class="form-control" type="text" id="y_coordinate_bearbeiten" name="y_coordinate_bearbeiten"><br><br>
                 <button class="btn btn-primary d-block w-100" type="submit">Fahrrad bearbeiten</button>
               </form>
               <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -120,7 +119,7 @@
                   jQuery.ajax({
 
                     url: "http://localhost/bike-management",
-                    type: "POST",
+                    type: "PUT",
                     headers: {
                       "X-CSRF-Token": "{{csrf_token()}}",
                       "Content-Type": "application/json; charset=utf-8",
