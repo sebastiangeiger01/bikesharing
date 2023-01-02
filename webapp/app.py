@@ -54,34 +54,12 @@ def home():
 
     return render_template('home.html', geo=geo, min_y=min_y, min_x=min_x, max_y=max_y, max_x=max_x)
 
-# remove this later
-@app.route("/hello")
-@auth_required()
-def hello():
-    return render_template('hello.html', email=current_user.email)
-
-# remove this later
-@app.route("/biketest")
-@auth_required()
-def biketest():
-    highest_id = db.session.query(func.max(Bike.id)).scalar()
-    bike_db = Bike.query.filter_by(id=highest_id).first()
-    return render_template('bike_test.html', id=bike_db.id, name=bike_db.name, x=bike_db.x_coordinate, y=bike_db.y_coordinate)
-
 # JSON with all bikes (id, name, x, y)
 @app.route("/allbikes")
 @auth_required()
 def bikes():
     bikes = get_all(Bike)
-    bike_json = '['
-    for current_bike in bikes:
-        bike_json = bike_json + '{ "id": ' + str(current_bike.id) + ', "name": "' + str(current_bike.name) + '", "x": ' + str(current_bike.x_coordinate) + ', "y": ' + str(current_bike.y_coordinate) + '},'
-    if len(bikes) != 0:
-        bike_json = bike_json[:-1] + ']'
-    else:
-        bike_json = bike_json + ']'
-    return render_template('bike_test.html', id=bike_json)
-    #return bike_json
+    return jsonify(bikes)
 
 # JSON with all users (id, email, roles)
 @app.route("/allusers")
@@ -89,21 +67,15 @@ def bikes():
 @roles_required('user-manager')
 def users():
     users = get_all(User)
-    user_json = '['
-    for current_user in users:
-        user_json = user_json + '{ "id": ' + str(current_user.id) + ', "email": "' + str(current_user.email) + '", "roles": ['
-        roles_users = RolesUsers.query.filter_by(user_id=current_user.id).all()
-        if len(roles_users) != 0:
-            for current_roles_users in roles_users:
-                user_json = user_json + '"' + Role.query.filter_by(id=current_roles_users.role_id).first().name + '",'
-            user_json = user_json[:-1] + ']},'
-        else:
-            user_json = user_json + ']},'
-    if len(users) != 0:
-        user_json = user_json[:-1] + ']'
-    else:
-        user_json = user_json + ']'
-    return user_json
+    return jsonify(users)
+
+# JSON with all rides (id, user_id, bike_id, start_time, end_time)
+@app.route("/allrides")
+@auth_required()
+@roles_required('user-manager', 'bike-manager')
+def rides():
+    rides = get_all(Ride)
+    return jsonify(rides)
 
 # rent and return bikes
 @app.route("/bike<id>", methods=['GET', 'POST', 'PUT'])
@@ -188,7 +160,8 @@ def user_management(operation = None):
             add_instance(RolesUsers, user_id=roles_users['user_id'], role_id=roles_users['role_id'])
             return "Role added"
         elif roles_users['operation'] == 'remove_role':
-            delete_instance(RolesUsers, id=roles_users['id'])
+            id = RolesUsers.query.filter_by(user_id=roles_users['user_id'], role_id=roles_users['role_id']).first().id
+            delete_instance(RolesUsers, id=id)
             return "Role removed"
         else:
             return "Unknown operation"

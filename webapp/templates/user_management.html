@@ -77,10 +77,13 @@
               <!-- Zweites Formular-->
 
               <h2>Rolle entfernen</h2>
-              <form id="role_entfernen">
+              <form id="form-entfernen">
 
-                <label for="role_zentfernen">Role-ID:</label><br>
-                <input class="form-control" type="number" id="role_zentfernen" name="role_zentfernen"><br>
+                <label class="form-label" for="id_entfernen">User-ID:</label><br>
+                <input class="form-control" type="number" id="id_entfernen" name="id_entfernen"><br>
+                
+                <label for="role_entfernen">Role-ID:</label><br>
+                <input class="form-control" type="number" id="role_entfernen" name="role_zentfernen"><br>
 
 
                 <button class="btn btn-primary d-block w-100" type="submit">Rolle löschen</button>
@@ -88,7 +91,7 @@
               <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
               <script>
                 // Die submit-Funktion wird auf das Form-Element angewendet
-                $('#role_entfernen').submit(function (event) {
+                $('#form-entfernen').submit(function (event) {
                   // Verhindere das Standardverhalten (das Formular wird gesendet)
                   event.preventDefault();
 
@@ -102,8 +105,9 @@
                     },
                     contentType: "application/json",
                     data: JSON.stringify({
-                        "id": $('#role_zentfernen').val(),
-                        "operation": "remove_role"
+                      "user_id": $('#id_entfernen').val(),  
+                      "role_id": $('#role_entfernen').val(),
+                      "operation": "remove_role"
 
                     })
                   })
@@ -173,6 +177,45 @@
           </div>
         </div>
 
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2>Alle User</h2>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Roles</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for user in users %}
+                  <tr>
+                    <th scope="row">{{user.id}}</th>
+                    <td>{{user.email}}</td>
+                    <td>
+                      {% for role in user.roles %}
+                      {{role.id}}
+                      {{role.name}}
+                      <br>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
