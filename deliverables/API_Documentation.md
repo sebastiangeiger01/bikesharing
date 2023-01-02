@@ -583,6 +583,46 @@ jQuery.ajax({
 ```
 </details>
 
+<details>
+<summary><h3>Get all users</summary>
+
+| Method | URL | Requirements |
+|---|---|---|
+| GET | `/allusers` | Role: user-manager |
+
+**HTTP**
+```http
+GET /allusers HTTP/1.1
+Host: localhost
+Connection: close
+User-Agent: RapidAPI/4.0.0 (Macintosh; OS X/13.1.0) GCDHTTPRequest
+```
+**cURL**
+```sh
+## get_all(User)
+curl "http://localhost/allusers"
+```
+**JavaScript (jQuery)**
+```javascript
+// get_all(User) (GET http://localhost/allusers)
+
+jQuery.ajax({
+    url: "http://localhost/allusers",
+    type: "GET",
+})
+.done(function(data, textStatus, jqXHR) {
+    console.log("HTTP Request Succeeded: " + jqXHR.status);
+    console.log(data);
+})
+.fail(function(jqXHR, textStatus, errorThrown) {
+    console.log("HTTP Request Failed");
+})
+.always(function() {
+    /* ... */
+});
+```
+</details>
+
 ## Bike
 <details>
 <summary><h3>Add Bike</summary>
@@ -785,6 +825,46 @@ jQuery.ajax({
 ```
 </details>
 
+<details>
+<summary><h3>Get all bikes</summary>
+
+| Method | URL | Requirements |
+|---|---|---|
+| GET | `/allbikes` | Role: bike-manager |
+
+**HTTP**
+```http
+GET /allbikes HTTP/1.1
+Host: localhost
+Connection: close
+User-Agent: RapidAPI/4.0.0 (Macintosh; OS X/13.1.0) GCDHTTPRequest
+```
+**cURL**
+```sh
+## get_all(Bike)
+curl "http://localhost/allbikes"
+```
+**JavaScript (jQuery)**
+```javascript
+// get_all(Bike) (GET http://localhost/allusers)
+
+jQuery.ajax({
+    url: "http://localhost/allbikes",
+    type: "GET",
+})
+.done(function(data, textStatus, jqXHR) {
+    console.log("HTTP Request Succeeded: " + jqXHR.status);
+    console.log(data);
+})
+.fail(function(jqXHR, textStatus, errorThrown) {
+    console.log("HTTP Request Failed");
+})
+.always(function() {
+    /* ... */
+});
+```
+</details>
+
 ## Ride
 <details>
 <summary><h3>Start Ride</summary>
@@ -896,6 +976,46 @@ jQuery.ajax({
     data: JSON.stringify({
         "end_time": "2004-10-19 10:23:59"
     })
+})
+.done(function(data, textStatus, jqXHR) {
+    console.log("HTTP Request Succeeded: " + jqXHR.status);
+    console.log(data);
+})
+.fail(function(jqXHR, textStatus, errorThrown) {
+    console.log("HTTP Request Failed");
+})
+.always(function() {
+    /* ... */
+});
+```
+</details>
+
+<details>
+<summary><h3>Get all rides</summary>
+
+| Method | URL | Requirements |
+|---|---|---|
+| GET | `/allrides` | Role: user-manager, bike-manager |
+
+**HTTP**
+```http
+GET /allrides HTTP/1.1
+Host: localhost
+Connection: close
+User-Agent: RapidAPI/4.0.0 (Macintosh; OS X/13.1.0) GCDHTTPRequest
+```
+**cURL**
+```sh
+## get_all(Rides)
+curl "http://localhost/allrides"
+```
+**JavaScript (jQuery)**
+```javascript
+// get_all(Rides) (GET http://localhost/allrides)
+
+jQuery.ajax({
+    url: "http://localhost/allrides",
+    type: "GET",
 })
 .done(function(data, textStatus, jqXHR) {
     console.log("HTTP Request Succeeded: " + jqXHR.status);
