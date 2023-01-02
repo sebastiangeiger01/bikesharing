@@ -188,7 +188,8 @@ def user_management(operation = None):
             add_instance(RolesUsers, user_id=roles_users['user_id'], role_id=roles_users['role_id'])
             return "Role added"
         elif roles_users['operation'] == 'remove_role':
-            delete_instance(RolesUsers, id=roles_users['id'])
+            id = RolesUsers.query.filter_by(user_id=roles_users['user_id'], role_id=roles_users['role_id']).first().id
+            delete_instance(RolesUsers, id=id)
             return "Role removed"
         else:
             return "Unknown operation"

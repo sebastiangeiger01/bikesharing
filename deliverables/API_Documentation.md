@@ -528,7 +528,8 @@ jQuery.ajax({
 **Body**
 ```json
 {
-  "id": 3,
+  "user_id": 3,
+  "role_id": 1,
   "operation": "remove_role"
 }
 ```
@@ -539,10 +540,10 @@ PUT /user-management HTTP/1.1
 Content-Type: application/json
 Host: localhost
 Connection: close
-User-Agent: RapidAPI/4.0.0 (Macintosh; OS X/13.0.1) GCDHTTPRequest
-Content-Length: 34
+User-Agent: RapidAPI/4.0.0 (Macintosh; OS X/13.1.0) GCDHTTPRequest
+Content-Length: 51
 
-{"id":3,"operation":"remove_role"}
+{"user_id":3,"role_id":1,"operation":"remove_role"}
 ```
 **cURL**
 ```sh
@@ -550,7 +551,8 @@ Content-Length: 34
 curl -X "PUT" "http://localhost/user-management" \
      -H 'Content-Type: application/json' \
      -d $'{
-  "id": 3,
+  "user_id": 3,
+  "role_id": 1,
   "operation": "remove_role"
 }'
 ```
@@ -566,7 +568,8 @@ jQuery.ajax({
     },
     contentType: "application/json",
     data: JSON.stringify({
-        "id": 3,
+        "user_id": 3,
+        "role_id": 1,
         "operation": "remove_role"
     })
 })
