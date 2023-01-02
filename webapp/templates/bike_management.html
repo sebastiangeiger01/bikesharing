@@ -227,6 +227,42 @@
     </div>
   </div>
 </section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body p-5">
+            <h2>Fahrräder</h2>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">X-Koordinate</th>
+                  <th scope="col">Y-Koordinate</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for bike in bikes %}
+                <tr>
+                  <th scope="row">{{bike.id}}</th>
+                  <td>{{bike.name}}</td>
+                  <td>{{bike.x_coordinate}}</td>
+                  <td>{{bike.y_coordinate}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}
 </body>
 
