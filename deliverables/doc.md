@@ -16,30 +16,56 @@ This is a Flask web application that provides functionality for managing a bike-
 Overall, this code provides the necessary functionality for a basic bike-sharing service. It allows users to view and rent bikes, and provides an administrative interface for managing users and bikes.
 
 ## __init__.py
-This is a Flask application factory, which is a function that creates and configures a Flask app instance. Here is a brief overview of the code:
-* The import statements at the top import the necessary modules for the application.
-* The csrf and mail objects are instances of the CSRFProtect and Mail classes, respectively. These are Flask extensions that add CSRF protection and email support to the application.
-* The create_app() function is the application factory. It creates a Flask app instance and configures it with the necessary settings. These settings include the database connection URI, secret key, password salt, email server settings, and other options.
-* The function initializes the csrf and mail objects with the Flask app instance, and creates the database tables using the db object. Finally, it returns the Flask app instance.
-Overall, this code provides a way to create and configure a Flask app instance with the necessary settings for a web application. This can be useful for organizing the code for a Flask app and separating the application logic from the configuration.
+The create_app function is used to create a Flask application instance and initialize its dependencies. This includes setting the application's configuration, initializing extensions such as csrf and mail, and setting up the database connection.
+
+The Flask application instance is created with flask_app = Flask(__name__). The __name__ variable is a built-in Python variable that is set to the name of the module that is currently being executed. This is used to determine the root path of the application, so that Flask can find other resources such as templates and static files.
+
+The csrf object is an instance of the CSRFProtect class, which is used to protect the application from cross-site request forgery (CSRF) attacks. CSRF attacks occur when an attacker tricks a user's web browser into making a request to a web application on the user's behalf, without the user's knowledge or consent. The csrf object is initialized with the Flask application using the csrf.init_app function.
+
+The mail object is an instance of the Mail class, which is used to send email through the application. The mail object is initialized with the Flask application using the mail.init_app function.
+
+The application's configuration is set using the flask_app.config dictionary. This includes settings for the database connection string, Flask-Security settings, and Flask-Mail settings. The configuration values are retrieved from environment variables, which allows the application to be deployed in different environments without hardcoding sensitive information such as passwords.
+
+The db object is an instance of the SQLAlchemy class, which is used to interact with a database. The db.init_app function initializes the db object with the Flask application, and the db.create_all function creates any missing database tables based on the models defined in the application.
+
+Finally, the create_app function returns the Flask application instance, which can then be used to run the application.
 
 ## models.py
-This code defines several SQLAlchemy models that represent the data stored in a database. Here is a brief overview of the models:
-* The RolesUsers model represents the relationship between users and roles. It has fields for the id, user_id, and role_id, which are the primary key, the id of the user, and the id of the role, respectively.
-* The Role model represents a role that a user can have. It has fields for the id, name, description, and permissions of the role.
-* The User model represents a user of the application. It has fields for the user's id, email, username, password, and other information such as login timestamps, IP addresses, and login count. It also has a roles relationship that specifies the roles that the user has.
-* The Bike model represents a bike in the bike-sharing service. It has fields for the id, name, x_coordinate, and y_coordinate of the bike.
-* The Ride model represents a ride that a user takes on a bike. It has fields for the id, user_id, bike_id, start_time, and end_time of the ride.
+This file contains the models for a bike-sharing application. It defines several classes that correspond to database tables: RolesUsers, Role, User, Bike, and Ride.
+
+The RolesUsers class is used to associate users with roles in a many-to-many relationship. It has two foreign keys to the user and role tables, and an id field as the primary key.
+
+The Role class represents a role that a user can have in the application. It has fields for the role's id, name, description, and permissions.
+
+The User class represents a user of the application. It has fields for the user's id, email, username, password, and roles. The roles field is a relationship to the Role table, representing the roles that the user has.
+
+The Bike class represents a bike in the bike-sharing system. It has fields for the bike's id, name, x_coordinate, and y_coordinate.
+
+The Ride class represents a ride taken by a user on a bike. It has fields for the ride's id, user_id, bike_id, start_time, and end_time. The user_id and bike_id fields are foreign keys to the user and bike tables, respectively.
+
+The db object is an instance of the SQLAlchemy class, which is used to interact with a database. The db.Model base class is used to define the models as classes that can be used with SQLAlchemy's ORM (Object-Relational Mapper). The ORM allows the application to interact with the database using objects, rather than directly using SQL queries.
+
+The @dataclass decorator is used to define the classes as Python dataclasses. Dataclasses are a subclass of Python's tuple class, with some additional functionality such as default values and automatic generation of the __init__ method as well as serializing to JSON.
+
 Overall, these models provide the necessary data structure for a bike-sharing service. They define the relationships between users, roles, bikes, and rides, and can be used to store and retrieve information from the database.
 
 ## database.py
-This code defines a set of utility functions that can be used to perform common database operations, such as querying, creating, updating, and deleting data. Here is a brief overview of the functions:
-* The get_all(model) function returns a list of all the instances of a given model.
-* The get_instance(model, id) function returns a single instance of a model with the specified id.
-* The add_instance(model, **kwargs) function creates a new instance of a model and adds it to the database. It takes the model class and the field values for the new instance as keyword arguments.
-* The delete_instance(model, id) function deletes a single instance of a model with the specified id.
-* The edit_instance(model, id, **kwargs) function updates the field values of an existing instance of a model. It takes the model class, the id of the instance to update, and the new field values as keyword arguments.
-* The commit_changes() function commits the changes made to the database.
+This file contains functions for interacting with the database. These functions use the SQLAlchemy ORM (Object-Relational Mapper) to perform CRUD (create, read, update, delete) operations on the database tables.
+
+The get_all function retrieves all rows from a given database table and returns them as a list of objects. The model parameter specifies the table to query, and the rows are ordered by the id field.
+
+The get_instance function retrieves a single row from a given database table, based on the value of the id field. It returns the row as an object.
+
+The add_instance function adds a new row to a given database table. The model parameter specifies the table to insert into, and the **kwargs parameter allows the caller to specify the values for the fields in the new row using keyword arguments.
+
+The delete_instance function deletes a row from a given database table, based on the value of the id field.
+
+The edit_instance function updates a row in a given database table, based on the value of the id field. The model parameter specifies the table to update, and the **kwargs parameter allows the caller to specify the new values for the fields using keyword arguments.
+
+The commit_changes function saves any pending changes to the database. It is called after each of the other functions that modify the database.
+
+The db object is an instance of the SQLAlchemy class, which is used to interact with the database. The db.session object represents the current database session, which is used to track changes to the database.
+
 Overall, these utility functions provide a convenient way to perform common database operations in the application. They can be used to query, create, update, and delete data in the database, and simplify the code for working with the database.
 
 ## db_config.py
