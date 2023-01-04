@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="static/assets/css/Navigation-with-Button.css">
     <link rel="stylesheet" href="static/assets/css/styles.css">
     <link rel="stylesheet" href="static/assets/css/Team-Boxed.css">
+    <link rel="stylesheet" href="static/assets/css/darkmode.css">
+    <link rel="stylesheet" href="static/assets/css/toggle.css">
+
     <script src="static/assets/bootstrap/js/bootstrap.min.js"></script>
 </head>
 
@@ -48,6 +51,8 @@
                             <a class="dropdown-item" href="#">Second Item</a>
                             <a class="dropdown-item" href="#">Third Item</a></div>
                     </li>
+
+
                     {% if current_user.is_authenticated %}
                 </ul><span class="navbar-text actions"><a
                     class="btn btn-link" role="button" href="/change">Passwort ändern</a><a class="btn btn-light action-button" role="button"
@@ -57,8 +62,80 @@
                         class="btn btn-light action-button" role="button" href="/register">Registrieren</a></span>
                 {% endif %}
 
+                <label class="switch">
+                    <input type="checkbox" id="check" onclick="changeStatus()"></input>
+                    <span class="slider round"></span>
+                  </label>
+
+
             </div>
         </div>
+
+
+
+
+
+
+        <script>
+
+                const check=document.getElementById("check")
+
+                // erstelle Variable Darmode, wenn diese noch nicht existiert
+                if (localStorage.getItem('darkMode')===null){
+                    localStorage.setItem('darkMode', "false");
+                }
+
+                //Erstelle leeren link für CSS Date
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                document.getElementsByTagName('HEAD')[0].appendChild(link);
+
+                
+                //Funktion checkstatus wird nur einmal beim neuladen der Seite aufgerufen
+                //Entsprechend wird das Design angepasst
+                checkStatus()
+
+                function checkStatus(){
+                    if (localStorage.getItem('darkMode')==="true"){
+                        check.checked = true;                           //Checkbox auf true setzen
+                        link.href = 'static/assets/css/darkmode.css';   //Darkmode Css laden
+
+                        document.documentElement.classList.toggle("dark-mode"); //Javascript um die Farben und Bilder zu invertieren
+        document.querySelectorAll(".inverted").forEach((result) => {
+            result.classList.toggle("invert");
+        });
+
+                    }else{
+                        check.checked = false;                          //ansonsten passiert nichts
+                        link.href = '';
+                    }
+                }
+
+                function changeStatus(){                                //diese Funktion wird jedes mal beim Klicken ausgeführt
+                    if (localStorage.getItem('darkMode')==="true"){     //Wenn der Darkmode aktiv war, wird nun diese Funktion ausgeführt
+                        localStorage.setItem('darkMode', "false");      //wieder zurück zu Lightmode setzen
+                        link.href = '';
+                        document.documentElement.classList.toggle("dark-mode");
+        document.querySelectorAll(".inverted").forEach((result) => {
+            result.classList.toggle("invert");
+        });
+                    } else{
+                        localStorage.setItem('darkMode', "true");       //Gleicher code für Darkmode
+                        link.href = 'static/assets/css/darkmode.css';
+
+                        document.documentElement.classList.toggle("dark-mode");
+                        document.querySelectorAll(".inverted").forEach((result) => {
+                            result.classList.toggle("invert");
+                        });
+
+
+                    }
+                }
+        </script>
+
+
+
+
     </nav>
 
     {% block content %}
