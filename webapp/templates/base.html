@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Bike Rental</title>
     <link rel="stylesheet" href="static/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="static/assets/fonts/ionicons.min.css">
     <link rel="stylesheet" href="static/assets/css/Brands.css">
     <link rel="stylesheet" href="static/assets/css/Features-Boxed.css">
@@ -16,8 +17,11 @@
     <link rel="stylesheet" href="static/assets/css/Navigation-with-Button.css">
     <link rel="stylesheet" href="static/assets/css/styles.css">
     <link rel="stylesheet" href="static/assets/css/Team-Boxed.css">
-    <link rel="icon" type="image/x-icon" href="static/assets/img/favicon.ico">
-    <link rel="apple-touch-icon" type="image/x-icon" href="static/assets/img/apple-touch-icon.png">
+    <link rel="stylesheet" href="static/assets/css/darkmode.css">
+    <link rel="stylesheet" href="static/assets/css/toggle.css">
+
+    <script src="static/assets/lottie/logo.json"></script>
+
     <script src="static/assets/bootstrap/js/bootstrap.min.js"></script>
 </head>
 
@@ -25,11 +29,35 @@
 
     <!-- Navigationsleiste -->
     <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
-        <div class="container"><a class="navbar-brand" href="http://localhost">BikeRental</a><button
+        <div class="container"><a href="http://localhost" title="Startseite Bikerental">
+            <lottie-player id="my-animation" src="static/assets/lottie/logo.json"  background="transparent"  speed="1"  style="width: 100px; height: 100px;"  loop  ></lottie-player></a><button
                 data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span
                     class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav me-auto">
+
+
+
+<!-- JavaScript Lottie -->
+<script src="static/assets/lottie/lottie-player.js"></script>
+<script>
+  // Get a reference to the Lottie player element
+  const animationElement = document.getElementById('my-animation');
+
+  // Add a mouseover event handler
+  animationElement.addEventListener('mouseover', function() {
+    // Start playing the animation
+    animationElement.play();
+  });
+
+  // Add a mouseout event handler
+  animationElement.addEventListener('mouseout', function() {
+    // Stop playing the animation
+    animationElement.stop();
+  });
+</script>
+
+
 
 
 
@@ -50,6 +78,8 @@
                             <a class="dropdown-item" href="#">Second Item</a>
                             <a class="dropdown-item" href="#">Third Item</a></div>
                     </li>
+
+
                     {% if current_user.is_authenticated %}
                 </ul><span class="navbar-text actions"><a
                     class="btn btn-link" role="button" href="/change">Passwort ändern</a><a class="btn btn-light action-button" role="button"
@@ -59,8 +89,63 @@
                         class="btn btn-light action-button" role="button" href="/register">Registrieren</a></span>
                 {% endif %}
 
+                <label class="switch">
+                    <input type="checkbox" id="check" onclick="changeStatus()"></input>
+                    <span class="slider round"></span>
+                  </label>
+
+
             </div>
         </div>
+
+
+
+
+
+
+        <script>
+
+                const check=document.getElementById("check")
+
+                // erstelle Variable Darmode, wenn diese noch nicht existiert
+                if (localStorage.getItem('darkMode')===null){
+                    localStorage.setItem('darkMode', "false");
+                }
+                
+                //Funktion checkstatus wird nur einmal beim neuladen der Seite aufgerufen
+                //Entsprechend wird das Design angepasst
+                checkStatus()
+
+                function checkStatus() {
+                    if (localStorage.getItem('darkMode') === "true") {
+                        check.checked = true; //Checkbox auf true setzen
+
+                        document.documentElement.classList.toggle("dark-mode"); //Javascript um die Farben und Bilder zu invertieren
+                        document.querySelectorAll(".inverted").forEach((result) => {
+                        result.classList.toggle("invert");
+                    });
+                    }
+                }
+
+                function changeStatus(){                                //diese Funktion wird jedes mal beim Klicken ausgeführt
+                    document.documentElement.classList.toggle("dark-mode");
+                    document.querySelectorAll(".inverted").forEach((result) => {
+                     result.classList.toggle("invert");
+                    });
+
+                    if (localStorage.getItem('darkMode') === "true" && document.getElementById("check").checked == false){
+                        localStorage.setItem('darkMode', "false");
+
+                    }else if(localStorage.getItem('darkMode') === "false" && document.getElementById("check").checked == true){
+                        localStorage.setItem('darkMode', "true");
+                    }
+
+                }
+        </script>
+
+
+
+
     </nav>
 
     {% block content %}

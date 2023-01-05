@@ -4,223 +4,224 @@
 <!-- Bike Management Section-->
 
 </html>
+
 <!-- Starte Inhalt-->
-<section class="vh-100 bg-image" style="background-image: url('static/assets/img/HG_Register.jpg');">
-  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+<section class=" bg-image" style="background-image: url('); padding-top: 50px; padding-bottom:120px;">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3; padding-top: 50px; padding-bottom:120px;">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
 
         <center>
-          <font color="white">
-            <h1>User Management</h1>
-          </font>
+          <h1>User Management</h1>
         </center>
 
-        <div class="col-md-4">
-          <div class="card" style="border-radius: 15px;">
-            <div class="card-body p-5">
-              <!-- Erstes Formular-->
+        <div class="container">
+          <div class="row gx-5 ">
+            <div class="col-md-4">
+              <div class="card h-100" style="border-radius: 15px;">
+                <div class="card-body p-5">
 
-              <h2>Rolle zuweisen</h2>
-              <form id="form-hinzufuegen">
+                  <h2>Rolle zuweisen</h2>
+                  <form id="form-hinzufuegen">
 
-                <label class="form-label" for="id_zuweisen">User-ID:</label><br>
-                <input class="form-control" type="number" id="id_zuweisen" name="id_zuweisen"><br>
+                    <label class="form-label" for="id_zuweisen">User-ID:</label><br>
+                    <input class="form-control" type="number" id="id_zuweisen" name="id_zuweisen"><br>
 
-                <label for="role_zuweisen">Role-ID:</label><br>
-                <input class="form-control" type="number" id="role_zuweisen" name="role_zuweisen"><br>
+                    <label for="role_zuweisen">Role-ID:</label><br>
+                    <input class="form-control" type="number" id="role_zuweisen" name="role_zuweisen"><br>
 
-                <button class="btn btn-primary d-block w-100" type="submit">Rolle zuweisen</button>
-              </form>
-              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-              <script>
-                // Die submit-Funktion wird auf das Form-Element angewendet
-                $('#form-hinzufuegen').submit(function (event) {
-                  // Verhindere das Standardverhalten (das Formular wird gesendet)
-                  event.preventDefault();
+                    <button class="btn btn-primary d-block w-100" type="submit">Rolle zuweisen</button>
+                  </form>
+                  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                  <script>
+                    // Die submit-Funktion wird auf das Form-Element angewendet
+                    $('#form-hinzufuegen').submit(function (event) {
+                      // Verhindere das Standardverhalten (das Formular wird gesendet)
+                      event.preventDefault();
 
-                  // Führe den Ajax-Code aus
-                  jQuery.ajax({
-                    url: "http://localhost/user-management",
-                    type: "PUT",
+                      // Führe den Ajax-Code aus
+                      jQuery.ajax({
+                        url: "http://localhost/user-management",
+                        type: "PUT",
 
-                    headers: {
-                      "X-CSRF-Token": "{{csrf_token()}}",
-                      "Content-Type": "application/json; charset=utf-8",
-                    },
-                    contentType: "application/json",
-                    data: JSON.stringify({
-                      "user_id": $('#id_zuweisen').val(),
-                      "role_id": $('#role_zuweisen').val(),
-                      "operation": "add_role"
-                    })
-                  })
-                    .done(function (data, textStatus, jqXHR) {
-                      console.log("HTTP Request Succeeded: " + jqXHR.status);
-                      console.log(data);
-                    })
-                    .fail(function (jqXHR, textStatus, errorThrown) {
-                      console.log("HTTP Request Failed");
-                    })
-                    .always(function () {
-                      /* ... */
+                        headers: {
+                          "X-CSRF-Token": "{{csrf_token()}}",
+                          "Content-Type": "application/json; charset=utf-8",
+                        },
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                          "user_id": $('#id_zuweisen').val(),
+                          "role_id": $('#role_zuweisen').val(),
+                          "operation": "add_role"
+                        })
+                      })
+                        .done(function (data, textStatus, jqXHR) {
+                          console.log("HTTP Request Succeeded: " + jqXHR.status);
+                          console.log(data);
+                        })
+                        .fail(function (jqXHR, textStatus, errorThrown) {
+                          console.log("HTTP Request Failed");
+                        })
+                        .always(function () {
+                          /* ... */
+                        });
                     });
-                });
-              </script>
+                  </script>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <div class="col-md-4">
-          <div class="card" style="border-radius: 15px;">
-            <div class="card-body p-5">
-              <!-- Zweites Formular-->
+            <div class="col-md-4">
+              <div class="card h-100" style="border-radius: 15px;">
+                <div class="card-body p-5">
 
-              <h2>Rolle entfernen</h2>
-              <form id="form-entfernen">
+                  <h2>Rolle entfernen</h2>
+                  <form id="form-entfernen">
 
-                <label class="form-label" for="id_entfernen">User-ID:</label><br>
-                <input class="form-control" type="number" id="id_entfernen" name="id_entfernen"><br>
-                
-                <label for="role_entfernen">Role-ID:</label><br>
-                <input class="form-control" type="number" id="role_entfernen" name="role_zentfernen"><br>
+                    <label class="form-label" for="id_entfernen">User-ID:</label><br>
+                    <input class="form-control" type="number" id="id_entfernen" name="id_entfernen"><br>
+
+                    <label for="role_entfernen">Role-ID:</label><br>
+                    <input class="form-control" type="number" id="role_entfernen" name="role_zentfernen"><br>
 
 
-                <button class="btn btn-primary d-block w-100" type="submit">Rolle löschen</button>
-              </form>
-              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-              <script>
-                // Die submit-Funktion wird auf das Form-Element angewendet
-                $('#form-entfernen').submit(function (event) {
-                  // Verhindere das Standardverhalten (das Formular wird gesendet)
-                  event.preventDefault();
+                    <button class="btn btn-primary d-block w-100" type="submit">Rolle löschen</button>
+                  </form>
+                  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                  <script>
+                    // Die submit-Funktion wird auf das Form-Element angewendet
+                    $('#form-entfernen').submit(function (event) {
+                      // Verhindere das Standardverhalten (das Formular wird gesendet)
+                      event.preventDefault();
 
-                  // Führe den Ajax-Code aus
-                  jQuery.ajax({
-                    url: "http://localhost/user-management",
-                    type: "PUT",
-                    headers: {
-                      "X-CSRF-Token": "{{csrf_token()}}",
-                      "Content-Type": "application/json; charset=utf-8",
-                    },
-                    contentType: "application/json",
-                    data: JSON.stringify({
-                      "user_id": $('#id_entfernen').val(),  
-                      "role_id": $('#role_entfernen').val(),
-                      "operation": "remove_role"
+                      // Führe den Ajax-Code aus
+                      jQuery.ajax({
+                        url: "http://localhost/user-management",
+                        type: "PUT",
+                        headers: {
+                          "X-CSRF-Token": "{{csrf_token()}}",
+                          "Content-Type": "application/json; charset=utf-8",
+                        },
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                          "user_id": $('#id_entfernen').val(),
+                          "role_id": $('#role_entfernen').val(),
+                          "operation": "remove_role"
 
-                    })
-                  })
-                    .done(function (data, textStatus, jqXHR) {
-                      console.log("HTTP Request Succeeded: " + jqXHR.status);
-                      console.log(data);
-                    })
-                    .fail(function (jqXHR, textStatus, errorThrown) {
-                      console.log("HTTP Request Failed");
-                    })
-                    .always(function () {
-                      /* ... */
+                        })
+                      })
+                        .done(function (data, textStatus, jqXHR) {
+                          console.log("HTTP Request Succeeded: " + jqXHR.status);
+                          console.log(data);
+                        })
+                        .fail(function (jqXHR, textStatus, errorThrown) {
+                          console.log("HTTP Request Failed");
+                        })
+                        .always(function () {
+                          /* ... */
+                        });
                     });
-                });
-              </script>
+                  </script>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <div class="col-md-4">
-          <div class="card" style="border-radius: 15px;">
-            <div class="card-body p-5">
-              <!-- Drittes Formular-->
+            <div class="col-md-4">
+              <div class="card h-100" style="border-radius: 15px;">
+                <div class="card-body p-5">
 
-              <h2>User löschen</h2>
-              <form id="form-loeschen">
+                  <h2>User löschen</h2>
+                  <form id="form-loeschen">
 
-                <label class="form-label" for="id_loeschen">User-ID:</label><br>
-                <input class="form-control" type="number" id="id_loeschen" name="id_loeschen"><br>
+                    <label class="form-label" for="id_loeschen">User-ID:</label><br>
+                    <input class="form-control" type="number" id="id_loeschen" name="id_loeschen"><br>
 
-                <button class="btn btn-primary d-block w-100" type="submit">User löschen</button>
-              </form>
-              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-              <script>
-                // Die submit-Funktion wird auf das Form-Element angewendet
-                $('#form-loeschen').submit(function (event) {
-                  // Verhindere das Standardverhalten (das Formular wird gesendet)
-                  event.preventDefault();
+                    <button class="btn btn-primary d-block w-100" type="submit">User löschen</button>
+                  </form>
+                  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                  <script>
+                    // Die submit-Funktion wird auf das Form-Element angewendet
+                    $('#form-loeschen').submit(function (event) {
+                      // Verhindere das Standardverhalten (das Formular wird gesendet)
+                      event.preventDefault();
 
-                  // Führe den Ajax-Code aus
-                  jQuery.ajax({
+                      // Führe den Ajax-Code aus
+                      jQuery.ajax({
 
-                    url: "http://localhost/user-management",
-                    type: "DELETE",
-                    headers: {
-                      "X-CSRF-Token": "{{csrf_token()}}",
-                      "Content-Type": "application/json; charset=utf-8",
-                    },
-                    contentType: "application/json",
-                    data: JSON.stringify({
-                      "user_id": $('#id_loeschen').val(),
-                    })
-                  })
-                    .done(function (data, textStatus, jqXHR) {
-                      console.log("HTTP Request Succeeded: " + jqXHR.status);
-                      console.log(data);
-                    })
-                    .fail(function (jqXHR, textStatus, errorThrown) {
-                      console.log("HTTP Request Failed");
-                    })
-                    .always(function () {
-                      /* ... */
+                        url: "http://localhost/user-management",
+                        type: "DELETE",
+                        headers: {
+                          "X-CSRF-Token": "{{csrf_token()}}",
+                          "Content-Type": "application/json; charset=utf-8",
+                        },
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                          "user_id": $('#id_loeschen').val(),
+                        })
+                      })
+                        .done(function (data, textStatus, jqXHR) {
+                          console.log("HTTP Request Succeeded: " + jqXHR.status);
+                          console.log(data);
+                        })
+                        .fail(function (jqXHR, textStatus, errorThrown) {
+                          console.log("HTTP Request Failed");
+                        })
+                        .always(function () {
+                          /* ... */
+                        });
                     });
-                });
-              </script>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-<section>
-  <div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card" style="border-radius: 15px;">
-            <div class="card-body p-5">
-              <h2>Alle User</h2>
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Roles</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for user in users %}
-                  <tr>
-                    <th scope="row">{{user.id}}</th>
-                    <td>{{user.email}}</td>
-                    <td>
-                      {% for role in user.roles %}
-                      {{role.id}}
-                      {{role.name}}
-                      <br>
-                      {% endfor %}
-                    </td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
+                  </script>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</section>
-{% endblock %}
-</body>
+  <div style="margin:30px"></div>
+  <section>
+    <div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card" style="border-radius: 15px;">
+              <div class="card-body p-5">
+                <h2>Alle User</h2>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">E-Mail</th>
+                      <th scope="col">Rolle(n)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for user in users %}
+                    <tr>
+                      <th scope="row">{{user.id}}</th>
+                      <td>{{user.email}}</td>
+                      <td>
+                        {% for role in user.roles %}
+                        {{role.id}}
+                        {{role.name}}
+                        <br>
+                        {% endfor %}
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-</html>
+
+  {% endblock %}
+  </body>
+
+  </html>
