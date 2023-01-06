@@ -17,10 +17,12 @@
     <link rel="stylesheet" href="static/assets/css/Navigation-with-Button.css">
     <link rel="stylesheet" href="static/assets/css/styles.css">
     <link rel="stylesheet" href="static/assets/css/Team-Boxed.css">
-    <link rel="stylesheet" href="static/assets/css/darkmode.css">
-    <link rel="stylesheet" href="static/assets/css/toggle.css">
+    <link rel="stylesheet" href="static/assets/bootstrap/darkmode.css">
+    <link rel="stylesheet" href="static/assets/bootstrap/toggle.css">
+    <link rel="icon" type="image/x-icon" href="static/assets/img/favicon.ico">
+    <link rel="apple-touch-icon" type="image/x-icon" href="static/assets/img/apple-touch-icon.png">
 
-    <script src="static/assets/lottie/logo.json"></script>
+    <script src="static/assets/bootstrap/logo.json"></script>
 
     <script src="static/assets/bootstrap/js/bootstrap.min.js"></script>
 </head>
@@ -30,7 +32,7 @@
     <!-- Navigationsleiste -->
     <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
         <div class="container"><a href="http://localhost" title="Startseite Bikerental">
-            <lottie-player id="my-animation" src="static/assets/lottie/logo.json"  background="transparent"  speed="1"  style="width: 100px; height: 100px;"  loop  ></lottie-player></a><button
+            <lottie-player id="my-animation" src="static/assets/bootstrap/logo.json"  background="transparent"  speed="1"  style="width: 100px; height: 100px;"  loop  ></lottie-player><a class="navbar-brand" id="logo" href="http://localhost">BikeRental</a></a><button
                 data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span
                     class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
@@ -39,15 +41,28 @@
 
 
 <!-- JavaScript Lottie -->
-<script src="static/assets/lottie/lottie-player.js"></script>
+<script src="static/assets/bootstrap/lottie-player.js"></script>
 <script>
   // Get a reference to the Lottie player element
   const animationElement = document.getElementById('my-animation');
+  const logoanimation = document.getElementById('logo');
+
+  // Add a mouseover event handler
+  logoanimation.addEventListener('mouseover', function() {
+    // Start playing the animation
+    animationElement.play();
+  });
 
   // Add a mouseover event handler
   animationElement.addEventListener('mouseover', function() {
     // Start playing the animation
     animationElement.play();
+  });
+
+    // Add a mouseout event handler
+    logoanimation.addEventListener('mouseout', function() {
+    // Stop playing the animation
+    animationElement.stop();
   });
 
   // Add a mouseout event handler
@@ -88,12 +103,6 @@
                 </ul><span class="navbar-text actions"> <a class="login" href="/login">Log In</a><a
                         class="btn btn-light action-button" role="button" href="/register">Registrieren</a></span>
                 {% endif %}
-
-                <label class="switch">
-                    <input type="checkbox" id="check" onclick="changeStatus()"></input>
-                    <span class="slider round"></span>
-                  </label>
-
 
             </div>
         </div>
