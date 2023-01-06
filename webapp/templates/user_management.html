@@ -58,9 +58,12 @@
                         .done(function (data, textStatus, jqXHR) {
                           console.log("HTTP Request Succeeded: " + jqXHR.status);
                           console.log(data);
+                          document.getElementById('form-hinzufuegen').reset();
+                          alert('Rolle wurde zugewiesen');
                         })
                         .fail(function (jqXHR, textStatus, errorThrown) {
                           console.log("HTTP Request Failed");
+                          alert('Etwas ist schief gelaufen');
                         })
                         .always(function () {
                           /* ... */
@@ -113,9 +116,12 @@
                         .done(function (data, textStatus, jqXHR) {
                           console.log("HTTP Request Succeeded: " + jqXHR.status);
                           console.log(data);
+                          document.getElementById('form-entfernen').reset();
+                          alert('Rolle wurde entfernt');
                         })
                         .fail(function (jqXHR, textStatus, errorThrown) {
                           console.log("HTTP Request Failed");
+                          alert('Etwas ist schief gelaufen');
                         })
                         .always(function () {
                           /* ... */
@@ -162,9 +168,12 @@
                         .done(function (data, textStatus, jqXHR) {
                           console.log("HTTP Request Succeeded: " + jqXHR.status);
                           console.log(data);
+                          document.getElementById('form-loeschen').reset();
+                          alert('User wurde entfernt');
                         })
                         .fail(function (jqXHR, textStatus, errorThrown) {
                           console.log("HTTP Request Failed");
+                          alert('Etwas ist schief gelaufen');
                         })
                         .always(function () {
                           /* ... */

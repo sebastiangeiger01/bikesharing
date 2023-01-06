@@ -19,15 +19,15 @@
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
   <script>
     // create a map object
-    var map = L.map('map').setView([51.505, -0.09], 13);
+    var map = L.map('map').setView([49.988276672519454,8.228244781494142], 20);
     // add a tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
     }).addTo(map);
     // create a marker and add it to the map
-    var marker = L.marker([51.5, -0.09]).addTo(map);
+    var marker = L.marker([49.988276672519454,8.228244781494142]).addTo(map);
     // update the text fields when the marker is dragged
-    marker.on('dragend', function (event) {
+    marker.on('drag', function (event) {
       var coords = event.target.getLatLng();
       document.getElementById("latitude").value = coords.lat;
       document.getElementById("longitude").value = coords.lng;
@@ -48,8 +48,8 @@
 
         <div class="row">
           <div class="col-lg-6" style="float:none;margin:auto; padding-bottom: 20px;">
-            X-Koordinate: <input class="form-control" id="longitude" type="text" value="" readonly>
-            Y-Koordinate: <input class="form-control" id="latitude" type="text" value="" readonly>
+            X-Koordinate: <input class="form-control" id="longitude" type="text" value="8.228244781494142" readonly>
+            Y-Koordinate: <input class="form-control" id="latitude" type="text" value="49.988276672519454" readonly>
           </div>
         </div>
 
@@ -104,14 +104,17 @@
                         .done(function (data, textStatus, jqXHR) {
                           console.log("HTTP Request Succeeded: " + jqXHR.status);
                           console.log(data);
+                          document.getElementById('form-hinzufuegen').reset();
+                          alert('Fahrrad wurde hinzugefügt');
                         })
                         .fail(function (jqXHR, textStatus, errorThrown) {
                           console.log("HTTP Request Failed");
+                          alert('Etwas ist schief gelaufen');
                         })
                         .always(function () {
                           /* ... */
                         });
-                      location.reload();
+                        location.reload();
                     });
                   </script>
                 </div>
@@ -163,9 +166,12 @@
                         .done(function (data, textStatus, jqXHR) {
                           console.log("HTTP Request Succeeded: " + jqXHR.status);
                           console.log(data);
+                          document.getElementById('form-bearbeiten').reset();
+                          alert('Fahrrad wurde bearbeitet');
                         })
                         .fail(function (jqXHR, textStatus, errorThrown) {
                           console.log("HTTP Request Failed");
+                          alert('Etwas ist schief gelaufen');
                         })
                         .always(function () {
                           /* ... */
@@ -212,9 +218,12 @@
                         .done(function (data, textStatus, jqXHR) {
                           console.log("HTTP Request Succeeded: " + jqXHR.status);
                           console.log(data);
+                          document.getElementById('form-loeschen').reset();
+                          alert('Fahrrad wurde entfernt');
                         })
                         .fail(function (jqXHR, textStatus, errorThrown) {
                           console.log("HTTP Request Failed");
+                          alert('Etwas ist schief gelaufen');
                         })
                         .always(function () {
                           /* ... */
