@@ -104,8 +104,8 @@
                         .done(function (data, textStatus, jqXHR) {
                           console.log("HTTP Request Succeeded: " + jqXHR.status);
                           console.log(data);
-                          document.getElementById('form-hinzufuegen').reset();
-                          alert('Fahrrad wurde hinzugefügt');
+                          //document.getElementById('form-hinzufuegen').reset();
+                          //alert('Fahrrad wurde hinzugefügt');
                         })
                         .fail(function (jqXHR, textStatus, errorThrown) {
                           console.log("HTTP Request Failed");
@@ -114,7 +114,6 @@
                         .always(function () {
                           /* ... */
                         });
-                        location.reload();
                     });
                   </script>
                 </div>
@@ -166,8 +165,8 @@
                         .done(function (data, textStatus, jqXHR) {
                           console.log("HTTP Request Succeeded: " + jqXHR.status);
                           console.log(data);
-                          document.getElementById('form-bearbeiten').reset();
-                          alert('Fahrrad wurde bearbeitet');
+                          //document.getElementById('form-bearbeiten').reset();
+                          //alert('Fahrrad wurde bearbeitet');
                         })
                         .fail(function (jqXHR, textStatus, errorThrown) {
                           console.log("HTTP Request Failed");
@@ -176,7 +175,6 @@
                         .always(function () {
                           /* ... */
                         });
-                      location.reload();
                     });
                   </script>
                 </div>
@@ -218,8 +216,8 @@
                         .done(function (data, textStatus, jqXHR) {
                           console.log("HTTP Request Succeeded: " + jqXHR.status);
                           console.log(data);
-                          document.getElementById('form-loeschen').reset();
-                          alert('Fahrrad wurde entfernt');
+                          //document.getElementById('form-loeschen').reset();
+                          //alert('Fahrrad wurde entfernt');
                         })
                         .fail(function (jqXHR, textStatus, errorThrown) {
                           console.log("HTTP Request Failed");
@@ -228,7 +226,6 @@
                         .always(function () {
                           /* ... */
                         });
-                      location.reload();
                     });
                   </script>
                 </div>
