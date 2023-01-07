@@ -59,7 +59,7 @@
 
         <div class="container">
           <div class="row gx-5 ">
-            <div class="col-md-4">
+            <div class="col-md-6">
               <div class="card h-100" style="border-radius: 15px;">
                 <div class="card-body p-5">
 
@@ -120,7 +120,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
               <div class="card h-100" style="border-radius: 15px;">
                 <div class="card-body p-5">
 
@@ -182,118 +182,9 @@
                 </div>
               </div>
             </div>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                  <script>
-                    function deleteBike(id) {
-                      jQuery.ajax({
-                        url: "http://localhost/bike-management",
-                        type: "DELETE",
-                        headers: {
-                          "X-CSRF-Token": "{{csrf_token()}}",
-                          "Content-Type": "application/json; charset=utf-8",
-                        },
-                        contentType: "application/json",
-                        data: JSON.stringify({
-                          'id': id,
-                        })
-                        })
-                        .done(function (data, textStatus, jqXHR) {
-                          console.log("HTTP Request Succeeded: " + jqXHR.status);
-                          console.log(data);
-                          //document.getElementById('form-loeschen').reset();
-                          alert('Fahrrad wurde entfernt');
-                          location.reload();
-                        })
-                        .fail(function (jqXHR, textStatus, errorThrown) {
-                          console.log("HTTP Request Failed");
-                          alert('Etwas ist schief gelaufen. Überprüfen Sie die ID!');
-                        })
-                        .always(function () {
-                          /* ... */
-                        });
-                    }
-                  </script>
-            <!-- <div class="col-md-4"> 
-              <div class="card h-100" style="border-radius: 15px;">
-                <div class="card-body p-5">
 
-                  <h2>Fahrrad löschen</h2>
-                  <form id="form-loeschen">
-
-                    <label class="form-label" for="id_loeschen">Fahrrad-ID:</label><br>
-                    <input class="form-control" type="number" id="id_loeschen" name="id_loeschen" required><br>
-
-                    <button class="btn btn-primary d-block w-100" type="submit">Fahrrad löschen</button>
-                  </form>
-                  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                  <script>
-                    // Die submit-Funktion wird auf das Form-Element angewendet
-                    $('#form-loeschen').submit(function (event) {
-                      // Verhindere das Standardverhalten (das Formular wird gesendet)
-                      event.preventDefault();
-
-                      // Führe den Ajax-Code aus
-                      jQuery.ajax({
-
-                        url: "http://localhost/bike-management",
-                        type: "DELETE",
-                        headers: {
-                          "X-CSRF-Token": "{{csrf_token()}}",
-                          "Content-Type": "application/json; charset=utf-8",
-                        },
-                        contentType: "application/json",
-                        data: JSON.stringify({
-                          'id': $('#id_loeschen').val(),
-                        })
-                      })
-                        .done(function (data, textStatus, jqXHR) {
-                          console.log("HTTP Request Succeeded: " + jqXHR.status);
-                          console.log(data);
-                          //document.getElementById('form-loeschen').reset();
-                          alert('Fahrrad wurde entfernt');
-                          location.reload();
-                        })
-                        .fail(function (jqXHR, textStatus, errorThrown) {
-                          console.log("HTTP Request Failed");
-                          alert('Etwas ist schief gelaufen. Überprüfen Sie die ID!');
-                        })
-                        .always(function () {
-                          /* ... */
-                        });
-                    });
-
-                    function deleteBike(id) {
-                      jQuery.ajax({
-                        url: "http://localhost/bike-management",
-                        type: "DELETE",
-                        headers: {
-                          "X-CSRF-Token": "{{csrf_token()}}",
-                          "Content-Type": "application/json; charset=utf-8",
-                        },
-                        contentType: "application/json",
-                        data: JSON.stringify({
-                          'id': id,
-                        })
-                        })
-                        .done(function (data, textStatus, jqXHR) {
-                          console.log("HTTP Request Succeeded: " + jqXHR.status);
-                          console.log(data);
-                          //document.getElementById('form-loeschen').reset();
-                          alert('Fahrrad wurde entfernt');
-                          location.reload();
-                        })
-                        .fail(function (jqXHR, textStatus, errorThrown) {
-                          console.log("HTTP Request Failed");
-                          alert('Etwas ist schief gelaufen. Überprüfen Sie die ID!');
-                        })
-                        .always(function () {
-                          /* ... */
-                        });
-                    }
-                  </script>
-                </div>
               </div>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>
@@ -330,6 +221,41 @@
                 {% endfor %}
               </tbody>
             </table>
+
+
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                  <script>
+                    function deleteBike(id) {
+                      jQuery.ajax({
+                        url: "http://localhost/bike-management",
+                        type: "DELETE",
+                        headers: {
+                          "X-CSRF-Token": "{{csrf_token()}}",
+                          "Content-Type": "application/json; charset=utf-8",
+                        },
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                          'id': id,
+                        })
+                        })
+                        .done(function (data, textStatus, jqXHR) {
+                          console.log("HTTP Request Succeeded: " + jqXHR.status);
+                          console.log(data);
+                          //document.getElementById('form-loeschen').reset();
+                          alert('Fahrrad wurde entfernt');
+                          location.reload();
+                        })
+                        .fail(function (jqXHR, textStatus, errorThrown) {
+                          console.log("HTTP Request Failed");
+                          alert('Etwas ist schief gelaufen. Überprüfen Sie die ID!');
+                        })
+                        .always(function () {
+                          /* ... */
+                        });
+                    }
+                  </script>
+
           </div>
         </div>
       </div>
