@@ -105,11 +105,12 @@
                           console.log("HTTP Request Succeeded: " + jqXHR.status);
                           console.log(data);
                           //document.getElementById('form-hinzufuegen').reset();
-                          //alert('Fahrrad wurde hinzugefügt');
+                          alert('Fahrrad wurde hinzugefügt');
+                          location.reload();
                         })
                         .fail(function (jqXHR, textStatus, errorThrown) {
                           console.log("HTTP Request Failed");
-                          //alert('Etwas ist schief gelaufen');
+                          alert('Etwas ist schief gelaufen.');
                         })
                         .always(function () {
                           /* ... */
@@ -166,11 +167,12 @@
                           console.log("HTTP Request Succeeded: " + jqXHR.status);
                           console.log(data);
                           //document.getElementById('form-bearbeiten').reset();
-                          //alert('Fahrrad wurde bearbeitet');
+                          alert('Fahrrad wurde bearbeitet');
+                          location.reload();
                         })
                         .fail(function (jqXHR, textStatus, errorThrown) {
                           console.log("HTTP Request Failed");
-                          //alert('Etwas ist schief gelaufen');
+                          alert('Etwas ist schief gelaufen. Überprüfen Sie die ID!');
                         })
                         .always(function () {
                           /* ... */
@@ -217,11 +219,12 @@
                           console.log("HTTP Request Succeeded: " + jqXHR.status);
                           console.log(data);
                           //document.getElementById('form-loeschen').reset();
-                          //alert('Fahrrad wurde entfernt');
+                          alert('Fahrrad wurde entfernt');
+                          location.reload();
                         })
                         .fail(function (jqXHR, textStatus, errorThrown) {
                           console.log("HTTP Request Failed");
-                          //alert('Etwas ist schief gelaufen');
+                          alert('Etwas ist schief gelaufen. Überprüfen Sie die ID!');
                         })
                         .always(function () {
                           /* ... */
