@@ -2,18 +2,24 @@
 <html lang="en">
 
 <head>
+
+   <link rel="manifest" href="webapp\templates\manifest.json" crossorigin="use-credentials">
+
+   <link rel="manifest" href="webapp\templates\manifest.json">
+
+
    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
       integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
    <!-- Make sure you put this AFTER Leaflet's CSS -->
    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
       integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
    <link rel="stylesheet" href="static/assets/bootstrap/css/style1.css">
-
    <!-- Favicons-->
    <link rel="icon" type="image/x-icon" href="static/assets/img/favicon.ico">
    <link rel="apple-touch-icon" type="image/x-icon" href="static/assets/img/apple-touch-icon.png">
 
    <title>BikeRental - Home</title>
+
 </head>
 
 <body>
@@ -22,10 +28,9 @@
    <!-- Navigationsleiste und Footer importieren -->
    {% extends 'base.html' %}
    {%block content%}
-
+   <div id="map" style="width: 100%; height: 600px;" class="inverted"></div>
    <section class="map-clean">
       <div class="intro"></div>
-      <div id="map" style="width: 100%; height: 600px;"></div>
       <script>
          var map = L.map('map').setView([0, 0]);
          map.fitBounds([
@@ -52,14 +57,14 @@
                <div class="row">
                   <div class="col-md-8">
                      <div class="intro">
-                        <h2>Sei' nicht feig, miet das Bike!</h2>
-                        <p>Klicke auf den Button und du erhälst eine komplette Anleitung wie unsere Seite funktioniert und wie du dein Fahrrad buchen kannst</p>
+                        <h2>Sei' gescheit, miet das Bike!</h2>
+                        <p>Klicke auf den Button und du erhälst eine komplette Anleitung wie unsere Seite funktioniert
+                           und wie du dein Fahrrad buchen kannst</p>
                         <a class="btn btn-primary" role="button" href="#">Action Button</a>
                      </div>
                   </div>
-                  <div class="col-sm-4"><img
-                        src="static/assets/img/bicycle-rent-isometric-design-concept_1284-21936.jpg"
-                        style="width: 338px;margin: -10px;padding: 4px;"></div>
+                  <div class="col-sm-4"<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<lottie-player src="https://assets4.lottiefiles.com/private_files/lf30_kcwpiswk.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player></div>
                </div>
             </div>
          </section>
@@ -77,7 +82,8 @@
                   <div class="box">
                      <i class="fa fa-map-marker icon"></i>
                      <h3 class="name">Funktioniert überall</h3>
-                     <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent
+                     <p class="description">Aenean torsssssssssssssssssssssssssssssstor est, vulputate quis leo in,
+                        vehicula rhoncus lacus. Praesent
                         aliquam in tellus eu.</p>
                   </div>
                </div>
@@ -133,8 +139,8 @@
          </div>
          <div class="row people">
             <div class="col-md-6 col-lg-4 item">
-               <div class="box">
-                  <img class="rounded-circle" src="static/assets/img/PB.jpeg">
+               <div class="box ">
+                  <img class="rounded-circle inverted" src="static/assets/img/PB.jpeg">
                   <h3 class="name">Jonas Frey</h3>
                   <p class="title">Frontend Designer</p>
                   <p class="description">Hat das Auge für das gewisse Etwas und hat die Webseite nutzerfreundlich
@@ -143,7 +149,7 @@
                            class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
                </div>
                <div class="box">
-                  <img class="rounded-circle" src="static/assets/img/1.jpg">
+                  <img class="rounded-circle inverted" src="static/assets/img/1.jpg">
                   <h3 class="name">Kai Seegers</h3>
                   <p class="title">Musician</p>
                   <p class="description">Zahlen und Logik sind sein Ding. Die Datenbankarchitektur was sein
@@ -154,7 +160,7 @@
             </div>
             <div class="col-md-6 col-lg-4 item">
                <div class="box">
-                  <img class="rounded-circle" src="static/assets/img/2.jpg">
+                  <img class="rounded-circle inverted" src="static/assets/img/2.jpg">
                   <h3 class="name">Luke Löwe</h3>
                   <p class="title">Datenbankexperte</p>
                   <p class="description">Zahlen und Logik sind sein Ding. Die Datenbankarchitektur was sein Anliegen.
@@ -163,7 +169,7 @@
                            class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
                </div>
                <div class="box">
-                  <img class="rounded-circle" src="static/assets/img/1.jpg">
+                  <img class="rounded-circle inverted" src="static/assets/img/1.jpg">
                   <h3 class="name">Tim&nbsp;</h3>
                   <p class="title">Musician</p>
                   <p class="description">Zahlen und Logik sind sein Ding. Die Datenbankarchitektur was sein
@@ -174,7 +180,7 @@
             </div>
             <div class="col-md-6 col-lg-4 item">
                <div class="box">
-                  <img class="rounded-circle" src="static/assets/img/3.jpg">
+                  <img class="rounded-circle inverted" src="static/assets/img/3.jpg">
                   <h3 class="name">Sebastian Geiger</h3>
                   <p class="title">Backend Entwickler</p>
                   <p class="description">Zahlen und Logik sind sein Ding. Die Datenbankarchitektur was sein
@@ -183,7 +189,7 @@
                            class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
                </div>
                <div class="box">
-                  <img class="rounded-circle" src="static/assets/img/1.jpg">
+                  <img class="rounded-circle inverted" src="static/assets/img/1.jpg">
                   <h3 class="name">Roman</h3>
                   <p class="title">Projektmanager</p>
                   <p class="description">Zahlen und Logik sind sein Ding. Die Datenbankarchitektur was sein

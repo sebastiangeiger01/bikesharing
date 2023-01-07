@@ -4,231 +4,243 @@
 <!-- Bike Management Section-->
 
 </html>
+
+<!-- include Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+<body>
+
+
+  <!-- create a container for the map -->
+  <div id="map" style="width: 100%; height: 400px;"></div>
+
+
+
+  <!-- include Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+  <script>
+    // create a map object
+    var map = L.map('map').setView([49.988276672519454,8.228244781494142], 20);
+    // add a tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    // create a marker and add it to the map
+    var marker = L.marker([49.988276672519454,8.228244781494142]).addTo(map);
+    // update the text fields when the marker is dragged
+    marker.on('drag', function (event) {
+      var coords = event.target.getLatLng();
+      document.getElementById("latitude").value = coords.lat;
+      document.getElementById("longitude").value = coords.lng;
+    });
+    // prevent the marker from moving outside the map container
+    map.on('mouseout', function (event) {
+      event.stopPropagation();
+    });
+    // enable dragging of the marker
+    marker.dragging.enable();
+  </script>
+</body>
 <!-- Starte Inhalt-->
-<section class="vh-100 bg-image" style="background-image: url('static/assets/img/HG_Register.jpg');">
-  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+<section class=" bg-image" style="background-image: url(''); padding-top: 50px; padding-bottom:120px;">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3; padding-top: 50px; padding-bottom:120px;">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
 
+        <div class="row">
+          <div class="col-lg-6" style="float:none;margin:auto; padding-bottom: 20px;">
+            X-Koordinate: <input class="form-control" id="longitude" type="text" value="8.228244781494142" readonly>
+            Y-Koordinate: <input class="form-control" id="latitude" type="text" value="49.988276672519454" readonly>
+          </div>
+        </div>
 
         <center>
-          <font color="white">
-            <h1>Bike Management</h1>
-          </font>
+          <h1>Bike Management</h1>
         </center>
 
+        <div class="container">
+          <div class="row gx-5 ">
+            <div class="col-md-4">
+              <div class="card h-100" style="border-radius: 15px;">
+                <div class="card-body p-5">
 
+                  <div>
+                    <h2>Fahrrad anlegen</h2>
+                  </div>
+                  <form id="form-hinzufuegen">
 
+                    <label class="form-label" for="name_hinzu">Name:</label><br>
+                    <input class="form-control" type="text" id="name_hinzu" name="name_hinzu" required><br>
+                    <label for="x_coordinate">X-Koordinate:</label><br>
+                    <input class="form-control" type="text" id="x_coordinate_hinzu" name="x_coordinate_hinzu"
+                      required><br>
+                    <label for="y_coordinate">Y-Koordinate:</label><br>
+                    <input class="form-control" type="text" id="y_coordinate_hinzu" name="y_coordinate_hinzu"
+                      required><br><br>
+                    <button class="btn btn-primary d-block w-100" type="submit">Fahrrad anlegen</button>
+                  </form>
+                  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                  <script>
+                    // Die submit-Funktion wird auf das Form-Element angewendet
+                    $('#form-hinzufuegen').submit(function (event) {
+                      // Verhindere das Standardverhalten (das Formular wird gesendet)
+                      event.preventDefault();
 
-        <div class="col-md-4">
-          <div class="card" style="border-radius: 15px;">
-            <div class="card-body p-5">
-              <!-- Erstes Formular-->
+                      // Führe den Ajax-Code aus
+                      jQuery.ajax({
 
-              <h2>Fahrrad anlegen</h2>
-              <form id="form-hinzufuegen">
-
-                <label class="form-label" for="name_hinzu">Name:</label><br>
-                <input class="form-control" type="text" id="name_hinzu" name="name_hinzu"><br>
-                <label for="x_coordinate">X-Koordinate:</label><br>
-                <input class="form-control" type="text" id="x_coordinate_hinzu" name="x_coordinate_hinzu"><br>
-                <label for="y_coordinate">Y-Koordinate:</label><br>
-                <input class="form-control" type="text" id="y_coordinate_hinzu" name="y_coordinate_hinzu"><br><br>
-                <button class="btn btn-primary d-block w-100" type="submit">Fahrrad anlegen</button>
-              </form>
-              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-              <script>
-                // Die submit-Funktion wird auf das Form-Element angewendet
-                $('#form-hinzufuegen').submit(function (event) {
-                  // Verhindere das Standardverhalten (das Formular wird gesendet)
-                  event.preventDefault();
-
-                  // Führe den Ajax-Code aus
-                  jQuery.ajax({
-
-                    url: "http://localhost/bike-management",
-                    type: "POST",
-                    headers: {
-                      "X-CSRF-Token": "{{csrf_token()}}",
-                      "Content-Type": "application/json; charset=utf-8",
-                    },
-                    contentType: "application/json",
-                    data: JSON.stringify({
-                      'name': $('#name_hinzu').val(),
-                      'x_coordinate': $('#x_coordinate_hinzu').val(),
-                      'y_coordinate': $('#y_coordinate_hinzu').val()
-                    })
-                  })
-                    .done(function (data, textStatus, jqXHR) {
-                      console.log("HTTP Request Succeeded: " + jqXHR.status);
-                      console.log(data);
-                    })
-                    .fail(function (jqXHR, textStatus, errorThrown) {
-                      console.log("HTTP Request Failed");
-                    })
-                    .always(function () {
-                      /* ... */
+                        url: "http://localhost/bike-management",
+                        type: "POST",
+                        headers: {
+                          "X-CSRF-Token": "{{csrf_token()}}",
+                          "Content-Type": "application/json; charset=utf-8",
+                        },
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                          'name': $('#name_hinzu').val(),
+                          'x_coordinate': $('#x_coordinate_hinzu').val(),
+                          'y_coordinate': $('#y_coordinate_hinzu').val()
+                        })
+                      })
+                        .done(function (data, textStatus, jqXHR) {
+                          console.log("HTTP Request Succeeded: " + jqXHR.status);
+                          console.log(data);
+                          //document.getElementById('form-hinzufuegen').reset();
+                          alert('Fahrrad wurde hinzugefügt');
+                          location.reload();
+                        })
+                        .fail(function (jqXHR, textStatus, errorThrown) {
+                          console.log("HTTP Request Failed");
+                          alert('Etwas ist schief gelaufen.');
+                        })
+                        .always(function () {
+                          /* ... */
+                        });
                     });
-                });
-              </script>
+                  </script>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100" style="border-radius: 15px;">
+                <div class="card-body p-5">
+
+                  <h2>Fahrrad bearbeiten</h2>
+                  <form id="form-bearbeiten">
+
+                    <label class="form-label" for="id_bearbeiten">Fahrrad-ID:</label><br>
+                    <input class="form-control" type="number" id="id_bearbeiten" name="id_bearbeiten" required><br>
+                    <label class="form-label" for="name_bearbeiten">Name:</label><br>
+                    <input class="form-control" type="text" id="name_bearbeiten" name="name_bearbeiten" required><br>
+                    <label for="x_coordinate_bearbeiten">X-Koordinate:</label><br>
+                    <input class="form-control" type="text" id="x_coordinate_bearbeiten" name="x_coordinate_bearbeiten"
+                      required><br>
+                    <label for="y_coordinate_bearbeiten">Y-Koordinate:</label><br>
+                    <input class="form-control" type="text" id="y_coordinate_bearbeiten" name="y_coordinate_bearbeiten"
+                      required><br><br>
+                    <button class="btn btn-primary d-block w-100" type="submit">Fahrrad bearbeiten</button>
+                  </form>
+                  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                  <script>
+                    // Die submit-Funktion wird auf das Form-Element angewendet
+                    $('#form-bearbeiten').submit(function (event) {
+                      // Verhindere das Standardverhalten (das Formular wird gesendet)
+                      event.preventDefault();
+
+                      // Führe den Ajax-Code aus
+                      jQuery.ajax({
+
+                        url: "http://localhost/bike-management",
+                        type: "PUT",
+                        headers: {
+                          "X-CSRF-Token": "{{csrf_token()}}",
+                          "Content-Type": "application/json; charset=utf-8",
+                        },
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                          'id': $('#id_bearbeiten').val(),
+                          'name': $('#name_bearbeiten').val(),
+                          'x_coordinate': $('#x_coordinate_bearbeiten').val(),
+                          'y_coordinate': $('#y_coordinate_bearbeiten').val()
+                        })
+                      })
+                        .done(function (data, textStatus, jqXHR) {
+                          console.log("HTTP Request Succeeded: " + jqXHR.status);
+                          console.log(data);
+                          //document.getElementById('form-bearbeiten').reset();
+                          alert('Fahrrad wurde bearbeitet');
+                          location.reload();
+                        })
+                        .fail(function (jqXHR, textStatus, errorThrown) {
+                          console.log("HTTP Request Failed");
+                          alert('Etwas ist schief gelaufen. Überprüfen Sie die ID!');
+                        })
+                        .always(function () {
+                          /* ... */
+                        });
+                    });
+                  </script>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100" style="border-radius: 15px;">
+                <div class="card-body p-5">
+
+                  <h2>Fahrrad löschen</h2>
+                  <form id="form-loeschen">
+
+                    <label class="form-label" for="id_loeschen">Fahrrad-ID:</label><br>
+                    <input class="form-control" type="number" id="id_loeschen" name="id_loeschen" required><br>
+
+                    <button class="btn btn-primary d-block w-100" type="submit">Fahrrad löschen</button>
+                  </form>
+                  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                  <script>
+                    // Die submit-Funktion wird auf das Form-Element angewendet
+                    $('#form-loeschen').submit(function (event) {
+                      // Verhindere das Standardverhalten (das Formular wird gesendet)
+                      event.preventDefault();
+
+                      // Führe den Ajax-Code aus
+                      jQuery.ajax({
+
+                        url: "http://localhost/bike-management",
+                        type: "DELETE",
+                        headers: {
+                          "X-CSRF-Token": "{{csrf_token()}}",
+                          "Content-Type": "application/json; charset=utf-8",
+                        },
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                          'id': $('#id_loeschen').val(),
+                        })
+                      })
+                        .done(function (data, textStatus, jqXHR) {
+                          console.log("HTTP Request Succeeded: " + jqXHR.status);
+                          console.log(data);
+                          //document.getElementById('form-loeschen').reset();
+                          alert('Fahrrad wurde entfernt');
+                          location.reload();
+                        })
+                        .fail(function (jqXHR, textStatus, errorThrown) {
+                          console.log("HTTP Request Failed");
+                          alert('Etwas ist schief gelaufen. Überprüfen Sie die ID!');
+                        })
+                        .always(function () {
+                          /* ... */
+                        });
+                    });
+                  </script>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <div class="col-md-4">
-          <div class="card" style="border-radius: 15px;">
-            <div class="card-body p-5">
-              <!-- Zweites Formular-->
-
-              <h2>Fahrrad bearbeiten</h2>
-              <form id="form-bearbeiten">
-
-                <label class="form-label" for="id_bearbeiten">Fahrrad-ID:</label><br>
-                <input class="form-control" type="number" id="id_bearbeiten" name="id_bearbeiten"><br>
-                <label class="form-label" for="name_bearbeiten">Name:</label><br>
-                <input class="form-control" type="text" id="name_bearbeiten" name="name_bearbeiten"><br>
-                <label for="x_coordinate_bearbeiten">X-Koordinate:</label><br>
-                <input class="form-control" type="text" id="x_coordinate_bearbeiten" name="x_coordinate_bearbeiten"><br>
-                <label for="y_coordinate_bearbeiten">Y-Koordinate:</label><br>
-                <input class="form-control" type="text" id="y_coordinate_bearbeiten" name="y_coordinate_bearbeiten"><br><br>
-                <button class="btn btn-primary d-block w-100" type="submit">Fahrrad bearbeiten</button>
-              </form>
-              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-              <script>
-                // Die submit-Funktion wird auf das Form-Element angewendet
-                $('#form-bearbeiten').submit(function (event) {
-                  // Verhindere das Standardverhalten (das Formular wird gesendet)
-                  event.preventDefault();
-
-                  // Führe den Ajax-Code aus
-                  jQuery.ajax({
-
-                    url: "http://localhost/bike-management",
-                    type: "PUT",
-                    headers: {
-                      "X-CSRF-Token": "{{csrf_token()}}",
-                      "Content-Type": "application/json; charset=utf-8",
-                    },
-                    contentType: "application/json",
-                    data: JSON.stringify({
-                      'id': $('#id_bearbeiten').val(),
-                      'name': $('#name_bearbeiten').val(),
-                      'x_coordinate': $('#x_coordinate_bearbeiten').val(),
-                      'y_coordinate': $('#y_coordinate_bearbeiten').val()
-                    })
-                  })
-                    .done(function (data, textStatus, jqXHR) {
-                      console.log("HTTP Request Succeeded: " + jqXHR.status);
-                      console.log(data);
-                    })
-                    .fail(function (jqXHR, textStatus, errorThrown) {
-                      console.log("HTTP Request Failed");
-                    })
-                    .always(function () {
-                      /* ... */
-                    });
-                });
-              </script>
-            </div>
-          </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-        <div class="col-md-4">
-          <div class="card" style="border-radius: 15px;">
-            <div class="card-body p-5">
-              <!-- Drittes Formular-->
-
-              <h2>Fahrrad löschen</h2>
-              <form id="form-loeschen">
-
-                <label class="form-label" for="id_loeschen">Fahrrad-ID:</label><br>
-                <input class="form-control" type="number" id="id_loeschen" name="id_loeschen"><br>
-
-                <button class="btn btn-primary d-block w-100" type="submit">Fahrrad löschen</button>
-              </form>
-              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-              <script>
-                // Die submit-Funktion wird auf das Form-Element angewendet
-                $('#form-loeschen').submit(function (event) {
-                  // Verhindere das Standardverhalten (das Formular wird gesendet)
-                  event.preventDefault();
-
-                  // Führe den Ajax-Code aus
-                  jQuery.ajax({
-
-                    url: "http://localhost/bike-management",
-                    type: "DELETE",
-                    headers: {
-                      "X-CSRF-Token": "{{csrf_token()}}",
-                      "Content-Type": "application/json; charset=utf-8",
-                    },
-                    contentType: "application/json",
-                    data: JSON.stringify({
-                      'id': $('#id_loeschen').val(),
-                    })
-                  })
-                    .done(function (data, textStatus, jqXHR) {
-                      console.log("HTTP Request Succeeded: " + jqXHR.status);
-                      console.log(data);
-                    })
-                    .fail(function (jqXHR, textStatus, errorThrown) {
-                      console.log("HTTP Request Failed");
-                    })
-                    .always(function () {
-                      /* ... */
-                    });
-                });
-              </script>
-            </div>
-          </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       </div>
     </div>
   </div>
 </section>
-
-
-
+<div style="margin:30px"></div>
 <section>
   <div class="container">
     <div class="row">
@@ -236,13 +248,14 @@
         <div class="card" style="border-radius: 15px;">
           <div class="card-body p-5">
             <h2>Fahrräder</h2>
-            <table class="table table-striped">
+            <table class="table table-striped h-auto" cellpadding="3">
               <thead>
                 <tr>
                   <th scope="col">ID</th>
                   <th scope="col">Name</th>
                   <th scope="col">X-Koordinate</th>
                   <th scope="col">Y-Koordinate</th>
+                  <th scope="col">Löschen</th>
                 </tr>
               </thead>
               <tbody>
@@ -252,6 +265,7 @@
                   <td>{{bike.name}}</td>
                   <td>{{bike.x_coordinate}}</td>
                   <td>{{bike.y_coordinate}}</td>
+                  <td><button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i>Löschen</button></td>
                 </tr>
                 {% endfor %}
               </tbody>
@@ -264,5 +278,4 @@
 </section>
 {% endblock %}
 </body>
-
 </html>
