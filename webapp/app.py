@@ -97,11 +97,17 @@ def bike(id):
 
     # time format: 2004-10-19 10:23:54
     if request.method == 'POST':
-        add_instance(Ride, user_id=current_user.id, bike_id=id, start_time=datetime.now())
-        return "bike rented"
-    elif request.method == 'PUT':                
-        edit_instance(Ride, ride_db.id, end_time=datetime.now())
-        return "bike returned"
+        if ride_db is not None:
+            return "already rented"
+        else:
+            add_instance(Ride, user_id=current_user.id, bike_id=id, start_time=datetime.now())
+            return "bike rented"
+    elif request.method == 'PUT':  
+        if ride_db is None:
+            return "return not possible"
+        else:
+            edit_instance(Ride, ride_db.id, end_time=datetime.now())
+            return "bike returned"
     else:
         return "Unknown method"
 
