@@ -4,6 +4,7 @@ from . import create_app
 from .models import *
 from .database import *
 from sqlalchemy import *
+from datetime import datetime
 from flask_security import Security, current_user, auth_required, roles_required, hash_password, SQLAlchemySessionUserDatastore
 
 app = create_app()
@@ -94,18 +95,19 @@ def bike(id):
             return redirect('/')
         return render_template('bike.html', bike=bike, status=status)
 
-    if 'application/json' in request.content_type:
-        ride_req = request.get_json()
-    else:
-        return "Unknown content type"
-
     # time format: 2004-10-19 10:23:54
     if request.method == 'POST':
-        add_instance(Ride, user_id=current_user.id, bike_id=id, start_time=ride_req['start_time'])
-        return "bike rented"
-    elif request.method == 'PUT':                
-        edit_instance(Ride, ride_db.id, end_time=ride_req['end_time'])
-        return "bike returned"
+        if ride_db is not None:
+            return "already rented"
+        else:
+            add_instance(Ride, user_id=current_user.id, bike_id=id, start_time=datetime.now())
+            return "bike rented"
+    elif request.method == 'PUT':  
+        if ride_db is None:
+            return "return not possible"
+        else:
+            edit_instance(Ride, ride_db.id, end_time=datetime.now())
+            return "bike returned"
     else:
         return "Unknown method"
 
@@ -127,6 +129,8 @@ def bike_management(operation = None):
         add_instance(Bike, **bike)
         return "Bike added"
     elif request.method == 'DELETE':
+        Ride.query.filter_by(bike_id=bike['id']).delete()
+        db.session.commit()
         delete_instance(Bike, bike['id'])
         return "Bike deleted"
     elif request.method == 'PUT':
@@ -150,10 +154,11 @@ def user_management(operation = None):
         return "Unknown request content type"
 
     if request.method == 'DELETE':
+        RolesUsers.query.filter_by(user_id=roles_users['user_id']).delete()
+        Ride.query.filter_by(user_id=roles_users['user_id']).delete()
+        db.session.commit()
         delete_instance(User, roles_users['user_id'])
         # delete related roles
-        RolesUsers.query.filter_by(user_id=roles_users['user_id']).delete()
-        db.session.commit()
         return "User deleted"
     elif request.method == 'PUT':
         if roles_users['operation'] == 'add_role':
