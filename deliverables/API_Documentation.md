@@ -876,32 +876,18 @@ jQuery.ajax({
 |---|---|---|
 | POST | `/bike<id>` | authenticated |
 
-**Body**
-```json
-{
-  "start_time": "2004-10-19 10:23:54"
-}
-```
-
 **HTTP**
 ```http
 POST /bike1 HTTP/1.1
-Content-Type: application/json; charset=utf-8
 Host: localhost
 Connection: close
 User-Agent: RapidAPI/4.0.0 (Macintosh; OS X/13.0.1) GCDHTTPRequest
-Content-Length: 36
-
-{"start_time":"2004-10-19 10:23:54"}
+Content-Length: 0
 ```
 **cURL**
 ```sh
 ## start
-curl -X "POST" "http://localhost/bike1" \
-     -H 'Content-Type: application/json; charset=utf-8' \
-     -d $'{
-  "start_time": "2004-10-19 10:23:54"
-}'
+curl -X "POST" "http://localhost/bike1"
 ```
 **JavaScript (jQuery)**
 ```javascript
@@ -910,13 +896,6 @@ curl -X "POST" "http://localhost/bike1" \
 jQuery.ajax({
     url: "http://localhost/bike1",
     type: "POST",
-    headers: {
-        "Content-Type": "application/json; charset=utf-8",
-    },
-    contentType: "application/json",
-    data: JSON.stringify({
-        "start_time": "2004-10-19 10:23:54"
-    })
 })
 .done(function(data, textStatus, jqXHR) {
     console.log("HTTP Request Succeeded: " + jqXHR.status);
@@ -938,32 +917,18 @@ jQuery.ajax({
 |---|---|---|
 | PUT | `/bike<id>` | authenticated |
 
-**Body**
-```json
-{
-  "end_time": "2004-10-19 10:23:59"
-}
-```
-
 **HTTP**
 ```http
 PUT /bike1 HTTP/1.1
-Content-Type: application/json; charset=utf-8
 Host: localhost
 Connection: close
 User-Agent: RapidAPI/4.0.0 (Macintosh; OS X/13.0.1) GCDHTTPRequest
-Content-Length: 34
-
-{"end_time":"2004-10-19 10:23:59"}
+Content-Length: 0
 ```
 **cURL**
 ```sh
 ## end
-curl -X "PUT" "http://localhost/bike1" \
-     -H 'Content-Type: application/json; charset=utf-8' \
-     -d $'{
-  "end_time": "2004-10-19 10:23:59"
-}'
+curl -X "PUT" "http://localhost/bike1" 
 ```
 **JavaScript (jQuery)**
 ```javascript
@@ -972,13 +937,6 @@ curl -X "PUT" "http://localhost/bike1" \
 jQuery.ajax({
     url: "http://localhost/bike1",
     type: "PUT",
-    headers: {
-        "Content-Type": "application/json; charset=utf-8",
-    },
-    contentType: "application/json",
-    data: JSON.stringify({
-        "end_time": "2004-10-19 10:23:59"
-    })
 })
 .done(function(data, textStatus, jqXHR) {
     console.log("HTTP Request Succeeded: " + jqXHR.status);
