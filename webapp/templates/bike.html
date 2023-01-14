@@ -68,36 +68,13 @@
             $('#mieten').click(function (event) {
               event.preventDefault();
 
-              // Die aktuelle Uhrzeit ermitteln
-              var currentTime = new Date();
-              var year = currentTime.getFullYear();
-              var month = currentTime.getMonth() + 1; // Monate werden von 0 bis 11 gezählt
-              var day = currentTime.getDate();
-              var hours = currentTime.getHours();
-              var minutes = currentTime.getMinutes();
-              var seconds = currentTime.getSeconds();
-
-              // Führende Nullen hinzufügen, falls nötig
-              month = (month < 10 ? "0" : "") + month;
-              day = (day < 10 ? "0" : "") + day;
-              hours = (hours < 10 ? "0" : "") + hours;
-              minutes = (minutes < 10 ? "0" : "") + minutes;
-              seconds = (seconds < 10 ? "0" : "") + seconds;
-
-              // Den Wert von "start_time" im vorgegebenen Format setzen
-              var start_time = year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
-
               jQuery.ajax({
                 url: "http://localhost/bike{{ bike.id }}",
                 type: "POST",
                 headers: {
                   "X-CSRF-Token": "{{csrf_token()}}",
                     "Content-Type": "application/json; charset=utf-8",
-                },
-                contentType: "application/json",
-                data: JSON.stringify({
-                  "start_time": start_time
-                })
+                }
               })
           .done(function(data, textStatus, jqXHR) {
               console.log("HTTP Request Succeeded: " + jqXHR.status);
@@ -121,24 +98,6 @@
           $('#rueckgabe').click(function (event) {
             event.preventDefault();
 
-            // Die aktuelle Uhrzeit ermitteln
-            var currentTime2 = new Date();
-            var year2 = currentTime2.getFullYear();
-            var month2 = currentTime2.getMonth() + 1; // Monate werden von 0 bis 11 gezählt
-            var day2 = currentTime2.getDate();
-            var hours2 = currentTime2.getHours();
-            var minutes2 = currentTime2.getMinutes();
-            var seconds2 = currentTime2.getSeconds();
-
-            // Führende Nullen hinzufügen, falls nötig
-            month2 = (month2 < 10 ? "0" : "") + month2;
-            day2 = (day2 < 10 ? "0" : "") + day2;
-            hours2 = (hours2 < 10 ? "0" : "") + hours2;
-            minutes2 = (minutes2 < 10 ? "0" : "") + minutes2;
-            seconds2 = (seconds2 < 10 ? "0" : "") + seconds2;
-
-            // Den Wert von "start_time" im vorgegebenen Format setzen
-            var end_time2 = year2 + "-" + month2 + "-" + day2 + " " + hours2 + ":" + minutes2 + ":" + seconds2;
 
             jQuery.ajax({
               url: "http://localhost/bike{{ bike.id }}",
@@ -146,12 +105,8 @@
               headers: {
                   "X-CSRF-Token": "{{csrf_token()}}",
                   "Content-Type": "application/json; charset=utf-8",
-              },
-              contentType: "application/json",
-              data: JSON.stringify({
-                "end_time": end_time2
+                }
               })
-            })
         .done(function(data, textStatus, jqXHR) {
             console.log("HTTP Request Succeeded: " + jqXHR.status);
             console.log(data);
