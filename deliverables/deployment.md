@@ -6,10 +6,10 @@ Deploying this software architecture locally involves several steps that use Doc
 1. Install Docker: Install Docker on your local machine. This is required to run the Docker containers for your application and its dependencies.
 1. Install Docker Compose: Install Docker Compose on your local machine. This is used to manage the relationships between the services in your application.
 1. Clone the Repository: Clone the repository containing the code for your application, the docker-compose.yml file, and the env_files.
-1. Build the Images: In the root directory of your cloned repository, use the command docker-compose build to build the images for the webapp, database and adminer services.
-1. Start the Services: In the root directory of your cloned repository, use the command docker-compose up to start the services defined in the docker-compose.yml.
+1. Build the Images: In the root directory of your cloned repository, use the command `docker-compose build` to build the images for the webapp, database and adminer services.
+1. Start the Services: In the root directory of your cloned repository, use the command `docker-compose up` to start the services defined in the docker-compose.yml.
 1. Verify the Deployment: Verify that your application is running by visiting http://localhost in your web browser. The adminer service is available at http://localhost:8080.
-1. Stop the Services: To stop the services use the command docker-compose down
+1. Stop the Services: To stop the services use the command `docker-compose down`. 
 
 Please note that the above steps are just an example and the commands may differ depending on the specific configurations.
 
@@ -39,7 +39,7 @@ Deploying this software architecture to Azure involves several steps, which can 
 1. Create a new AKS cluster: Log in to the Azure portal and create a new AKS cluster. This is where your Docker containers will be deployed.
 1. Create a new Azure Database for PostgreSQL: In the Azure portal, create a new Azure Database for PostgreSQL. This will be used as the backend for the database service.
 1. Create a new Azure Container Registry (ACR): In the Azure portal, create a new ACR. This will be used to store the container images for your application.
-1. Push container images to the ACR: Using the docker push command, push the container images for the webapp, database and adminer services to the ACR.
+1. Push container images to the ACR: Using the `docker push` command, push the container images for the webapp, database and adminer services to the ACR.
 1. Create a Kubernetes deployment and service: Use kubectl or Azure CLI to create a new deployment and service for the webapp and adminer services. This will create new pods for each service and will ensure that the pods are running and healthy.
 1. Create a secret for the env_file: Use kubectl or Azure CLI to create a new secret for the env_file and provide the connection strings and credentials for the Azure Database for PostgreSQL.
 1. Create an Azure Load Balancer: Create a new Azure Load Balancer and configure it to route traffic to the webapp service. This will ensure that traffic is distributed evenly across all pods running in the service.
