@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
     <meta charset="utf-8">
@@ -27,45 +27,26 @@
 
     <!-- Navigationsleiste -->
     <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
-        <div class="container"><a href="http://localhost" title="Startseite Bikerental">
-            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-<lottie-player src="https://assets7.lottiefiles.com/packages/lf20_aai4k5ba.json"  background="transparent"  speed="1"  style="width: 100px; height: 100px;" hover   ></lottie-player><a class="navbar-brand" id="logo" href="http://localhost">BikeRental</a></a><button
-                data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span
+        <div class="container"><a href="/" title="Startseite Bikerental">
+                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_aai4k5ba.json"
+                    background="transparent" speed="1" style="width: 100px; height: 100px;" hover></lottie-player><a
+                    class="navbar-brand" id="logo" href="/">BikeRental</a>
+            </a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span
                     class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav me-auto">
 
-
-
-
-
-
-
-
-
-
                     {% if current_user.has_role('bike-manager') %}
                     <li class="nav-item"><a class="nav-link" href="/bike-management">Bike-Management</a></li>
                     {% endif %}
-                    
-                    
-                    
+
                     {% if current_user.has_role('user-manager') %}
                     <li class="nav-item"><a class="nav-link" href="/user-management">User-Management</a></li>
                     {% endif %}
-                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false"
-                            data-bs-toggle="dropdown" href="#">Dropdown </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">First Item</a>
-                            <a class="dropdown-item" href="#">Second Item</a>
-                            <a class="dropdown-item" href="#">Third Item</a></div>
-                    </li>
-
-
                     {% if current_user.is_authenticated %}
-                </ul><span class="navbar-text actions"><a
-                    class="btn btn-link" role="button" href="/change">Passwort ändern</a><a class="btn btn-light action-button" role="button"
-                        href="/logout">Logout</a></span>
+                </ul><span class="navbar-text actions"><a class="btn btn-link" role="button" href="/change">Passwort
+                        ändern</a><a class="btn btn-light action-button" role="button" href="/logout">Logout</a></span>
                 {% else %}
                 </ul><span class="navbar-text actions"> <a class="login" href="/login">Log In</a><a
                         class="btn btn-light action-button" role="button" href="/register">Registrieren</a></span>
@@ -73,55 +54,6 @@
 
             </div>
         </div>
-
-
-
-
-
-
-        <script>
-
-                const check=document.getElementById("check")
-
-                // erstelle Variable Darmode, wenn diese noch nicht existiert
-                if (localStorage.getItem('darkMode')===null){
-                    localStorage.setItem('darkMode', "false");
-                }
-                
-                //Funktion checkstatus wird nur einmal beim neuladen der Seite aufgerufen
-                //Entsprechend wird das Design angepasst
-                checkStatus()
-
-                function checkStatus() {
-                    if (localStorage.getItem('darkMode') === "true") {
-                        check.checked = true; //Checkbox auf true setzen
-
-                        document.documentElement.classList.toggle("dark-mode"); //Javascript um die Farben und Bilder zu invertieren
-                        document.querySelectorAll(".inverted").forEach((result) => {
-                        result.classList.toggle("invert");
-                    });
-                    }
-                }
-
-                function changeStatus(){                                //diese Funktion wird jedes mal beim Klicken ausgeführt
-                    document.documentElement.classList.toggle("dark-mode");
-                    document.querySelectorAll(".inverted").forEach((result) => {
-                     result.classList.toggle("invert");
-                    });
-
-                    if (localStorage.getItem('darkMode') === "true" && document.getElementById("check").checked == false){
-                        localStorage.setItem('darkMode', "false");
-
-                    }else if(localStorage.getItem('darkMode') === "false" && document.getElementById("check").checked == true){
-                        localStorage.setItem('darkMode', "true");
-                    }
-
-                }
-        </script>
-
-
-
-
     </nav>
 
     {% block content %}
@@ -135,30 +67,28 @@
                 <div class="col-sm-4 col-md-3 item">
                     <h3>Services</h3>
                     <ul>
-                        <li><a href="#">Für Kommunen</a></li>
-                        <li><a href="#">Für Kunden</a></li>
+                        <li style="color:#a0a0a0">Für Kommunen</li>
+                        <li style="color:#a0a0a0">Für Kunden</li>
                         <li></li>
                     </ul>
                 </div>
                 <div class="col-sm-4 col-md-3 item">
                     <h3>Infos</h3>
                     <ul>
-                        <li><a href="#">Das Unternehmen</a></li>
-                        <li><a href="#">Das Team</a></li>
-                        <li></li>
+                        <li style="color:#a0a0a0">Das Unternehmen</li>
+                        <li style="color:#a0a0a0">Das Team</li>
                     </ul>
                 </div>
                 <div class="col-sm-4 col-md-3 item">
                     <h3>Rechtliches</h3>
                     <ul>
-                        <li><a href="#">Impressum</a></li>
-                        <li><a href="#">Datenschutz</a></li>
-                        <li></li>
+                        <li style="color:#a0a0a0">Impressum</li>
+                        <li style="color:#a0a0a0">Datenschutz</li>
                     </ul>
                 </div>
                 <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i
                             class="icon ion-social-instagram"></i></a>
-                    <p class="copyright">Bike Rental© 2022</p>
+                    <p class="copyright">Bike Rental© 2023</p>
                 </div>
             </div>
         </div>
