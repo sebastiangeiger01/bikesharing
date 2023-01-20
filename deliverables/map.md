@@ -35,6 +35,8 @@ This code is a section of HTML that is used to display a map on a web page using
 
 In summary, this code uses the Leaflet library to create a map and display it on a web page. It sets the map's initial view based on passed coordinates, adds a tile layer using OpenStreetMap tiles, and adds a GeoJSON layer, which is used to display the location of bikes on the map with a link to the detail page of the bike.
 
+------------
+
 This code is a Flask web application that defines a route for the home page ("/") and a corresponding function, "home()". The function performs several tasks:
 
 1. Initialize variables: The function starts by initializing several variables, including geo, which is a string that will store a GeoJSON object. The other variables, such as min_x, max_x, min_y, and max_y, will be used later to calculate the map's starting view. The list_x and list_y lists will store the x and y coordinates of all bikes respectively.
@@ -47,4 +49,15 @@ This code is a Flask web application that defines a route for the home page ("/"
 This code is responsible for generating a GeoJSON object from the array of bikes and passing it along with other variables to the home page template. The home page template can then use these variables to display a map of the bikes with an appropriate starting view.
 
 #How is it used for BikeManagement?
+This code is a section of HTML and JavaScript that is used to create a web page with a map that displays a marker that can be dragged by the user. The map uses the Leaflet library to create the map and marker. The code does the following:
 
+1. <div id="map" style="width: 100%; height: 400px;"></div>: This line creates a div element that will be used to display the map. The id attribute is set to "map" which will be used to reference the div element in the JavaScript code. The style attribute sets the width and height of the div element.
+2. <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>: This line includes the Leaflet JavaScript library.
+3. var map = L.map('map').setView([49.988276672519454,8.228244781494142], 20);: This line creates a new map object and sets its initial view to the coordinates (49.988276672519454,8.228244781494142) and zoom level 20. It references the "map" div element created in the previous step.
+4. L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors' }).addTo(map);: This line adds a tile layer to the map, using the OpenStreetMap tiles. It also adds an attribution link to OpenStreetMap.
+5. var marker = L.marker([49.988276672519454,8.228244781494142]).addTo(map);: This line creates a new marker object and sets its position to the coordinates (49.988276672519454,8.228244781494142). It also adds the marker to the map.
+6. marker.on('drag', function (event) { var coords = event.target.getLatLng(); document.getElementById("latitude").value = coords.lat; document.getElementById("longitude").value = coords.lng; });: This line sets an event listener on the marker that listens for the "drag" event. When the marker is dragged, the function updates the value of the elements with the id "latitude" and "longitude" with the marker's latitude and longitude respectively.
+7. map.on('mouseout', function (event) { event.stopPropagation(); }); : This line sets an event listener on the map that listens for the "mouseout" event. When the mouse moves out of the map container, the function stops the event from propagating.
+8. marker.dragging.enable();: This line enables the dragging of the marker.
+
+In summary, this code uses the Leaflet library to create a map and display it on a web page with a marker that can be dragged by the user. When the marker is dragged, it updates the latitude and longitude values in the text fields, and also prevents the marker from moving outside the map container.
