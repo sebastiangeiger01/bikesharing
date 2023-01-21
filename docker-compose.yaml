@@ -1,0 +1,36 @@
+version: '3'
+services:
+  webapp:
+    image: bikesharingcreg.azurecr.io/bike-sharing-webapp
+    build: ./webapp
+    restart: always
+    env_file:
+      - database.conf
+      - security.conf
+      - mail.conf
+    ports:
+      - 80:80
+    depends_on:
+      - database
+
+  database:
+    image: postgres
+    restart: always
+    volumes:
+      - data:/home/postgres:/var/lib/postgresql/data
+    env_file:
+      - database.conf
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  data:
+    driver: azure_file
+    driver_opts:
+      share_name: bikeshare
+      storage_account_name: bikestorageacchsmainz
+      storage_account_key: Dv4+4yCdNBqO+1sMPN9Pvk1L3cdTcR21EbkcVz+EUZUwIC5tEreb4JJnHwc++yr2/3+dTk1qEu/Y+AStpqZDBA==
