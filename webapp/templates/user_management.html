@@ -40,7 +40,7 @@
 
                       // Führe den Ajax-Code aus
                       jQuery.ajax({
-                        url: "http://localhost/user-management",
+                        url: "/user-management",
                         type: "PUT",
 
                         headers: {
@@ -98,7 +98,7 @@
 
                       // Führe den Ajax-Code aus
                       jQuery.ajax({
-                        url: "http://localhost/user-management",
+                        url: "/user-management",
                         type: "PUT",
                         headers: {
                           "X-CSRF-Token": "{{csrf_token()}}",
@@ -178,7 +178,7 @@
                   <script>
                     function deleteUser(id) {
                       jQuery.ajax({
-                        url: "http://localhost/user-management",
+                        url: "/user-management",
                         type: "DELETE",
                         headers: {
                           "X-CSRF-Token": "{{csrf_token()}}",
