@@ -1,4 +1,33 @@
 # Deployment
+Before starting any containers, you want to make sure everything is configured correctely. This involves database, mail and security configuration. If you use Docker Compose create the following three files:
+
+**database.conf**
+```
+POSTGRES_USER=admin
+POSTGRES_PASSWORD=example
+POSTGRES_HOST=database
+POSTGRES_PORT=5432
+POSTGRES_DB=postgres
+
+```
+**mail.conf**
+```
+MAIL_SERVER=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USE_TLS=true
+MAIL_USERNAME=noreply.bikerental@gmail.com
+MAIL_PASSWORD=rwfigoblrwefirkb
+SECURITY_EMAIL_SENDER=noreply.bikerental@gmail.com
+
+```
+**security.conf**
+```
+SECRET_KEY=pf9Wkove4IKEAXvy-cQkeDPhv9Cb3Ag-wyJILbq_dFw
+SECURITY_PASSWORD_SALT=146585145368132386173505678016728509634
+```
+Docker Compose will create environment variables containing these values. Alternatively you can create environment variables as you want. Note that the webapp container needs access to all environment variables, the database container only to the ones listet in database.conf. 
+
+Change the default admin password after setting up. 
 
 ## Local
 Deploying this software architecture locally involves several steps that use Docker and Docker Compose:
