@@ -156,6 +156,7 @@ The environment variables are as follows:
 * POSTGRES_HOST: This variable specifies the hostname or IP address of the database server.
 * POSTGRES_PORT: This variable specifies the port number that is used to connect to the database.
 * POSTGRES_DB: This variable specifies the name of the database to connect to.
+
 These environment variables are used by the Flask application and the PostgreSQL container to establish a connection to the database. For example, the Flask application uses these variables to construct a connection URI that specifies the database server, port, and authentication credentials. The PostgreSQL container uses these variables to initialize the database when it is started for the first time.
 
 ## mail.conf
@@ -167,12 +168,16 @@ The environment variables are as follows:
 * MAIL_USERNAME: This variable specifies the username that is used to authenticate with the email server.
 * MAIL_PASSWORD: This variable specifies the password that is used to authenticate with the email server.
 * SECURITY_EMAIL_SENDER: This variable specifies the email address that should be used as the sender of messages sent by the Flask application.
+
 These environment variables are used by the Flask application to configure the email server that it uses to send messages. For example, the Flask application uses these variables to specify the hostname, port, authentication credentials, and sender address for the email server. This allows the Flask application to send emails, such as password reset emails, to users of the application.
 
 ## security.conf
 This is an environment file that contains configuration settings for the Flask-Security-Too module, which is used to implement user authentication and authorization in the Flask application. The file defines two environment variables that are used to configure Flask-Security.
 The environment variables are as follows:
 * SECRET_KEY: This variable specifies a secret key that is used to secure the Flask application's session data. The session data is encrypted using this key, which helps to prevent session hijacking attacks.
+This is actually part of Flask - but is used by Flask-Security to sign all tokens. It is critical this is set to a strong value. For python3 consider using: `secrets.token_urlsafe()`
 * SECURITY_PASSWORD_SALT: This variable specifies a password salt that is used to hash and salt user passwords. The password salt is used to add additional entropy to the password hashing process, which helps to make it more difficult to crack hashed passwords.
+Specifies the HMAC salt. This is required for all schemes that are configured for double hashing. A good salt can be generated using: `secrets.SystemRandom().getrandbits(128)`.
+
 These environment variables are used by the Flask application to configure the Flask-Security module. For example, the Flask application uses these variables to securely store session data and to securely hash user passwords. This helps to protect the security and integrity of user data in the Flask application.
 
