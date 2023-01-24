@@ -1,5 +1,5 @@
 <!-- Navigationsleiste und Footer importieren -->
-{% extends 'base.html' %}
+{% extends 'base.jinja' %}
 {%block content%}
 <!-- Bike Management Section-->
 
@@ -42,7 +42,7 @@
                               {{ register_user_form.submit(class="btn btn-primary") }}
                            </div>
                            <p class="text-center text-muted mt-5 mb-0">Du hast schon einen Account? <a
-                                 href="http://localhost/login" class="fw-bold text-body"><u>Login</u></a></p>
+                                 href="/login" class="fw-bold text-body"><u>Login</u></a></p>
                            {{ register_user_form.hidden_tag() }}
                            {% if register_user_form.errors %}
                            <div class="alert alert-danger">
