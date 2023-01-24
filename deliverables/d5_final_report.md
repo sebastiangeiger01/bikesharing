@@ -3,17 +3,21 @@
 ## Deliverables
 ### [D1 Project Description](/deliverables/d1_project_description.md)
 ### [D2 User Stories](/deliverables/d2_user_stories.md)
-### [D3 System Architecture](/deliverables/d3_system_architecture.md)
+### [D3 System Architecture](/deliverables/d3_system_architecture.md) 
+*(authored by Sebastian)*
 
 ## Documentaion
-### [Deployment](/deliverables/deployment.md)
+### Backend
+**[Deployment](/deliverables/deployment.md)** *(authored by Sebastian)* <br>
 Instructions on how to deploy this web application locally, on AWS and on Azure. 
 
-### [API](/deliverables/API_Documentation.md)
+**[API](/deliverables/API_Documentation.md)** *(authored by Luke)* <br>
 Documentation for the usage of the API with examples in cURL and JavaScript. 
 
-### [Code](/deliverables/doc.md)
+**[Code](/deliverables/doc.md)** *(authored by Luke)* <br>
 Explanation of every files and functions purpose. 
 
-### [Security](/deliverables/security.md)
+**[Security](/deliverables/security.md)** *(authored by Luke)* <br>
 Security and authentication considerations. 
+
+### Frontend
