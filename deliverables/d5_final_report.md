@@ -1,10 +1,9 @@
 # Final Report
 
 ## Deliverables
-### [D1 Project Description](/deliverables/d1_project_description.md)
-### [D2 User Stories](/deliverables/d2_user_stories.md)
-### [D3 System Architecture](/deliverables/d3_system_architecture.md) 
-*(authored by Sebastian)*
+### [D1 Project Description](/deliverables/d1_project_description.md) <br><sup>*(authored by XXXXXXX)*<sup/>
+### [D2 User Stories](/deliverables/d2_user_stories.md) <br><sup>*(authored by XXXXXXX)*<sup/>
+### [D3 System Architecture](/deliverables/d3_system_architecture.md) <br><sup>*(authored by Sebastian)*<sup/>
 
 ## Documentaion
 ### Backend
