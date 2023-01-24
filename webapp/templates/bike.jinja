@@ -1,0 +1,147 @@
+
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+    integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+  <!-- Make sure you put this AFTER Leaflet's CSS -->
+  <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+    integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+  <link rel="stylesheet" href="static/assets/bootstrap/css/style1.css">
+</head>
+
+
+<!-- Navigationsleiste und Footer importieren -->
+{% extends 'base.jinja' %}
+{%block content%}
+
+<!-- Bike section-->
+<section class="py-5">
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="row gx-4 gx-lg-5 align-items-center">
+
+    <!-- Bild links-->
+      <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0 inverted"
+          style="box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1); border-radius: 5% 5% 5% 5% / 5% 5% 5% 5%;"
+          src="static/assets/img/Produktbild.png" alt="{{ bike.name }}" /></div>
+      
+      
+      <!-- Spalte rechts-->
+          <div class="col-md-6">
+        <div class="small mb-1">Bike-ID:{{ bike.id }}</div>
+        <h1 class="display-5 fw-bolder">{{ bike.name }}</h1>
+        <div class="fs-5 mb-5">
+          <span class="text-decoration-line-through">5,00 €</span>
+          <span>3,50 €</span></br></br>
+          <span>Adresse: <div id="address" style="font-size: smaller;"></div>
+          <!-- Script um Adresse anzuzeigen-->
+        <script>
+          // Rufe Nominatim-API auf, um Adresse zu erhalten
+          var url = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat={{ bike.y_coordinate }}&lon={{ bike.x_coordinate }}";
+          fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+              // Zeige Adresse an
+              document.getElementById("address").innerHTML = data.display_name;
+            });
+        </script>
+          </span>
+          <hr>
+          <blockquote class="blockquote" style="font-size: smaller;">Erlebe die Freiheit des Radfahrens mit unserem hochwertigen Fahrrad! Mit seinem leichten
+            Aluminiumrahmen und den robusten Reifen bist du für jedes Abenteuer gerüstet.</blockquote>
+
+        <!-- Buttongroup-->
+        {% if status == "rent" %}<button id="mieten" type="button" class="btn btn-primary btn-lg">Jetzt mieten</button>{% endif %}
+        {% if status == "return" %}<button id="rueckgabe" type="button" class="btn btn-primary btn-lg">Jetzt zurückgeben</button>{% endif %}
+        {% if status == "unavailable" %}Das Fahrrad ist leider nicht mehr verfügbar! Das tut uns leid!{% endif %}
+        </div>    
+
+
+    
+
+
+
+        <!------------------------------------------Mieten Button ------------------------------------------>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Script wenn Button gedrückt -->
+        <script>
+            $('#mieten').click(function (event) {
+              event.preventDefault();
+
+              jQuery.ajax({
+                url: "/bike{{ bike.id }}",
+                type: "POST",
+                headers: {
+                  "X-CSRF-Token": "{{csrf_token()}}",
+                    "Content-Type": "application/json; charset=utf-8",
+                }
+              })
+          .done(function(data, textStatus, jqXHR) {
+              console.log("HTTP Request Succeeded: " + jqXHR.status);
+              console.log(data);
+              location.reload();
+          })
+          .fail(function(jqXHR, textStatus, errorThrown) {
+              console.log("HTTP Request Failed");
+          })
+          .always(function() {
+              /* ... */
+          })
+          });
+        </script>
+
+
+
+        <!------------------------------------------Rückgabe Button ------------------------------------------>
+        <!-- Script wenn Button gedrückt -->
+        <script>
+          $('#rueckgabe').click(function (event) {
+            event.preventDefault();
+
+
+            jQuery.ajax({
+              url: "/bike{{ bike.id }}",
+              type: "PUT",
+              headers: {
+                  "X-CSRF-Token": "{{csrf_token()}}",
+                  "Content-Type": "application/json; charset=utf-8",
+                }
+              })
+        .done(function(data, textStatus, jqXHR) {
+            console.log("HTTP Request Succeeded: " + jqXHR.status);
+            console.log(data);
+            location.reload();
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            console.log("HTTP Request Failed");
+        })
+        .always(function() {
+            /* ... */
+        })
+        });
+      </script>
+
+
+        
+        <!-- Map-->
+        <div id="map" style="width: 100%; height: 250px; box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1); border-radius: 5% 5% 5% 5% / 5% 5% 5% 5%;" ></div>
+          <script>
+          var map = L.map('map').setView([{{ bike.y_coordinate }}, {{ bike.x_coordinate }}],19);
+          var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+          }).addTo(map);
+          var marker = L.marker([{{ bike.y_coordinate }}, {{ bike.x_coordinate }}]).addTo(map);
+        </script>
+       
+
+
+        
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+</div>
+{% endblock %}
+</body>
+
+</html>
