@@ -25,7 +25,9 @@ SECURITY_EMAIL_SENDER=noreply.bikerental@gmail.com
 SECRET_KEY=pf9Wkove4IKEAXvy-cQkeDPhv9Cb3Ag-wyJILbq_dFw
 SECURITY_PASSWORD_SALT=146585145368132386173505678016728509634
 ```
-Docker Compose will create environment variables containing these values. Alternatively you can create environment variables as you want. Note that the webapp container needs access to all environment variables, the database container only to the ones listet in database.conf. 
+Docker Compose will create environment variables containing these values. Alternatively you can create environment variables as you want. Note that the webapp container needs access to all environment variables, the database container only to the ones listet in database.conf.
+
+For more details for the environment variables and their function read [here](/deliverables/doc.md/#databaseconf). 
 
 Change the default admin password after setting up. 
 

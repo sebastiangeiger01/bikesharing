@@ -33,7 +33,7 @@ This is a Flask web application that provides functionality for managing a bike-
 
 Overall, this code provides the necessary functionality for a basic bike-sharing service. It allows users to view and rent bikes, and provides an administrative interface for managing users and bikes.
 
-## __init__.py
+## \_\_init\_\_.py
 The create_app function is used to create a Flask application instance and initialize its dependencies. This includes setting the application's configuration, initializing extensions such as csrf and mail, and setting up the database connection.
 
 The Flask application instance is created with flask_app = Flask(__name__). The __name__ variable is a built-in Python variable that is set to the name of the module that is currently being executed. This is used to determine the root path of the application, so that Flask can find other resources such as templates and static files.
