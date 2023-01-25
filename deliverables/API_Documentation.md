@@ -27,7 +27,7 @@ Content-Length: 52
 **Add Bike cURL**
 ```sh
 ## json add
-curl -X "POST" "http://localhost/bike-management" \
+curl -X "POST" "/bike-management" \
      -H 'X-CSRF-Token: Ijc4ZjFlZTI2NGYyNGY1N2JkMGJkMDJhMzk4ZTliZDM3YTA2NjhlOTUi.Y5GW6A.N9Yofk_vd3zVh2UKqqLjkSlwjQc' \
      -H 'Content-Type: application/json; charset=utf-8' \
      -H 'Cookie: session=.eJwljklqBDEMRe_idQiSB8nqyxSyBhICSajqXjW5ewwNWnzB-8OzHHnG9VFu9_MRb-X49HIr3pJILLOhDjUE0V4FdEXgREGTaD6tIzuEr-oCHVB4cLB1Nozp3ZWQqVKdPoFiEzuOcMgyDtDM2gYPdzX1FKdFu7bPmuhlD3lccb7WaJuCPaEvk84oK6bpVGIRmWiwabvOPO4_X_G9eZ6JEZV61p6Dl8O-qk1myPLGCkRbju3L6zDblivur-9XtdyQGPoc3OidgGFC_fsHFoJTIg.Y5GW6A.b4PVLItp7hTptzQZ2Uqd0_SAV3U' \
@@ -39,10 +39,10 @@ curl -X "POST" "http://localhost/bike-management" \
 ```
 **Add Bike JavaScript (jQuery)**
 ```javascript
-// json add (POST http://localhost/bike-management)
+// json add (POST /bike-management)
 
 jQuery.ajax({
-    url: "http://localhost/bike-management",
+    url: "/bike-management",
     type: "POST",
     headers: {
         "X-CSRF-Token": "Ijc4ZjFlZTI2NGYyNGY1N2JkMGJkMDJhMzk4ZTliZDM3YTA2NjhlOTUi.Y5GW6A.N9Yofk_vd3zVh2UKqqLjkSlwjQc",
@@ -89,7 +89,7 @@ Content-Length: 55
 **Get Token cURL**
 ```sh
 ## Login
-curl -X "POST" "http://localhost/login?include_auth_token=true" \
+curl -X "POST" "/login?include_auth_token=true" \
      -H 'Content-Type: application/json; charset=utf-8' \
      -d $'{
   "email": "admin@bikesharing.com",
@@ -99,10 +99,10 @@ curl -X "POST" "http://localhost/login?include_auth_token=true" \
 
 **Get Token JavaScript (jQuery)**
 ```javascript
-// Login (POST http://localhost/login)
+// Login (POST /login)
 
 jQuery.ajax({
-    url: "http://localhost/login?" + jQuery.param({
+    url: "/login?" + jQuery.param({
         "include_auth_token": "true",
     }),
     type: "POST",
@@ -173,7 +173,7 @@ Content-Length: 52
 **Add Bike URL parameter cURL**
 ```sh
 ## json add
-curl -X "POST" "http://localhost/bike-management?auth_token=WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU" \
+curl -X "POST" "/bike-management?auth_token=WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU" \
      -H 'Content-Type: application/json' \
      -d $'{
   "name": "gbike",
@@ -184,7 +184,7 @@ curl -X "POST" "http://localhost/bike-management?auth_token=WyI0ZmFhOTQ1MDY2ZWE0
 **Add Bike header cURL**
 ```sh
 ## json add
-curl -X "POST" "http://localhost/bike-management" \
+curl -X "POST" "/bike-management" \
      -H 'Content-Type: application/json' \
      -H 'Authentication-Token: WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU' \
      -d $'{
@@ -195,10 +195,10 @@ curl -X "POST" "http://localhost/bike-management" \
 ```
 **Add Bike URL parameter JavaScript (jQuery)**
 ```javascript
-// json add (POST http://localhost/bike-management)
+// json add (POST /bike-management)
 
 jQuery.ajax({
-    url: "http://localhost/bike-management?" + jQuery.param({
+    url: "/bike-management?" + jQuery.param({
         "auth_token": "WyI0ZmFhOTQ1MDY2ZWE0NjNmOGI4NzA1NjE1YmY2MDJmZCJd.Y4zrmw.gzQE1prXoNBEiFxDzaagGJ3UKtU",
     }),
     type: "POST",
@@ -225,10 +225,10 @@ jQuery.ajax({
 ```
 **Add Bike header JavaScript (jQuery)**
 ```javascript
-// json add (POST http://localhost/bike-management)
+// json add (POST /bike-management)
 
 jQuery.ajax({
-    url: "http://localhost/bike-management",
+    url: "/bike-management",
     type: "POST",
     headers: {
         "Content-Type": "application/json",
@@ -284,7 +284,7 @@ Content-Length: 40
 **cURL**
 ```sh
 ## Request Duplicate
-curl -X "POST" "http://localhost/register" \
+curl -X "POST" "/register" \
      -H 'Content-Type: application/json; charset=utf-8' \
      -d $'{
   "email": "t@l.co",
@@ -293,10 +293,10 @@ curl -X "POST" "http://localhost/register" \
 ```
 **JavaScript (jQuery)**
 ```javascript
-// Request Duplicate (POST http://localhost/register)
+// Request Duplicate (POST /register)
 
 jQuery.ajax({
-    url: "http://localhost/register",
+    url: "/register",
     type: "POST",
     headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -350,7 +350,7 @@ Content-Length: 83
 **cURL**
 ```sh
 ## change
-curl -X "POST" "http://localhost/change" \
+curl -X "POST" "/change" \
      -H 'Content-Type: application/json; charset=utf-8' \
      -d $'{
   "new_password": "admin123",
@@ -360,10 +360,10 @@ curl -X "POST" "http://localhost/change" \
 ```
 **JavaScript (jQuery)**
 ```javascript
-// change (POST http://localhost/change)
+// change (POST /change)
 
 jQuery.ajax({
-    url: "http://localhost/change",
+    url: "/change",
     type: "POST",
     headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -416,7 +416,7 @@ Content-Length: 15
 **cURL**
 ```sh
 ## delete
-curl -X "DELETE" "http://localhost/user-management" \
+curl -X "DELETE" "/user-management" \
      -H 'Content-Type: application/json' \
      -d $'{
   "user_id": "3"
@@ -424,10 +424,10 @@ curl -X "DELETE" "http://localhost/user-management" \
 ```
 **JavaScript (jQuery)**
 ```javascript
-// delete (DELETE http://localhost/user-management)
+// delete (DELETE /user-management)
 
 jQuery.ajax({
-    url: "http://localhost/user-management",
+    url: "/user-management",
     type: "DELETE",
     headers: {
         "Content-Type": "application/json",
@@ -480,7 +480,7 @@ Content-Length: 48
 **cURL**
 ```sh
 ## add role
-curl -X "PUT" "http://localhost/user-management" \
+curl -X "PUT" "/user-management" \
      -H 'Content-Type: application/json' \
      -d $'{
   "user_id": 4,
@@ -490,10 +490,10 @@ curl -X "PUT" "http://localhost/user-management" \
 ```
 **JavaScript (jQuery)**
 ```javascript
-// add role (PUT http://localhost/user-management)
+// add role (PUT /user-management)
 
 jQuery.ajax({
-    url: "http://localhost/user-management",
+    url: "/user-management",
     type: "PUT",
     headers: {
         "Content-Type": "application/json",
@@ -548,7 +548,7 @@ Content-Length: 51
 **cURL**
 ```sh
 ## remove role
-curl -X "PUT" "http://localhost/user-management" \
+curl -X "PUT" "/user-management" \
      -H 'Content-Type: application/json' \
      -d $'{
   "user_id": 3,
@@ -558,10 +558,10 @@ curl -X "PUT" "http://localhost/user-management" \
 ```
 **JavaScript (jQuery)**
 ```javascript
-// remove role (PUT http://localhost/user-management)
+// remove role (PUT /user-management)
 
 jQuery.ajax({
-    url: "http://localhost/user-management",
+    url: "/user-management",
     type: "PUT",
     headers: {
         "Content-Type": "application/json",
@@ -603,14 +603,14 @@ User-Agent: RapidAPI/4.0.0 (Macintosh; OS X/13.1.0) GCDHTTPRequest
 **cURL**
 ```sh
 ## get_all(User)
-curl "http://localhost/allusers"
+curl "/allusers"
 ```
 **JavaScript (jQuery)**
 ```javascript
-// get_all(User) (GET http://localhost/allusers)
+// get_all(User) (GET /allusers)
 
 jQuery.ajax({
-    url: "http://localhost/allusers",
+    url: "/allusers",
     type: "GET",
 })
 .done(function(data, textStatus, jqXHR) {
@@ -657,7 +657,7 @@ Content-Length: 52
 **cURL**
 ```sh
 ## json add
-curl -X "POST" "http://localhost/bike-management" \
+curl -X "POST" "/bike-management" \
      -H 'Content-Type: application/json' \
      -d $'{
   "name": "gbike",
@@ -667,10 +667,10 @@ curl -X "POST" "http://localhost/bike-management" \
 ```
 **JavaScript (jQuery)**
 ```javascript
-// json add (POST http://localhost/bike-management)
+// json add (POST /bike-management)
 
 jQuery.ajax({
-    url: "http://localhost/bike-management",
+    url: "/bike-management",
     type: "POST",
     headers: {
         "Content-Type": "application/json",
@@ -723,7 +723,7 @@ Content-Length: 8
 **cURL**
 ```sh
 ## json delete
-curl -X "DELETE" "http://localhost/bike-management" \
+curl -X "DELETE" "/bike-management" \
      -H 'Content-Type: application/json' \
      -d $'{
   "id": 3
@@ -731,10 +731,10 @@ curl -X "DELETE" "http://localhost/bike-management" \
 ```
 **JavaScript (jQuery)**
 ```javascript
-// json delete (DELETE http://localhost/bike-management)
+// json delete (DELETE /bike-management)
 
 jQuery.ajax({
-    url: "http://localhost/bike-management",
+    url: "/bike-management",
     type: "DELETE",
     headers: {
         "Content-Type": "application/json",
@@ -788,7 +788,7 @@ Content-Length: 59
 **cURL**
 ```sh
 ## json edit
-curl -X "PUT" "http://localhost/bike-management" \
+curl -X "PUT" "/bike-management" \
      -H 'Content-Type: application/json' \
      -d $'{
   "id": 1,
@@ -799,10 +799,10 @@ curl -X "PUT" "http://localhost/bike-management" \
 ```
 **JavaScript (jQuery)**
 ```javascript
-// json edit (PUT http://localhost/bike-management)
+// json edit (PUT /bike-management)
 
 jQuery.ajax({
-    url: "http://localhost/bike-management",
+    url: "/bike-management",
     type: "PUT",
     headers: {
         "Content-Type": "application/json",
@@ -845,14 +845,14 @@ User-Agent: RapidAPI/4.0.0 (Macintosh; OS X/13.1.0) GCDHTTPRequest
 **cURL**
 ```sh
 ## get_all(Bike)
-curl "http://localhost/allbikes"
+curl "/allbikes"
 ```
 **JavaScript (jQuery)**
 ```javascript
-// get_all(Bike) (GET http://localhost/allusers)
+// get_all(Bike) (GET /allusers)
 
 jQuery.ajax({
-    url: "http://localhost/allbikes",
+    url: "/allbikes",
     type: "GET",
 })
 .done(function(data, textStatus, jqXHR) {
@@ -887,14 +887,14 @@ Content-Length: 0
 **cURL**
 ```sh
 ## start
-curl -X "POST" "http://localhost/bike1"
+curl -X "POST" "/bike1"
 ```
 **JavaScript (jQuery)**
 ```javascript
-// start (POST http://localhost/bike1)
+// start (POST /bike1)
 
 jQuery.ajax({
-    url: "http://localhost/bike1",
+    url: "/bike1",
     type: "POST",
 })
 .done(function(data, textStatus, jqXHR) {
@@ -928,14 +928,14 @@ Content-Length: 0
 **cURL**
 ```sh
 ## end
-curl -X "PUT" "http://localhost/bike1" 
+curl -X "PUT" "/bike1" 
 ```
 **JavaScript (jQuery)**
 ```javascript
-// end (PUT http://localhost/bike1)
+// end (PUT /bike1)
 
 jQuery.ajax({
-    url: "http://localhost/bike1",
+    url: "/bike1",
     type: "PUT",
 })
 .done(function(data, textStatus, jqXHR) {
@@ -968,14 +968,14 @@ User-Agent: RapidAPI/4.0.0 (Macintosh; OS X/13.1.0) GCDHTTPRequest
 **cURL**
 ```sh
 ## get_all(Rides)
-curl "http://localhost/allrides"
+curl "/allrides"
 ```
 **JavaScript (jQuery)**
 ```javascript
-// get_all(Rides) (GET http://localhost/allrides)
+// get_all(Rides) (GET /allrides)
 
 jQuery.ajax({
-    url: "http://localhost/allrides",
+    url: "/allrides",
     type: "GET",
 })
 .done(function(data, textStatus, jqXHR) {

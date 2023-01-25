@@ -10,7 +10,7 @@
 
 
 <!-- Navigationsleiste und Footer importieren -->
-{% extends 'base.html' %}
+{% extends 'base.jinja' %}
 {%block content%}
 
 <!-- Bike section-->
@@ -67,7 +67,7 @@
               event.preventDefault();
 
               jQuery.ajax({
-                url: "http://localhost/bike{{ bike.id }}",
+                url: "/bike{{ bike.id }}",
                 type: "POST",
                 headers: {
                   "X-CSRF-Token": "{{csrf_token()}}",
@@ -98,7 +98,7 @@
 
 
             jQuery.ajax({
-              url: "http://localhost/bike{{ bike.id }}",
+              url: "/bike{{ bike.id }}",
               type: "PUT",
               headers: {
                   "X-CSRF-Token": "{{csrf_token()}}",

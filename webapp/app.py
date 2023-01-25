@@ -53,7 +53,7 @@ def home():
         max_x=max(list_x)
         max_y=max(list_y)
 
-    return render_template('home.html', geo=geo, min_y=min_y, min_x=min_x, max_y=max_y, max_x=max_x)
+    return render_template('home.jinja', geo=geo, min_y=min_y, min_x=min_x, max_y=max_y, max_x=max_x)
 
 # JSON with all bikes (id, name, x, y)
 @app.route("/allbikes")
@@ -93,7 +93,7 @@ def bike(id):
         bike = get_instance(Bike, id)
         if bike is None:
             return redirect('/')
-        return render_template('bike.html', bike=bike, status=status)
+        return render_template('bike.jinja', bike=bike, status=status)
 
     # time format: 2004-10-19 10:23:54
     if request.method == 'POST':
@@ -118,7 +118,7 @@ def bike(id):
 def bike_management(operation = None):
     if request.method == 'GET':
         bikes = get_all(Bike)
-        return render_template('bike_management.html', bikes=bikes)
+        return render_template('bike_management.jinja', bikes=bikes)
 
     if 'application/json' in request.content_type:
         bike = request.get_json()
@@ -146,7 +146,7 @@ def bike_management(operation = None):
 def user_management(operation = None):
     if request.method == 'GET':
         users = get_all(User)
-        return render_template('user_management.html', users=users)
+        return render_template('user_management.jinja', users=users)
 
     if 'application/json' in request.content_type:
         roles_users = request.get_json()

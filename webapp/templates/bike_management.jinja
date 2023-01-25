@@ -1,5 +1,5 @@
 <!-- Navigationsleiste und Footer importieren -->
-{% extends 'base.html' %}
+{% extends 'base.jinja' %}
 {%block content%}
 <!-- Bike Management Section-->
 
@@ -87,7 +87,7 @@
                       // Führe den Ajax-Code aus
                       jQuery.ajax({
 
-                        url: "http://localhost/bike-management",
+                        url: "/bike-management",
                         type: "POST",
                         headers: {
                           "X-CSRF-Token": "{{csrf_token()}}",
@@ -148,7 +148,7 @@
                       // Führe den Ajax-Code aus
                       jQuery.ajax({
 
-                        url: "http://localhost/bike-management",
+                        url: "/bike-management",
                         type: "PUT",
                         headers: {
                           "X-CSRF-Token": "{{csrf_token()}}",
@@ -230,7 +230,7 @@
                   <script>
                     function deleteBike(id) {
                       jQuery.ajax({
-                        url: "http://localhost/bike-management",
+                        url: "/bike-management",
                         type: "DELETE",
                         headers: {
                           "X-CSRF-Token": "{{csrf_token()}}",
