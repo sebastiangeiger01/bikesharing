@@ -11,8 +11,6 @@ After the tip was passed to the backend, the timestamps were set in the backend 
 
 
 ```javascript
-@@ -910,13 +896,6 @@ curl -X "POST" "http://localhost/bike1" \
-@@ -910,13 +896,6 @@ curl -X "POST" "http://localhost/bike1" \
 jQuery.ajax({
     url: "http://localhost/bike1",
     type: "POST",
