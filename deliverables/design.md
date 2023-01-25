@@ -48,7 +48,7 @@ The following image shows the difference between pure invert and invert with Hue
 
 It can be seen that the colors remain more color tinged. The image retains its blue tint (although slightly darker than before) and the green button remains almost unchanged, while with the pure invert filter it appears red. 
 
-The dark mode function was removed in the final release due to a small bug. However, it is planned to include it in the project again in the future. 
+> Note: The dark mode function was removed in the final release due to a small bug. However, it is planned to include it in the project again in the future. 
 
 ### CSS Filter Effects 
 CSS Filter Effects are method for applying filter effects using the Filter property to elements that correspond to the filters available in SVG. Filter functions include blur, brightness, contrast, drop shadow, grayscale, hue rotation, invert, opacity, sepia, and saturation. These methods are comparatively new. In order for the darkmode to work safely, care was taken beforehand to ensure compatibility of different browsers. The website https://caniuse.com/ offers a good overview of the compatibility of common web browsers.
