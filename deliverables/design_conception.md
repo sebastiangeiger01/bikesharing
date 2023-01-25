@@ -19,6 +19,7 @@ Since BikeSharing is an environmentally friendly way to travel from A to B, colo
 
 Due to this, a predominantly white background was chosen, paired with turquoise (mixture between blue and green) and blue elements.
 The following color palette shows which colors were mainly used:
+![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/ColorScheme.png)
 
 
 ## Bootstrap
