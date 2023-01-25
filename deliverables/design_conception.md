@@ -12,10 +12,10 @@ The first image shows the planned home page. The first approximately 50 percent 
 
 
 The following wireframe shows the "Shop Page" of a single bike. On the left side there is space for a picture of the bike. On the right side, there is information about the bike, with the possibility to rent it directly by clicking a button. Below is a map, so that the user can see directly where this one bike is located. 
-![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/bike.png)
+![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/wireframes/bike.png)
 
 The last wireframe shows our so-called "dashboard". This is the administration area, which can only be accessed with the appropriate rights. We decided to design this dashboard so that the administrators do not have to work with the database management systems every time, but can also work directly from the page. In total, there are two pages that can be found in the dashboard. One page is for creating, deleting and editing users, the other page equivalent to this for bikes.
-![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/BikeManager-UserManager.png)
+![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/wireframes/BikeManager-UserManager.png)
 ## Color Scheme
 It was intended from the beginning to use comparatively few colors on the website. The homepage should make a clean and user-friendly impression. For this, gaudy colors and too many animations were dispensed with. 
 Since BikeSharing is an environmentally friendly way to travel from A to B, colors that can be found in nature were the most suitable. The color green is associated with nature and is considered the "color of flora". It is also associated with concepts such as clarity, freshness, openness and awareness. The color blue is associated with purity, relaxation, non-confrontational, organizing and controlling.
