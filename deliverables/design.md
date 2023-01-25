@@ -5,7 +5,7 @@ The Base.html can contain elements such as a header, footer, and a main content 
 The Base.html opens the HTML document with the corresponding doctype and the complete head area and contains all necessary links to different stylesheets and a link to the favicon. 
 
 The body area of the Base.html also contains the role-based main menu and the footer.  Any page that now inherits from Base.html will be rendered between the menu and the footer. So these two big contents don't have to be created every time.
-![alt text](http://url/to/vererbung_frontend.png)
+![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/vererbung_frontend.png)
 
 ## Rollenbasiertes Hauptmenü
 The main menu of the website is role-based. This means that the content changes whenever the user's role is different. 
