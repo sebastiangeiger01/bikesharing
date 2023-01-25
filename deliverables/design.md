@@ -46,6 +46,8 @@ The two filter properties are applied in combination, which first inverts the el
 
 The following image shows the difference between pure invert and invert with Hue-rotate(180).
 
+![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/huerotate.png)
+
 It can be seen that the colors remain more color tinged. The image retains its blue tint (although slightly darker than before) and the green button remains almost unchanged, while with the pure invert filter it appears red. 
 
 > Note: The dark mode function was removed in the final release due to a small bug. However, it is planned to include it in the project again in the future. 
