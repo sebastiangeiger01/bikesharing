@@ -1,4 +1,4 @@
-# Rollenbasiertes Hauptmenü
+# Rolebased Mainmenu
 The main menu of the website is role-based. This means that the content changes whenever the user's role is different. 
 At the beginning, when the user is not logged in, the main menu appears rather empty. There are only two buttons with the possibility to register or login.  
 As soon as the user is logged in, these links are swapped. The user now has the possibility to change his password or to log out at the same place. 
@@ -40,7 +40,7 @@ The entries in the dashboard can cause errors. For example, if the admin enters 
 In this way, the UX in the dashboard could be increased through error messages even without a large query and error handling on the part of the backend.
 
 
-# Umsetzung Darkmode
+# Darkmode implementation
 Normally for the light design (Light mode) and the dark mode different CSS classes are used. Depending on the need, either the one CSS class is loaded, which contains the light design, or just the one with the dark design. This assumes that the function was already planned in advance, because a subsequent change of all classes is very labor intensive and takes a lot of time.   
 The idea with the darkmode within the BikeRental project came spontaneously. Since it is a very small site with relatively few design elements, a different way of implementation was used.  
 First, a checkbox was placed in the main menu. This was designed as a toggle to make the design more appealing. When the toggle is activated, a boolean and local variable is set directly in the browser. If this variable is true, so the toggle is activated, then all color ads are inverted. However, we did not choose an implementation that simply maps the negative color value, but a combination of inverting the colors and a so called HUE rotation by 180 degrees:
@@ -65,14 +65,14 @@ It can be seen that the colors remain more color tinged. The image retains its b
 ## CSS Filter Effects 
 CSS Filter Effects are method for applying filter effects using the Filter property to elements that correspond to the filters available in SVG. Filter functions include blur, brightness, contrast, drop shadow, grayscale, hue rotation, invert, opacity, sepia, and saturation. These methods are comparatively new. In order for the darkmode to work safely, care was taken beforehand to ensure compatibility of different browsers. The website https://caniuse.com/ offers a good overview of the compatibility of common web browsers.
 Overall, all browsers cover 97.98% of all functions. This seems to be sufficient to be able to include the function without hesitation. 
-
+![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/css-filter-effects.png)
 # Lottie
 Lottie is a framework that enables animations created in Adobe After Effects to be rendered to mobile devices and the web. The animations are saved as JSON files called "Lottie files". The advantages of Lottie are that the animations are very smooth and responsive, and they take up little memory because they are rendered on the user's device. 
 Lottie is used in the menu. The Lottie file always links to the start page and starts an animation on mouseover.   
 In addition, there are Lottie animations on the start page, which fulfills purely optical purposes.  
 The Lottie JSON files, as well as the Javascript for the player, are loaded via a CDN. In the future, however, the files will be integrated locally. 
 
-# Die Shopseite
+# Bike Rental Page
 The Bike.html is next to the homepage the most important page for the customer. Therefore, special attention had to be paid to a user-friendly design here as well. 
 On the left side, as already in the wireframe, there is a large picture of the bike. This is currently still statically integrated and is not generated dynamically. This should change in the future. To the right of the image is more information about the bike. The name of the bike and the address are generated dynamically. The price and the description of the bike are currently not yet stored in the database and are also created statically - this will also change in the future. 
 Below the description and above the map, depending on the status of the availability of the bike, there is a button to rent the bike, to return it or an information text that the bike is currently rented and cannot be rented. 
