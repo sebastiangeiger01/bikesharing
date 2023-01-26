@@ -49,7 +49,7 @@ This not only saves storage space on the web server, but also ensures that the d
 Other data coming from the database or the backend are specified in a shortcode. This is surrounded by two braces and is provided by the backend. This code snippet is then inserted in the frontend. When a user calls the page, this code snippet renders to the corresponding data that the backend passes with it.
 
 
-## Vererbung mittels Base.html
+## Inheritance of Base.html
 The Base Template is an important concept in web development with Flask. It is a template that defines the basic structure and layout of a web page and serves as a base for other templates.  
 The Base.html can contain elements such as a header, footer, and a main content area. It is typically used by means of the extends directive in other templates to indicate that the new template should inherit from the base template.
 The Base.html opens the HTML document with the corresponding doctype and the complete head area and contains all necessary links to different stylesheets and a link to the favicon. 
