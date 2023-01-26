@@ -2,7 +2,7 @@
 
 In the section that now follows, we consider the risks that may be associated with our project. The risks are presented in a risk matrix and explained subsequently.
 
-![system architecture](/deliverables/Risiken.JPG)
+![system architecture](/deliverables/Risiken.png)
 
 ##Risk 1: Time management
 At first, we established a set timetable using our MVG approach. This initiative aimed to provide a product with the least amount of work possible. The buyer can afterwards add all other extensions. As a result, the idea of "time management" is neither highly probable nor highly impactful.

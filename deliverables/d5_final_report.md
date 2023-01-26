@@ -34,5 +34,8 @@ A short insight into our chosen project model
 **[Cost estimate](/deliverables/Cost_estimate.md)** *(authored by Tim)* <br>
 A theoretical overview of our costs
 
+**[Risk Assessment](/deliverables/Risk_Assessment.md)** *(authored by Tim)* <br>
+An overview of common risks in a software project
+
 
 
