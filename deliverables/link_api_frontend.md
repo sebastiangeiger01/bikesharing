@@ -25,3 +25,16 @@ jQuery.ajax({
 .done(function(data, textStatus, jqXHR) {
     console.log("HTTP Request Succeeded: " + jqXHR.status);
 ```
+```javascript
+jQuery.ajax({
+    url: "http://localhost/bike1",
+    type: "POST",
+    headers: {
+        "Content-Type": "application/json; charset=utf-8",
+    },
+    contentType: "application/json",
+})
+.done(function(data, textStatus, jqXHR) {
+    console.log("HTTP Request Succeeded: " + jqXHR.status);
+```
+As you can see, the part with the data has disappeared and it is now no longer possible for the user to manipulate the times locally and thus rent a bike cheaper without permission
