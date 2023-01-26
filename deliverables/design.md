@@ -37,6 +37,7 @@ The entries in the dashboard can cause errors. For example, if the admin enters 
 /* ... */
 });
 ```
+In this way, the UX in the dashboard could be increased through error messages even without a large query and error handling on the part of the backend.
 
 
 # Umsetzung Darkmode
