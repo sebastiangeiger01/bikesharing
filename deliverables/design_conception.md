@@ -24,13 +24,6 @@ Due to this, a predominantly white background was chosen, paired with turquoise 
 The following color palette shows which colors were mainly used:
 ![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/ColorScheme.png)
 
-# Vererbung mittels Base.html
-The Base Template is an important concept in web development with Flask. It is a template that defines the basic structure and layout of a web page and serves as a base for other templates.  
-The Base.html can contain elements such as a header, footer, and a main content area. It is typically used by means of the extends directive in other templates to indicate that the new template should inherit from the base template.
-The Base.html opens the HTML document with the corresponding doctype and the complete head area and contains all necessary links to different stylesheets and a link to the favicon. 
-
-The body area of the Base.html also contains the role-based main menu and the footer.  Any page that now inherits from Base.html will be rendered between the menu and the footer. So these two big contents don't have to be created every time.
-![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/vererbung_frontend.png)
 
 
 # Bootstrap
@@ -47,6 +40,14 @@ Another reason why websites should be built dynamically is that the maintenance 
 This not only saves storage space on the web server, but also ensures that the data is always available in a consistent manner. 
 Other data coming from the database or the backend are specified in a shortcode. This is surrounded by two braces and is provided by the backend. This code snippet is then inserted in the frontend. When a user calls the page, this code snippet renders to the corresponding data that the backend passes with it.
 
+
+## Vererbung mittels Base.html
+The Base Template is an important concept in web development with Flask. It is a template that defines the basic structure and layout of a web page and serves as a base for other templates.  
+The Base.html can contain elements such as a header, footer, and a main content area. It is typically used by means of the extends directive in other templates to indicate that the new template should inherit from the base template.
+The Base.html opens the HTML document with the corresponding doctype and the complete head area and contains all necessary links to different stylesheets and a link to the favicon. 
+
+The body area of the Base.html also contains the role-based main menu and the footer.  Any page that now inherits from Base.html will be rendered between the menu and the footer. So these two big contents don't have to be created every time.
+![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/vererbung_frontend.png)
 # Leaflet
 Leaflet is an open source JavaScript library for creating interactive maps on the web.
 Leaflet provides a variety of features and tools that allow developers to customize and design maps, add markers and pop-ups, and more. It is also very easy to integrate and compatible with most modern web browsers and devices.  
