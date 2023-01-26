@@ -104,4 +104,4 @@ Deploying this software architecture to the cloud involves several steps, which 
 1. Deploy your application: Use the ECS console to deploy your application. This will create new tasks for your services, start the tasks, and register them with the load balancer.
 1. Verify the deployment: Verify that your application is running and accessible by visiting the load balancer endpoint.
 
-Please note that this is just an example and these steps were not implemented by us, they are just based on initial research done by us.
+Please note that the AWS deployment manual was not yet implemented by us, ist is just based on initial research done by us.
