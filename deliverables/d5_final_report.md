@@ -20,11 +20,4 @@ Explanation of every files and functions purpose.
 Security and authentication considerations. 
 
 ### Frontend
-**[Conception](/deliverables/design_conception.md)** *(authored by Jonas)* <br>
-Collection of ideas and planning of the design
 
-**[Design](/deliverables/design.md)** *(authored by Jonas)* <br>
-Implementation of the design drafts and adjustments
-
-**[Linking with backend API](/deliverables/link_api_frontend.md)** *(authored by Jonas)* <br>
-Implementation of the API provided by the backend
