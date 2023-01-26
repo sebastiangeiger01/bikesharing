@@ -24,18 +24,18 @@ The API for the complete dashboard was provided by Backend Team.
 The entries in the dashboard can cause errors. For example, if the admin enters invalid values for the coordinates or leaves a field blank. Here it would have gone beyond the scope of the project if the backend would have had to catch error cases, which are then returned via the frontend. In order to still inform the admin about success or failure when editing the data, the various jQuery functions provided by the backend were used. Depending on the success, the functions .done or .fail were called, which rendered a standard alter window with the corresponding message.
 ```javascript
 .done(function (data, textStatus, jqXHR) {
-                          console.log("HTTP Request Succeeded: " + jqXHR.status);
-                          console.log(data);
-                          alert('Rolle wurde zugewiesen');
-                          location.reload();
-                        })
-                        .fail(function (jqXHR, textStatus, errorThrown) {
-                          console.log("HTTP Request Failed");
-                          alert('Etwas ist schief gelaufen');
-                        })
-                        .always(function () {
-                          /* ... */
-                        });
+  console.log("HTTP Request Succeeded: " + jqXHR.status);
+  console.log(data);
+  alert('Rolle wurde zugewiesen');
+  location.reload();
+})
+.fail(function (jqXHR, textStatus, errorThrown) {
+  console.log("HTTP Request Failed");
+  alert('Etwas ist schief gelaufen');
+})
+.always(function () {
+/* ... */
+});
 ```
 
 
