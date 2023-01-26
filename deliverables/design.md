@@ -20,6 +20,24 @@ For this purpose, two forms were added to the user management, which can be used
 Below these forms there is an automatically generated table with all necessary information about the users. In the last column there is also a red button with a trash can icon, which can be used to easily remove users.  
 The bike management page has a similar structure. However, above it there is a map with two read-only fields with X and Y coordinates. During development, we noticed that it is very complicated to add bikes if you don't have the exact coordinates of the bike. In order to not have to rely on external tools from the Internet that calculate a location into the corresponding coordinates, such a function was implemented directly. By dragging the marker on the map, the data in the coordinate fields are updated. So the admin has the possibility to easily find out the coordinates for new bikes. 
 The API for the complete dashboard was provided by Backend Team. 
+## Errorhandling
+The entries in the dashboard can cause errors. For example, if the admin enters invalid values for the coordinates or leaves a field blank. Here it would have gone beyond the scope of the project if the backend would have had to catch error cases, which are then returned via the frontend. In order to still inform the admin about success or failure when editing the data, the various jQuery functions provided by the backend were used. Depending on the success, the functions .done or .fail were called, which rendered a standard alter window with the corresponding message.
+```javascript
+.done(function (data, textStatus, jqXHR) {
+                          console.log("HTTP Request Succeeded: " + jqXHR.status);
+                          console.log(data);
+                          alert('Rolle wurde zugewiesen');
+                          location.reload();
+                        })
+                        .fail(function (jqXHR, textStatus, errorThrown) {
+                          console.log("HTTP Request Failed");
+                          alert('Etwas ist schief gelaufen');
+                        })
+                        .always(function () {
+                          /* ... */
+                        });
+```
+
 
 # Umsetzung Darkmode
 Normally for the light design (Light mode) and the dark mode different CSS classes are used. Depending on the need, either the one CSS class is loaded, which contains the light design, or just the one with the dark design. This assumes that the function was already planned in advance, because a subsequent change of all classes is very labor intensive and takes a lot of time.   
