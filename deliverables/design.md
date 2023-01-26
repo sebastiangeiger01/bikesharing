@@ -1,5 +1,12 @@
+# Definition User Interface (UI)
+The focus of user interface design is on the visual design of digital applications. A good user interface is by no means just visually high-quality design; in addition to the design, the goal of the application and the brand message must be conveyed via the visual expression of websites.
+The user interface is the element through which users interact with an interactive application. This interaction must be efficient and effective, which in turn can only be achieved through intuitive usability. For a user interface to develop its full potential, it must also be visually appealing. If we take the example of the large number of touchpoints mentioned above, the individual interfaces must be designed consistently on the various devices.
 
-## Vererbung mittels Base.html
+# Definition User Experience (UX)
+The focus of user experience design is on creating experiences. A successful UX is composed of various factors, for example, in addition to usability, the feeling that arises before, during and after the use of an interactive application is relevant.
+A good user experience design satisfies people's context of use regardless of the communication channel or device used. In addition, it is important that a brand has a consistent appearance and communication style. 
+
+# Vererbung mittels Base.html
 The Base Template is an important concept in web development with Flask. It is a template that defines the basic structure and layout of a web page and serves as a base for other templates.  
 The Base.html can contain elements such as a header, footer, and a main content area. It is typically used by means of the extends directive in other templates to indicate that the new template should inherit from the base template.
 The Base.html opens the HTML document with the corresponding doctype and the complete head area and contains all necessary links to different stylesheets and a link to the favicon. 
@@ -7,7 +14,7 @@ The Base.html opens the HTML document with the corresponding doctype and the com
 The body area of the Base.html also contains the role-based main menu and the footer.  Any page that now inherits from Base.html will be rendered between the menu and the footer. So these two big contents don't have to be created every time.
 ![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/vererbung_frontend.png)
 
-## Rollenbasiertes Hauptmenü
+# Rollenbasiertes Hauptmenü
 The main menu of the website is role-based. This means that the content changes whenever the user's role is different. 
 At the beginning, when the user is not logged in, the main menu appears rather empty. There are only two buttons with the possibility to register or login.  
 As soon as the user is logged in, these links are swapped. The user now has the possibility to change his password or to log out at the same place. 
@@ -20,9 +27,9 @@ The following shortcodes were used to query the appropriate logic to determine i
 
 {% if current_user.is_authenticated %} 
 ```
-## Responsive Design
+# Responsive Design
 The website was created directly responsive, using the Bootstrap framework. Responsive design refers to the ability of websites to automatically adapt to the size and aspect ratio of the screen on which they are displayed. This is important as more and more people are accessing websites through different devices and screen sizes, and it is important that the website looks good and is usable on all devices. 
-## Dashboard
+# Dashboard
 Since we decided to also implement a backend for administrators, a backend with a corresponding user interface was also created. This has the advantage that it is not necessary to work directly on database systems or other admin tools, but directly from the website. The admin panel is accessible with appropriate rights. The logged in admin has two additional entries in the main menu, which he can use to access either the user management or the bike management. 
 The interface for administrators should be kept simple. The goal was to map the most important functions directly so that each function can be performed without scrolling or additional navigation on the page. 
 For this purpose, two forms were added to the user management, which can be used to create and edit new users. 
@@ -30,7 +37,7 @@ Below these forms there is an automatically generated table with all necessary i
 The bike management page has a similar structure. However, above it there is a map with two read-only fields with X and Y coordinates. During development, we noticed that it is very complicated to add bikes if you don't have the exact coordinates of the bike. In order to not have to rely on external tools from the Internet that calculate a location into the corresponding coordinates, such a function was implemented directly. By dragging the marker on the map, the data in the coordinate fields are updated. So the admin has the possibility to easily find out the coordinates for new bikes. 
 The API for the complete dashboard was provided by Backend Team. 
 
-## Umsetzung Darkmode
+# Umsetzung Darkmode
 Normally for the light design (Light mode) and the dark mode different CSS classes are used. Depending on the need, either the one CSS class is loaded, which contains the light design, or just the one with the dark design. This assumes that the function was already planned in advance, because a subsequent change of all classes is very labor intensive and takes a lot of time.   
 The idea with the darkmode within the BikeRental project came spontaneously. Since it is a very small site with relatively few design elements, a different way of implementation was used.  
 First, a checkbox was placed in the main menu. This was designed as a toggle to make the design more appealing. When the toggle is activated, a boolean and local variable is set directly in the browser. If this variable is true, so the toggle is activated, then all color ads are inverted. However, we did not choose an implementation that simply maps the negative color value, but a combination of inverting the colors and a so called HUE rotation by 180 degrees:
@@ -52,17 +59,17 @@ It can be seen that the colors remain more color tinged. The image retains its b
 
 > Note: The dark mode function was removed in the final release due to a small bug. However, it is planned to include it in the project again in the future. 
 
-### CSS Filter Effects 
+## CSS Filter Effects 
 CSS Filter Effects are method for applying filter effects using the Filter property to elements that correspond to the filters available in SVG. Filter functions include blur, brightness, contrast, drop shadow, grayscale, hue rotation, invert, opacity, sepia, and saturation. These methods are comparatively new. In order for the darkmode to work safely, care was taken beforehand to ensure compatibility of different browsers. The website https://caniuse.com/ offers a good overview of the compatibility of common web browsers.
 Overall, all browsers cover 97.98% of all functions. This seems to be sufficient to be able to include the function without hesitation. 
 
-## Lottie
+# Lottie
 Lottie is a framework that enables animations created in Adobe After Effects to be rendered to mobile devices and the web. The animations are saved as JSON files called "Lottie files". The advantages of Lottie are that the animations are very smooth and responsive, and they take up little memory because they are rendered on the user's device. 
 Lottie is used in the menu. The Lottie file always links to the start page and starts an animation on mouseover.   
 In addition, there are Lottie animations on the start page, which fulfills purely optical purposes.  
 The Lottie JSON files, as well as the Javascript for the player, are loaded via a CDN. In the future, however, the files will be integrated locally. 
 
-## Die Shopseite
+# Die Shopseite
 The Bike.html is next to the homepage the most important page for the customer. Therefore, special attention had to be paid to a user-friendly design here as well. 
 On the left side, as already in the wireframe, there is a large picture of the bike. This is currently still statically integrated and is not generated dynamically. This should change in the future. To the right of the image is more information about the bike. The name of the bike and the address are generated dynamically. The price and the description of the bike are currently not yet stored in the database and are also created statically - this will also change in the future. 
 Below the description and above the map, depending on the status of the availability of the bike, there is a button to rent the bike, to return it or an information text that the bike is currently rented and cannot be rented. 
