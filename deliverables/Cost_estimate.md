@@ -8,7 +8,7 @@ This project is an assignment for the "Software Engineering" module and not a bu
 
 In addition, there are the fees for hosting the product on the Microsoft Azure Cloud. These currently amount to 3.45 euros per month. However, this price can also vary greatly if there are more calls to the site. This results in manageable costs of about 1005 euros.   
 
-
+![system architecture](/deliverables/cloud.jpg)
 
 
 
