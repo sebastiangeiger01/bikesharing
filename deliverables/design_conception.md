@@ -24,6 +24,14 @@ Due to this, a predominantly white background was chosen, paired with turquoise 
 The following color palette shows which colors were mainly used:
 ![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/ColorScheme.png)
 
+# Vererbung mittels Base.html
+The Base Template is an important concept in web development with Flask. It is a template that defines the basic structure and layout of a web page and serves as a base for other templates.  
+The Base.html can contain elements such as a header, footer, and a main content area. It is typically used by means of the extends directive in other templates to indicate that the new template should inherit from the base template.
+The Base.html opens the HTML document with the corresponding doctype and the complete head area and contains all necessary links to different stylesheets and a link to the favicon. 
+
+The body area of the Base.html also contains the role-based main menu and the footer.  Any page that now inherits from Base.html will be rendered between the menu and the footer. So these two big contents don't have to be created every time.
+![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/vererbung_frontend.png)
+
 
 # Bootstrap
 Bootstrap is an open source front-end web development library developed by Twitter.  
