@@ -1,5 +1,5 @@
 # Deployment
-Before starting any containers, you want to make sure everything is configured correctely. This involves database, mail and security configuration. If you use Docker Compose create the following three files:
+Before starting any containers, you want to make sure everything is configured correctely. This involves database, mail and security configuration. Configure following files from our repository:
 
 **database.conf**
 ```
@@ -29,14 +29,14 @@ Docker Compose will create environment variables containing these values. Altern
 
 For more details for the environment variables and their function read [here](/deliverables/doc.md/#databaseconf). 
 
-Change the default admin password after setting up. 
+**IMPORTANT: For a safe public deployment, change the default admin password after setting up. The ```SECRET_KEY``` and ```SECURITY_PASSWORD_SALT``` must be changed before deployment as well.**
 
 ## Local
-Deploying this software architecture locally involves several steps that use Docker and Docker Compose:
+Deploying the software locally can be helpful for development and involves several steps that use Docker and Docker Compose.:
 
-1. Install Docker: Install Docker on your local machine. This is required to run the Docker containers for your application and its dependencies.
+1. Install Docker: Install Docker on your local machine. This is required to run the Docker containers for your application and its dependencies. Alternatively, install Docker Desktop under https://www.docker.com/products/docker-desktop/ and go to step 3.
 1. Install Docker Compose: Install Docker Compose on your local machine. This is used to manage the relationships between the services in your application.
-1. Clone the Repository: Clone the repository containing the code for your application, the docker-compose.yml file, and the env_files.
+1. Clone the Repository: Clone the repository containing the code for your application, the docker-compose.yml file, and the env_files. The release branch is for full versions of the software, the master branch is for further development.
 1. Build the Images: In the root directory of your cloned repository, use the command `docker-compose build` to build the images for the webapp, database and adminer services.
 1. Start the Services: In the root directory of your cloned repository, use the command `docker-compose up` to start the services defined in the docker-compose.yml.
 1. Verify the Deployment: Verify that your application is running by visiting http://localhost in your web browser. The adminer service is available at http://localhost:8080.
@@ -44,7 +44,51 @@ Deploying this software architecture locally involves several steps that use Doc
 
 Please note that the above steps are just an example and the commands may differ depending on the specific configurations.
 
-It's important to also consider security, monitoring and scaling when deploying locally, you should also create a backup strategy for the data in the database and implement monitoring and logging to ensure that the system is running smoothly.
+## Public deployment on Azure
+For deployment into Azure, start with the `feature/AzureDeployment` branch.
+The following steps are a summary of the following Microsoft Learn Articles: [Tutorial: Deploy a multi-container group using Docker Compose](https://learn.microsoft.com/en-us/azure/container-instances/tutorial-docker-compose) and [Mount an Azure file share in Azure Container Instances](https://learn.microsoft.com/en-us/azure/container-instances/container-instances-volume-azure-files). Please read them for further information.
+
+**Prerequisites: Azure account & (student) subscription as well as Azure CLI and Docker Desktop installed on your device.
+
+Deploying this software to Azure involves the following steps:
+
+1. Create a new Azure File Share, there create the folders `home` and `postgres` and get the storage credentials. Configure the credentials in the `volume` settings in the `docker-compose.yaml`.
+```
+...
+volumes:
+  data:
+    driver: azure_file
+    driver_opts:
+      share_name: [YOUR_ACI_PERS_SHARE_NAME]
+      storage_account_name: [YOUR_ACI_PERS_STORAGE_ACCOUNT_NAME]
+      storage_account_key: [YOUR_STORAGE_KEY]
+```
+1. Create a new Azure Resource Group and container registry via the Azure CLI or the Azure Portal. This will be used to store the container images for your application. CLI usage example:
+```
+az group create --name myResourceGroup --location eastus
+az acr create --resource-group myResourceGroup --name <acrName> --sku Basic
+```
+1. Log in to your container Registry
+```
+az acr login --name <acrName>
+```
+1. Configure the docker-compose.yaml file so that the webapp name points to your container registry
+```
+...
+  webapp:
+    image: <acrName>.azurecr.io/bike-sharing-webapp
+...
+```
+1. Build the images with `docker-compose build` and push container images to the ACR using the `docker push` command.
+1. To use Docker commands to run containers in Azure Container Instances, use `docker login azure` to login to Azure.
+1. Create an ACI context by running `docker context create aci <myAciContext>`.
+1. Select the new context via `docker context use <myAciContext>`
+1. Start your container group via the `docker compose up` command. (Make sure to not insert a hyphen between docker and compose, since then the command would run locally. Insted, 'docker compose up' is a command implemented by the Azure CLI. Be aware that the Azure CLI for MacOS is currently not working correctly with ACI, so try to do this on a Windows machine if you experience that the webapp container does not start up).
+1. Verify the deployment: Verify that your application is running and accessible by visiting the Azure Portal. You can see your service under "container insantces". In the overview you can see the IP adress the application is accessible from. To see wether all conainers are running and to access the logs, view the "container" tab unter settings.
+
+You should now have a cloud-deployed version of BikeRental. See our version of the running software under 20.242.168.6.
+
+**Please note that we are not security experts when it comes to cloud deployment. Further development will be needed to secure the application. We advice against using this deployment method for production.**
 
 ## AWS
 Deploying this software architecture to the cloud involves several steps, which can vary depending on the cloud provider you are using. Here is an example of how to deploy this architecture to AWS using Elastic Container Service (ECS):
@@ -60,24 +104,4 @@ Deploying this software architecture to the cloud involves several steps, which 
 1. Deploy your application: Use the ECS console to deploy your application. This will create new tasks for your services, start the tasks, and register them with the load balancer.
 1. Verify the deployment: Verify that your application is running and accessible by visiting the load balancer endpoint.
 
-Please note that this is just an example and the steps may differ depending on the cloud provider and specific configurations. It's also worth noting that some cloud providers have a managed service for the ECS and RDS, which can simplify the process and provide additional features.
-
-It's important to also consider security, monitoring, and scaling when deploying to the cloud. You should also create a backup strategy for the data in the RDS, and implement monitoring and logging to ensure that the system is running smoothly.
-
-## Azure
-Deploying this software architecture to Azure involves several steps, which can vary depending on the specific configuration. Here is an example of how to deploy this architecture to Azure using Azure Container Service (AKS) and Azure Database for PostgreSQL:
-
-1. Create a new AKS cluster: Log in to the Azure portal and create a new AKS cluster. This is where your Docker containers will be deployed.
-1. Create a new Azure Database for PostgreSQL: In the Azure portal, create a new Azure Database for PostgreSQL. This will be used as the backend for the database service.
-1. Create a new Azure Container Registry (ACR): In the Azure portal, create a new ACR. This will be used to store the container images for your application.
-1. Push container images to the ACR: Using the `docker push` command, push the container images for the webapp, database and adminer services to the ACR.
-1. Create a Kubernetes deployment and service: Use kubectl or Azure CLI to create a new deployment and service for the webapp and adminer services. This will create new pods for each service and will ensure that the pods are running and healthy.
-1. Create a secret for the env_file: Use kubectl or Azure CLI to create a new secret for the env_file and provide the connection strings and credentials for the Azure Database for PostgreSQL.
-1. Create an Azure Load Balancer: Create a new Azure Load Balancer and configure it to route traffic to the webapp service. This will ensure that traffic is distributed evenly across all pods running in the service.
-1. Update the env_file: Update the env_file with the Azure Database for PostgreSQL endpoint and credentials.
-1. Scale the deployment: Use the AKS dashboard to scale the deployment as needed.
-1. Verify the deployment: Verify that your application is running and accessible by visiting the load balancer endpoint.
-
-Please note that this is just an example and the steps may differ depending on the specific configurations. It's also worth noting that AKS provides a managed Kubernetes service which can simplify the process and provide additional features.
-
-It's important to also consider security, monitoring, and scaling when deploying to azure. You should also create a backup strategy for the data in the Azure Database for PostgreSQL, and implement monitoring and logging to ensure that the system is running smoothly.
+Please note that this is just an example and these steps were not implemented by us, they are just based on initial research done by us.
