@@ -1,0 +1,11 @@
+# System Architecture
+
+![system architecture](/deliverables/Architecture.png)
+
+This system architecture uses Docker and Docker Compose to manage the deployment of a web application, a database, and a web-based database management tool. The webapp service uses the "bike-sharing-webapp" image and is built from the "./webapp" directory. It is configured to always restart, and uses environment files for database, security, and email configuration. It also depends on the database service. The database service uses the "postgres" image and is also configured to always restart. It uses a volume named "postgres_volume" to persist data. The adminer service uses the "adminer" image, which is a web-based database management tool, and is configured to always restart and to map port 8080 on the host to port 8080 on the container. 
+
+This architecture has several strengths. Using Docker allows for easy deployment and management of the application and its dependencies. The containerization of the application and its dependencies ensures that they run consistently across different environments and eliminates the "works on my machine" problem. Docker Compose simplifies the process of starting and stopping all the services together by providing a simple way to define and manage the relationships between the services, such as dependencies and ports mapping. It also allows easy scaling of the application. 
+
+The use of environment files for configuration allows for easy separation of configuration from code, and easy management of sensitive data such as passwords. This allows for easy modification of the configuration without changing the code, and for different configurations for different environments, such as development, staging and production. Additionally, using a volume for the database allows for data persistence even if the container is deleted, ensuring that the data is not lost. 
+
+The addition of the adminer service allows for easy management of the database without the need to log into the database directly. It provides a web-based interface that allows you to view and modify data, run SQL queries, and manage the database schema. This can be useful for debugging and troubleshooting. Additionally, by exposing it on a different port, it can be easily accessed and used by developers and administrators.
