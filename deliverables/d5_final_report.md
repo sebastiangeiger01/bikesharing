@@ -26,16 +26,19 @@ Security and authentication considerations.
 In this section we briefly mention the tools we use.
 
 **[Time Frame](/deliverables/Time Frame.md)** *(authored by Tim)* <br>
-Here is the schedule and the individual work packages explained 
+Here is the schedule and the individual work packages explained. 
 
 **[Minimum Viable Product](/deliverables/mvp.md)** *(authored by Tim)* <br>
-A short insight into our chosen project model 
+A short insight into our chosen project model. 
 
 **[Cost estimate](/deliverables/Cost_estimate.md)** *(authored by Tim)* <br>
-A theoretical overview of our costs
+A theoretical overview of our costs.
 
 **[Risk Assessment](/deliverables/Risk_Assessment.md)** *(authored by Tim)* <br>
-An overview of common risks in a software project
+An overview of common risks in a software project.
+
+**[Future prospects](/deliverables/Future_prospects.md)** *(authored by Tim)* <br>
+An overview of features planned later.
 
 
 
