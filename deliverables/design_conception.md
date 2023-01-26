@@ -1,3 +1,11 @@
+# Definition User Interface (UI)
+The focus of user interface design is on the visual design of digital applications. A good user interface is by no means just visually high-quality design; in addition to the design, the goal of the application and the brand message must be conveyed via the visual expression of websites.
+The user interface is the element through which users interact with an interactive application. This interaction must be efficient and effective, which in turn can only be achieved through intuitive usability. For a user interface to develop its full potential, it must also be visually appealing. If we take the example of the large number of touchpoints mentioned above, the individual interfaces must be designed consistently on the various devices.
+
+# Definition User Experience (UX)
+The focus of user experience design is on creating experiences. A successful UX is composed of various factors, for example, in addition to usability, the feeling that arises before, during and after the use of an interactive application is relevant.
+A good user experience design satisfies people's context of use regardless of the communication channel or device used. In addition, it is important that a brand has a consistent appearance and communication style.
+
 # Wireframes
 At the beginning of the project, so-called wireframes were created. Wireframes are simple visual sketches that are used to plan the basic structure of a user interface. A wireframe shows the basic layout, the possibilities for navigation and only the basic functions of the website.   
 
