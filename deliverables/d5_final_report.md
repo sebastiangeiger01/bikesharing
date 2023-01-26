@@ -31,5 +31,8 @@ Here is the schedule and the individual work packages explained
 **[Minimum Viable Product](/deliverables/mvp.md)** *(authored by Tim)* <br>
 A short insight into our chosen project model 
 
+**[Cost estimate](/deliverables/Cost_estimate.md)** *(authored by Tim)* <br>
+A theoretical overview of our costs
+
 
 
