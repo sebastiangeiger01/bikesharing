@@ -28,5 +28,8 @@ In this section we briefly mention the tools we use.
 **[Time Frame](/deliverables/Time Frame.md)** *(authored by Tim)* <br>
 Here is the schedule and the individual work packages explained 
 
+**[Minimum Viable Product](/deliverables/mvp.md)** *(authored by Tim)* <br>
+A short insight into our chosen project model 
+
 
 
