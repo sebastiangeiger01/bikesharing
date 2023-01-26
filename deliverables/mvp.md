@@ -8,4 +8,4 @@ The MVG model was used for this project. The goal of a Minimum Viable Product is
 - Implementation of the frontend - 15 hours 
 - The documentation - 5 hours
 
-![system architecture](/deliverables/MVP.JPG)
+![system architecture](/deliverables/mvp.JPG)
