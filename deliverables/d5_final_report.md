@@ -25,7 +25,7 @@ Security and authentication considerations.
 **[Tools](/deliverables/Tools.md)** *(authored by Tim)* <br>
 In this section we briefly mention the tools we use.
 
-**[Time Frame](/deliverables/Time Frame.md)** *(authored by Tim)* <br>
+**[Time Frame](/deliverables/Time_Frame.md)** *(authored by Tim)* <br>
 Here is the schedule and the individual work packages explained. 
 
 **[Minimum Viable Product](/deliverables/mvp.md)** *(authored by Tim)* <br>
