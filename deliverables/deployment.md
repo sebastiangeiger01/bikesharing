@@ -48,7 +48,7 @@ Please note that the above steps are just an example and the commands may differ
 For deployment into Azure, start with the `feature/AzureDeployment` branch.
 The following steps are a summary of the following Microsoft Learn Articles: [Tutorial: Deploy a multi-container group using Docker Compose](https://learn.microsoft.com/en-us/azure/container-instances/tutorial-docker-compose) and [Mount an Azure file share in Azure Container Instances](https://learn.microsoft.com/en-us/azure/container-instances/container-instances-volume-azure-files). Please read them for further information.
 
-**Prerequisites: Azure account & (student) subscription as well as Azure CLI and Docker Desktop installed on your device.
+**Prerequisites: Azure account & (student) subscription as well as Azure CLI and Docker Desktop installed on your device.**
 
 Deploying this software to Azure involves the following steps:
 
