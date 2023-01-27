@@ -10,6 +10,9 @@
 **[Tools](/deliverables/Tools.md)** *(authored by Tim)* <br>
 In this section we briefly mention the tools we use.
 
+**[Projectmanagement](/deliverables/projectmanagement.md)** *(authored by Kai)* <br>
+Ways of working with Jira, Kanban and Git. 
+
 **[Time Frame](/deliverables/Time_Frame.md)** *(authored by Tim)* <br>
 Here is the schedule and the individual work packages explained.
 
@@ -21,9 +24,6 @@ An overview of common risks in a software project.
 
 **[Future prospects](/deliverables/Future_prospects)** *(authored by Tim)* <br>
 An overview of features planned later. 
-
-**[Projectmanagement](/deliverables/projectmanagement.md)** *(authored by Kai)* <br>
-Ways of working with Jira, Kanban and Git. 
 
 ### Backend
 **[Deployment](/deliverables/deployment.md)** *(authored by Sebastian)* <br>
