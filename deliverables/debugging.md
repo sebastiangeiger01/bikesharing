@@ -6,10 +6,12 @@ Also during the BikeRental project some bugs occurred.
 ## Simultaneous renting of bikes possible
 
 
-
 ## Lending time could be manipulated by changing the time of the device
 
 
+![bugfixing_1.png](./bugfixing_1.png)
 
 ## Users and bikes could not be deleted if a ride was still open
-![bugfixing_3.png](./bugfixing_3.png)
+
+
+![bugfixing_2.png](./bugfixing_2.png)
