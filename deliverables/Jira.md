@@ -42,12 +42,9 @@ In this status are all tickets that have no relevance for the project according 
 
 
 The described workflow looks like this:
-- "Name of step" and "Linked status" are synonymous here.
-- "Transitions" means in each case a decision from one status to another
 
 #### ![Bike sharing - Jira Workflow - grafik](deliverables/Jira_Workflow_-_Bike_sharing_-_grafik.png)
 
-<br />
 
 ### **Fields**<br />
 In order for the tickets to be usable and used to document the work, it had to be decided which fields were needed. Here, we limited ourselves to the essentials and used fields provided by Jira and did not create any of our own. The following fields were included for the project:
