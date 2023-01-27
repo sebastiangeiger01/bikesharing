@@ -4,7 +4,7 @@ During a project, there are always new challenges that the project team faces. T
 
 ## General
 
-### Finding a theme
+### Finding a Topic
 
 The basic challenge at the beginning of the project was to find a topic, but this was solved relatively quickly. A team member had explained one of his private interests to the group and the group was immediately enthusiastic about the proposed project. Bike sharing was born.
 
@@ -37,7 +37,7 @@ Another computer, on the other hand, had massive problems with Docker's performa
 
 ### Frontend - Backend
 
-Flawless technical cooperation between the frontend and the backend is essential for software, as it cannot function without it. In the development process, as with any software, there were problems here and there in this project. One example was the development of the bike management page. There were problems with the creation of bicycles. After discussion between the two development teams, this problem was solved.
+Flawless technical cooperation between the frontend and the backend is essential for software, as it cannot function without it. In the development process, as with any software, there were problems here and there in this project. An example of this was during the development of the bike management page. Once there were problems with the creation of bicycles. After discussion between the two development teams, it turned out that there was a misunderstanding in the frontend regarding the API and the implementation of the backend. Later, errors occurred again when deleting bikes, when the layout of the bike management page was revised again and was to be tested. These errors were then corrected by adjustments in the backend.
 
 
 
