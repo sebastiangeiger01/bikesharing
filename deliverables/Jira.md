@@ -45,7 +45,7 @@ The described workflow looks like this:
 - "Name of step" and "Linked status" are synonymous here.
 - "Transitions" means in each case a decision from one status to another
 
-[Bike sharing - Jira Workflow](/Bike_sharing_-_Jira_Workflow.png)
+[Bike sharing - Jira Workflow](/deliverables/Bike_sharing_-_Jira_Workflow.png)
 
 
 ### **Fields**<br />
