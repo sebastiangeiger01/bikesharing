@@ -28,7 +28,7 @@ A theoretical overview of our costs.
 **[Risk Assessment](/deliverables/Risk_Assessment.md)** *(authored by Tim)* <br>
 An overview of common risks in a software project.
 
-**[Future prospects](/deliverables/Future_prospects)** *(authored by Tim)* <br>
+**[Future prospects](/deliverables/Future_prospects.md)** *(authored by Tim)* <br>
 An overview of features planned later. 
 
 ### Backend
