@@ -49,13 +49,13 @@ Hochschule Mainz
    ### **2.1) Bruno Pressazk**
    #### *Use for municipalities*
    An important task of the mayor is to lead the municipality. The mayor advises and helps to decide whether there should be a possibility for citizens to rent bicycles at low cost. With this possibility, the municipality could cooperate with the local bicycle shops and provide a new cost-efficient and future-proof answer to public transport.
-To launch the bike rental, the mayor himself or the members of statt from the commune can follow our [instructions for starting your own bike rental](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/blob/main/README.md). Only some basic technical knowledge will be needed.
+To launch the bike rental, the mayor himself or the members of statt from the commune can follow our [instructions for starting your own bike rental](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/blob/docu/sebastian/deliverables/deployment.md). Only some basic technical knowledge will be needed.
 As an administrator of the service you will not only be able to edit the appearance of the website, but also can see who rented which bike when. Thus, you can gather information about the workload of your bike fleet and keep the renters accountable.
     
    ### **2.2) Dr. Peter Wiesemann**
    #### *Use for management*
    As the head of a 200-person company, it is important to Peter that all his employees have a way to travel around the company premises or to customers in an environmentally friendly way. With an easy-to-set-up, customisable and scalable software solution, renting is almost effortless for his employees. This software solution does not require any major investment.
-   Dr. Wiesemann can follow our [instructions for starting your own bike rental](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/blob/main/README.md), just like Bruno Pressazk could, to start the bike rental, add/remove bikes to his fleet and administrate the rental. Once operational, it is easy to customize the UI and adopt it to align with corporate identity by editing the frontend files.
+   Dr. Wiesemann can follow our [instructions for starting your own bike rental](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/blob/docu/sebastian/deliverables/deployment.md), just like Bruno Pressazk could, to start the bike rental, add/remove bikes to his fleet and administrate the rental. Once operational, it is easy to customize the UI and adopt it to align with corporate identity by editing the frontend files.
    
    ### **2.3) Petra Schlauberger**
    #### *Use for customer*
