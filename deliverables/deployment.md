@@ -53,7 +53,7 @@ The following steps are a summary of the following Microsoft Learn Articles: [Tu
 Deploying this software to Azure involves the following steps:
 
 1. Create a new Azure File Share i.e. by using the following PowerShell script (You need an existing Resource Group for this to work, see step 3):
-```
+```sh
 # Change these four parameters as needed
 ACI_PERS_RESOURCE_GROUP=myResourceGroup
 ACI_PERS_STORAGE_ACCOUNT_NAME=mystorageaccount$RANDOM
@@ -73,7 +73,7 @@ az storage share create \
   --account-name $ACI_PERS_STORAGE_ACCOUNT_NAME
 ```
 2. Get the storage account key via the following command. You will need it for step 4.
-```
+```sh
 STORAGE_KEY=$(az storage account keys list --resource-group $ACI_PERS_RESOURCE_GROUP --account-name $ACI_PERS_STORAGE_ACCOUNT_NAME --query "[0].value" --output tsv)
 echo $STORAGE_KEY
 ```
@@ -90,12 +90,12 @@ volumes:
       storage_account_key: [YOUR_STORAGE_KEY]
 ```
 4. Create a new Azure Resource Group and container registry via the Azure CLI or the Azure Portal. This will be used to store the container images for your application. CLI usage example:
-```
+```sh
 az group create --name myResourceGroup --location eastus
 az acr create --resource-group myResourceGroup --name <acrName> --sku Basic
 ```
 5. Log in to your container Registry
-```
+```sh
 az acr login --name <acrName>
 ```
 6. Configure the docker-compose.yaml file so that the webapp name points to your container registry
