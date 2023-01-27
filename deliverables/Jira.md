@@ -47,7 +47,7 @@ The described workflow looks like this:
 
  #### ![Bike sharing - Jira Workflow - text](/deliverables/Bike_sharing_-_Jira_Workflow.png)
 
-#### ![Bike sharing - Jira Workflow - grafik](/deliverables/Bike_sharing_-_Jira_Workflow_-_grafik.png)
+#### ![Bike sharing - Jira Workflow - grafik](/deliverables/Jira Workflow - Bike sharing - grafik.png)
 
 ### **Fields**<br />
 In order for the tickets to be usable and used to document the work, it had to be decided which fields were needed. Here, we limited ourselves to the essentials and used fields provided by Jira and did not create any of our own. The following fields were included for the project:
