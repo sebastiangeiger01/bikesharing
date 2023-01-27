@@ -56,7 +56,7 @@ The two filter properties are applied in combination, which first inverts the el
 
 The following image shows the difference between pure invert and invert with Hue-rotate(180).
 
-![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/huerotate.png)
+![alt text](/deliverables/huerotate.png)
 
 It can be seen that the colors remain more color tinged. The image retains its blue tint (although slightly darker than before) and the green button remains almost unchanged, while with the pure invert filter it appears red. 
 
@@ -65,7 +65,7 @@ It can be seen that the colors remain more color tinged. The image retains its b
 ## CSS Filter Effects 
 CSS Filter Effects are method for applying filter effects using the Filter property to elements that correspond to the filters available in SVG. Filter functions include blur, brightness, contrast, drop shadow, grayscale, hue rotation, invert, opacity, sepia, and saturation. These methods are comparatively new. In order for the darkmode to work safely, care was taken beforehand to ensure compatibility of different browsers. The website https://caniuse.com/ offers a good overview of the compatibility of common web browsers.
 Overall, all browsers cover 97.98% of all functions. This seems to be sufficient to be able to include the function without hesitation. 
-![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/css-filter-effects.png)
+![alt text](/deliverables/css-filter-effects.png)
 # Lottie
 Lottie is a framework that enables animations created in Adobe After Effects to be rendered to mobile devices and the web. The animations are saved as JSON files called "Lottie files". The advantages of Lottie are that the animations are very smooth and responsive, and they take up little memory because they are rendered on the user's device. 
 Lottie is used in the menu. The Lottie file always links to the start page and starts an animation on mouseover.   
@@ -76,4 +76,4 @@ The Lottie JSON files, as well as the Javascript for the player, are loaded via 
 The Bike.html is next to the homepage the most important page for the customer. Therefore, special attention had to be paid to a user-friendly design here as well. 
 On the left side, as already in the wireframe, there is a large picture of the bike. This is currently still statically integrated and is not generated dynamically. This should change in the future. To the right of the image is more information about the bike. The name of the bike and the address are generated dynamically. The price and the description of the bike are currently not yet stored in the database and are also created statically - this will also change in the future. 
 Below the description and above the map, depending on the status of the availability of the bike, there is a button to rent the bike, to return it or an information text that the bike is currently rented and cannot be rented. 
-![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/Bike.html.png)
+![alt text](/deliverables/Bike.html.png)
