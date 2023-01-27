@@ -1,8 +1,9 @@
-# What is OpenStreetMap?
+# Map
+## What is OpenStreetMap?
 OpenStreetMap (OSM) is a collaborative project to create a free, editable map of the world. 
 The data is open and can be integrated into various applications, including web and mobile applications. 
 
-# Integration
+## Integration
 1. Register for an API key from OpenStreetMap.
 2. Choose a mapping library that works with OSM data, such as Leaflet or OpenLayers (in the BikeRental project we used Leaflet).
 3. Use the chosen library to create a map on your website or application.
@@ -14,7 +15,7 @@ The data is open and can be integrated into various applications, including web 
 It is also important to note that OSM data is contributed by volunteers, so the quality and coverage of data may vary in different areas. 
 Additionally, there may be usage limits on the number of API requests that can be made per day.
 
-# GeoJSON
+## GeoJSON
 GeoJSON is a format for encoding a variety of geographic data structures, such as points, lines, and polygons, using the JSON (JavaScript Object Notation) data format. 
 It is a widely used and open standard for representing geographic data, and is supported by many GIS and web mapping libraries, including OpenStreetMap.
 
@@ -28,8 +29,8 @@ For example, you can use GeoJSON to style the map, add pop-ups and interactivity
 
 Overall, GeoJSON provides a flexible and interoperable way of working with OpenStreetMap data, and is a widely supported and powerful format for representing geographic data.
 
-# How is it used for the BikeRental homepage?
-## home.html
+## How is it used for the BikeRental homepage?
+### home.html
 ```html
 <div id="map" style="width: 100%; height: 600px;" class="inverted"></div>
    <section class="map-clean">
@@ -66,7 +67,7 @@ This code is a section of HTML that is used to display the map on the BikeRental
 
 In summary, this code uses the Leaflet library to create a map and display it on the BikeRental homepage. It sets the map's initial view based on passed coordinates, adds a tile layer using OpenStreetMap tiles, and adds a GeoJSON layer, which is used to display the location of bikes on the map with a link to the detail page of the bike.
 
-## app.py
+### app.py
 ```sh
 # Home
 # GeoJSON Template: '{"type": "FeatureCollection", "features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[20.0,30.0]},"properties":{"id":"1","name":"Pegasus 500"} },{"type":"Feature","geometry":{"type":"Point","coordinates":[15.0,50.0]},"properties":{"id":"2","name":"Tesla E3000"} },]}'
@@ -109,7 +110,7 @@ This code is a Flask web application that defines a route for the home page ("/"
 
 This code is responsible for generating a GeoJSON object from the array of bikes and passing it along with other variables to the home page template. The home page template can then use these variables to display a map of the bikes with an appropriate starting view.
 
-# How is it used for the BikeRental BikeManagement?
+## How is it used for the BikeRental BikeManagement?
 ```html
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
   <script>
