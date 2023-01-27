@@ -14,13 +14,16 @@ In this section we briefly mention the tools we use.
 Here is the schedule and the individual work packages explained.
 
 **[Cost estimate](/deliverables/Cost_estimate.md)** *(authored by Tim)* <br>
-A theoretical overview of our costs
+A theoretical overview of our costs. 
 
 **[Risk Assessment](/deliverables/Risk_Assessment.md)** *(authored by Tim)* <br>
 An overview of common risks in a software project.
 
 **[Future prospects](/deliverables/Future_prospects)** *(authored by Tim)* <br>
-An overview of features planned later
+An overview of features planned later. 
+
+**[Projectmanagement](/deliverables/projectmanagement.md)** *(authored by Kai)* <br>
+Ways of working with Jira, Kanban and Git. 
 
 ### Backend
 **[Deployment](/deliverables/deployment.md)** *(authored by Sebastian)* <br>
@@ -35,12 +38,18 @@ Explanation of every files and functions purpose.
 **[Security](/deliverables/security.md)** *(authored by Luke)* <br>
 Security and authentication considerations. 
 
+**[Debugging](/deliverables/debugging.md)** *(authored by Kai)* <br>
+Bug fixing procedure.  
+
 ### Frontend
 **[Conception](/deliverables/design_conception.md)** *(authored by Jonas)* <br>
-Collection of ideas and planning of the design
+Collection of ideas and planning of the design. 
 
 **[Design](/deliverables/design.md)** *(authored by Jonas)* <br>
-Implementation of the design drafts and adjustments
+Implementation of the design drafts and adjustments. 
 
 **[Linking with backend API](/deliverables/link_api_frontend.md)** *(authored by Jonas)* <br>
-Implementation of the API provided by the backend
+Implementation of the API provided by the backend. 
+
+**[Map](/deliverables/map.md)** *(authored by Kai)* <br>
+Implementation of leafmap. 
