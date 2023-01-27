@@ -20,4 +20,3 @@ Explanation of every files and functions purpose.
 Security and authentication considerations. 
 
 ### Frontend
-
