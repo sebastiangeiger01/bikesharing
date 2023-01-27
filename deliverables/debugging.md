@@ -3,9 +3,6 @@ Debugging is the process of identifying and resolving errors or bugs in a comput
 
 Also during the BikeRental project some bugs occurred.
 
-## Simultaneous renting of bikes possible
-
-
 ## Lending time could be manipulated by changing the time of the device
 First, the start and end time of the lending time was passed via the HTTP request POST and PUT. However, this could be manipulated, which is why the python libary "datetime" now determines the start and end time in the backend and writes it to the database (see picture below).
 
