@@ -52,34 +52,60 @@ The following steps are a summary of the following Microsoft Learn Articles: [Tu
 
 Deploying this software to Azure involves the following steps:
 
-1. Create a new Azure File Share, there create the folders `home` and `postgres` and get the storage credentials. Configure the credentials in the `volume` settings in the `docker-compose.yaml`.
+1. Create a new Azure File Share i.e. by using the following PowerShell script (You need an existing Resource Group for this to work, see step 3):
+```
+# Change these four parameters as needed
+ACI_PERS_RESOURCE_GROUP=myResourceGroup
+ACI_PERS_STORAGE_ACCOUNT_NAME=mystorageaccount$RANDOM
+ACI_PERS_LOCATION=eastus
+ACI_PERS_SHARE_NAME=acishare
+
+# Create the storage account with the parameters
+az storage account create \
+    --resource-group $ACI_PERS_RESOURCE_GROUP \
+    --name $ACI_PERS_STORAGE_ACCOUNT_NAME \
+    --location $ACI_PERS_LOCATION \
+    --sku Standard_LRS
+
+# Create the file share
+az storage share create \
+  --name $ACI_PERS_SHARE_NAME \
+  --account-name $ACI_PERS_STORAGE_ACCOUNT_NAME
+```
+2. Get the storage account key via the following command. You will need it for step 4.
+```
+STORAGE_KEY=$(az storage account keys list --resource-group $ACI_PERS_RESOURCE_GROUP --account-name $ACI_PERS_STORAGE_ACCOUNT_NAME --query "[0].value" --output tsv)
+echo $STORAGE_KEY
+```
+3. Go to your share via the Azure Portal and create the directory `home/postgres` 
+4. Configure the credentials in the `volume` settings in the `docker-compose.yaml`:
 ```
 ...
 volumes:
   data:
     driver: azure_file
     driver_opts:
-      share_name: [YOUR_ACI_PERS_SHARE_NAME]
-      storage_account_name: [YOUR_ACI_PERS_STORAGE_ACCOUNT_NAME]
+      share_name: [myResourceGroup]
+      storage_account_name: [mystorageaccount$RANDOM]
       storage_account_key: [YOUR_STORAGE_KEY]
 ```
-1. Create a new Azure Resource Group and container registry via the Azure CLI or the Azure Portal. This will be used to store the container images for your application. CLI usage example:
+4. Create a new Azure Resource Group and container registry via the Azure CLI or the Azure Portal. This will be used to store the container images for your application. CLI usage example:
 ```
 az group create --name myResourceGroup --location eastus
 az acr create --resource-group myResourceGroup --name <acrName> --sku Basic
 ```
-1. Log in to your container Registry
+5. Log in to your container Registry
 ```
 az acr login --name <acrName>
 ```
-1. Configure the docker-compose.yaml file so that the webapp name points to your container registry
+6. Configure the docker-compose.yaml file so that the webapp name points to your container registry
 ```
 ...
   webapp:
     image: <acrName>.azurecr.io/bike-sharing-webapp
 ...
 ```
-1. Build the images with `docker-compose build` and push container images to the ACR using the `docker push` command.
+7. Build the images with `docker-compose build` and push container images to the ACR using the `docker push` command.
 1. To use Docker commands to run containers in Azure Container Instances, use `docker login azure` to login to Azure.
 1. Create an ACI context by running `docker context create aci <myAciContext>`.
 1. Select the new context via `docker context use <myAciContext>`
@@ -88,7 +114,7 @@ az acr login --name <acrName>
 
 You should now have a cloud-deployed version of BikeRental. See our version of the running software under 20.242.168.6.
 
-**Please note that we are not security experts when it comes to cloud deployment. Further development will be needed to secure the application. We advice against using this deployment method for production.**
+**Please note that we are not security experts when it comes to cloud deployment. Further development will be needed to secure the application. We advice against using this deployment method for production without having the proper knowledge..**
 
 ## AWS
 Deploying this software architecture to the cloud involves several steps, which can vary depending on the cloud provider you are using. Here is an example of how to deploy this architecture to AWS using Elastic Container Service (ECS):
