@@ -12,7 +12,7 @@ After the tip was passed to the backend, the timestamps were set in the backend 
 
 ```javascript
 jQuery.ajax({
-    url: "http://localhost/bike1",
+    url: "/bike1",
     type: "POST",
     headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -27,7 +27,7 @@ jQuery.ajax({
 ```
 ```javascript
 jQuery.ajax({
-    url: "http://localhost/bike1",
+    url: "/bike1",
     type: "POST",
     headers: {
         "Content-Type": "application/json; charset=utf-8",
