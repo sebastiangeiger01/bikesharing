@@ -16,21 +16,21 @@ Theoretically, simple wireframes can even be drawn by hand. However, there are n
 Below are three images showing the wireframes of the website.   
 
 The first image shows the planned home page. The first approximately 50 percent of the screen is supposed to be an interactive map where bikes can later be rented. Above this is a simple navigation bar that can be used to navigate to all sub-pages. Below this is a so-called call-to-action section, which is intended to lead the user to interact with the button, but whose function is not yet specified in the wireframe. Next to it there will be a graphic. Below that, there are boxes of information about the bike rental and the team behind BikeSharing. The page ends with a footer with the usual links to be found there. 
-![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/wireframes/home.png)
+![alt text](/deliverables/wireframes/home.png)
 
 
 The following wireframe shows the "Shop Page" of a single bike. On the left side there is space for a picture of the bike. On the right side, there is information about the bike, with the possibility to rent it directly by clicking a button. Below is a map, so that the user can see directly where this one bike is located. 
-![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/wireframes/bike.png)
+![alt text](/deliverables/wireframes/bike.png)
 
 The last wireframe shows our so-called "dashboard". This is the administration area, which can only be accessed with the appropriate rights. We decided to design this dashboard so that the administrators do not have to work with the database management systems every time, but can also work directly from the page. In total, there are two pages that can be found in the dashboard. One page is for creating, deleting and editing users, the other page equivalent to this for bikes.
-![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/wireframes/BikeManager-UserManager.png)
+![alt text](/deliverables/wireframes/BikeManager-UserManager.png)
 # Color Scheme
 It was intended from the beginning to use comparatively few colors on the website. The homepage should make a clean and user-friendly impression. For this, gaudy colors and too many animations were dispensed with. 
 Since BikeSharing is an environmentally friendly way to travel from A to B, colors that can be found in nature were the most suitable. The color green is associated with nature and is considered the "color of flora". It is also associated with concepts such as clarity, freshness, openness and awareness. The color blue is associated with purity, relaxation, non-confrontational, organizing and controlling.
 
 Due to this, a predominantly white background was chosen, paired with turquoise (mixture between blue and green) and blue elements.
 The following color palette shows which colors were mainly used:
-![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/ColorScheme.png)
+![alt text](/deliverables/ColorScheme.png)
 
 
 
@@ -55,7 +55,7 @@ The Base.html can contain elements such as a header, footer, and a main content 
 The Base.html opens the HTML document with the corresponding doctype and the complete head area and contains all necessary links to different stylesheets and a link to the favicon. 
 
 The body area of the Base.html also contains the role-based main menu and the footer.  Any page that now inherits from Base.html will be rendered between the menu and the footer. So these two big contents don't have to be created every time.
-![alt text](https://gitlab.rlp.net/software-engineering/2022/bike-sharing/-/raw/docu/jonas/deliverables/vererbung_frontend.png)
+![alt text](/deliverables/vererbung_frontend.png)
 # Leaflet
 Leaflet is an open source JavaScript library for creating interactive maps on the web.
 Leaflet provides a variety of features and tools that allow developers to customize and design maps, add markers and pop-ups, and more. It is also very easy to integrate and compatible with most modern web browsers and devices.  
