@@ -13,6 +13,12 @@ In this section we briefly mention the tools we use.
 **[Projectmanagement](/deliverables/projectmanagement.md)** *(authored by Kai)* <br>
 Ways of working with Jira, Kanban and Git. 
 
+**[Jira](/deliverables/Jira.md)** *(authored by Roman)* <br>
+Description about the use of Jira in this project. 
+
+**[Challenges](/deliverables/Challenges.md)** *(authored by Roman)* <br>
+Here are briefly the challenges in this project. 
+
 **[Time Frame](/deliverables/Time_Frame.md)** *(authored by Tim)* <br>
 Here is the schedule and the individual work packages explained.
 
