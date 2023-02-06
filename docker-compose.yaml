@@ -31,6 +31,6 @@ volumes:
   data:
     driver: azure_file
     driver_opts:
-      share_name: bikeshare
-      storage_account_name: bikestorageacchsmainz
-      storage_account_key: Dv4+4yCdNBqO+1sMPN9Pvk1L3cdTcR21EbkcVz+EUZUwIC5tEreb4JJnHwc++yr2/3+dTk1qEu/Y+AStpqZDBA==
+      share_name: <your_share_name>
+      storage_account_name: <your_account_name>
+      storage_account_key: <your__account_key>
